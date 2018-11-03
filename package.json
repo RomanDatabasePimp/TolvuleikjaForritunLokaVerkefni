@@ -1,0 +1,17 @@
+{
+  "name": "FinalProject-Computergame-course",
+  "version": "1.0.0",
+  "description": "A spooky online turn based game",
+  "main": "app.js",
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "express": "^4.16.2",
+    "socket.io": "^2.1.1"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
