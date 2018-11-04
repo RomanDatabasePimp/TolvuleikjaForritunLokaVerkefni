@@ -4,8 +4,7 @@
 */
 
 /* Our map is composed of a set of tiles, and the tileManeger holds all the tiles */
-let tileManger = {
-  
+let g_tileManger = {
   // all the tiles inside the map
   __tiles: [],
 

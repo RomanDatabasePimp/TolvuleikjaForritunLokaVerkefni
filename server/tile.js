@@ -9,11 +9,9 @@
    - terrain (if contains terrain then you can enter the tile)
    - a tile can belong to some other entitie : f.x House (that can be many tiles) */
 
-let tile = {
+let g_tile = {
 
   _nextSpatialID : 1, // make all valid IDs non-falsey (i.e. don't start at 0)
   _entities : [],    // containter over all our entities
   
-  
-  
-  }
+}

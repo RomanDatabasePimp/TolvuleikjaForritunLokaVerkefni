@@ -5,20 +5,25 @@
     <title>Lokaverkefni</title>
   </head>
   <body>
-	<canvas id="myCanvas" width="600" height="600" style="border: 1px solid black;">
-	Sorry, but your browser does not support the HTML5 canvas tag.
-	</canvas>
+	  <canvas id="myCanvas" width="600" height="600" style="border: 1px solid black;">
+	  Sorry, but your browser does not support the HTML5 canvas tag.
+	  </canvas>
 
   <!-- ------------------HTML END SCRIPTS START --------------------------------------->
+  
   <!-- We need this to communicate using socket.io from client side -->
   <script src="/socket.io/socket.io.js"></script>
   <!-- Load all the client game code and assests from the server-->
+
   <script src="/client/js/utils.js"></script>
-
-
-
+  <script src="/client/js/renderGame.js"></script>
+  
   <script>
-    
+    // our canvas
+    const g_canvas = document.getElementById("myCanvas");
+    const g_ctx = g_canvas.getContext("2d");
+   
+   
 
   </script>
   </body>
