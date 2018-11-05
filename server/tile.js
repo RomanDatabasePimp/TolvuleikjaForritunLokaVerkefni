@@ -6,12 +6,54 @@
 /* The tile has the following properties
    - each tile is X * X pixels  
    - can contain any amount of players (in our case 3 players and 1 monster)
-   - terrain (if contains terrain then you can enter the tile)
+   - tile can contain the powerup or the objective pick up
+   - terrain (if contains terrain then you cant enter the tile)
    - a tile can belong to some other entitie : f.x House (that can be many tiles) */
 
-let g_tile = {
+function Tile(descr) {
+  /* We want to get _TilePosX and _TilePosY */
+  for(let property in descr) { this[property] = descr[property]; }
 
-  _nextSpatialID : 1, // make all valid IDs non-falsey (i.e. don't start at 0)
-  _entities : [],    // containter over all our entities
+  this._nextSpatialID = 1; // make all valid IDs non-falsey (i.e. don't start at 0)
+  this._entities = [];    // containter over all our entities
   
-}
+  this._amITerrain= false;// tells us if this tile is just a terrain blocking the cell
+
+  /* some tiles can be a part of somekind of structure f.x like a house and
+     this tells you if this tile is a part of that house */
+  this._amIAStructure=null;
+
+  /* this tells us from what position we can enter the tile f.x if we are in tile i,j 
+     and we try to enter this tile wich is at i,j+1 this would be a entry from the left side */
+  this._canEnterFrom = {
+    left:true,
+    right:true,
+    top:true,
+    down:true
+  };
+
+  /* Usage : t.addEntity(ent)
+      For  : t is a Tile 
+             ent is a Entity
+      After: adds the Entity in this tile */
+  this.addEntity = function(ent) {
+    const newSpID = this._nextSpatialID ++; // get the new spatial id
+    this._entities[newSpID] = ent; // add the entity in the tile
+    // update the that  entitys position
+    ent.updateEntityTilePos(this._TilePosX,this._TilePosY,newSpID);
+  };
+  
+  /* Usage : t.removeEntity(spdID)
+      For  : t is a Tile 
+             spdID is the location in the tile
+      After: removes the entity in tiles container */
+  this.removeEntity = function(spId) {
+    delete this._entities[spId];
+  };
+
+};
+
+/* export the tile so we can work with it in tileManeger */
+module.exports = {
+  Tile,
+};

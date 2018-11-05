@@ -11,6 +11,7 @@ const app = express();
 /* this is abit different from vef2 we need to do this to use sockets  */
 const serv = require('http').Server(app);
 const io = require('socket.io')(serv,{}); // socket.io package commication
+const g_tileManger = require('./server/tileManeger').g_tileManger;
 
 /* ---------------------------------NOTICE---------------------------------
    if there any files you want to send to the user they should be under 
@@ -30,53 +31,14 @@ app.get('/', (req, res) => { res.sendfile(__dirname+'/client/index.html'); });
 
 /* -----------------------------SOCKET LOGIC START ---------------------------------- */
 
-/* Okay so we will have 2 sockets running for this server
-   1- gets inputs from the users every 5 seconds
-   2- draws out the board maybe every 40 millisec
-   the idea is that we keep drawing out the board 40 millisec and we update the board
-   state every 5 seconds, because this is a turn based game, ofc with this type of setup
-   if we dont want to have "turn based game" we can just make the 1st socket get inputs 
-   much faster from the clients to make a none turn based game ? */
-   
-  // The "nominal interval" is the one that all of our time-based units are
-  // calibrated to e.g. a velocity unit is "pixels per nominal interval"
-  let NOMINAL_UPDATE_INTERVAL = 25;
-   
-  // Dt means "delta time" and is in units of the timer-system (i.e. milliseconds)
-  let g_prevUpdateDt = null;
-
-  // Du means "delta u", where u represents time in multiples of our nominal interval
-  let g_prevUpdateDu = null;
-
-  // Track odds and evens for diagnostic / illustrative purposes
-  let g_isUpdateOdd = false;
-
-  
-  function update(dt) {
-    // Remember this for later
-    var original_dt = dt;
-     
-    // Warn about very large dt values -- they may lead to error
-    if (dt > 200) {
-      console.log("Big dt =", dt, ": CLAMPING TO NOMINAL");
-      dt = NOMINAL_UPDATE_INTERVAL;
-    }
-      
-    // If using variable time, divide the actual delta by the "nominal" rate,
-    // giving us a conveniently scaled "du" to work with.
-    var du = (dt / NOMINAL_UPDATE_INTERVAL);
-    
-    updateSimulation(du); // where our gamelogic update will be at
-  
-    g_prevUpdateDt = original_dt;
-    g_prevUpdateDu = du;
-    g_isUpdateOdd = !g_isUpdateOdd;
-  }
+/* Okay basicly our socket will pull the user data from the clients and when it has
+   pulled all 5 clients it will update the game state and send the next state to the 
+   clients where they have again 5 seconds to make a move  */
 
    // our socket
-   io.sockets.on('connect',(socket) => {
-     
-   });
+  io.sockets.on('connect',(socket) => {
+    
+  });
 
 /* -----------------------------SOCKET LOGIC END ------------------------------------ */
 
