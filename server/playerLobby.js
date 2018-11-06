@@ -135,13 +135,15 @@ GameLobby.prototype.tryJoinGame = function(sockId) {
   for(let char in this._avivablePlayers){
     if(!this._avivablePlayers[char].playBy){
       this._avivablePlayers[char].playBy = sockId; // now the socket is playing this character
-      // if the player is monster he starts in bottom right corner
-      if(this._avivablePlayers[char].character === 'monster'){
-        g_tileManger.__tiles[49][49].addEntity(this._avivablePlayers[char].player);
-      } else {
-        // all players start in the top left corner
-        g_tileManger.__tiles[0][0].addEntity(this._avivablePlayers[char].player);
-        console.log(this._avivablePlayers[char].player.entityPos);
+      // if the player is already initialized we just let the socket take over
+      if(!this._avivablePlayers[char].player.entityPos.spatialPos) {
+        // if the player is monster he starts in bottom right corner
+        if(this._avivablePlayers[char].character === 'monster'){
+          g_tileManger.__tiles[49][49].addEntity(this._avivablePlayers[char].player);
+        } else {
+          // all players start in the top left corner
+          g_tileManger.__tiles[0][0].addEntity(this._avivablePlayers[char].player);
+        }
       }
       return true;  
     }
@@ -155,12 +157,14 @@ GameLobby.prototype.tryJoinGame = function(sockId) {
     After: search in the _avivablePlayers for the sockId and set its value to null  */
 GameLobby.prototype.leftGame = function(sockId) {
   for(let char in this._avivablePlayers){
-    if(this._avivablePlayers[char].playBy === sockId){
+    if(this._avivablePlayers[char].playBy === sockId) {
+      /* we want to just remove him from lobby, the player can still be in the 
+         tile so the next person can take over if he wants to */
       this._avivablePlayers[char].playBy = null;
       return; 
     }
   }
-}; 
+};
 
 module.exports = {
   GameLobby,

@@ -46,15 +46,17 @@ app.get('/', (req, res) => { res.sendfile(__dirname+'/client/index.html'); });
     /* if a socket manages to get into our game then we need to keep track of it and 
        poll its input else we dont care what it does maybe later we can add a spectate feature ? */
     if(GameLobby.tryJoinGame(socket.id)){ 
-      console.log("new player joined ! \navivable chars left",GameLobby._avivablePlayers); // for loggin
+      console.log("new player joined ! \navivable chars left \n",GameLobby._avivablePlayers); // for loggin
       
       /* like recursion its good to define rightaway what should happen if the socket disconects
          so we dont forgget about it, if the player leaves we set its char to null allowing
          a new socket to take over */
       socket.on('disconnect',()=>{
         GameLobby.leftGame(socket.id);
-        console.log("A player has left ! \navivable chars left",GameLobby._avivablePlayers);//for loggin
+        console.log("A player has left ! \navivable chars left \n",GameLobby._avivablePlayers);//for loggin
       }); 
+
+      console.log(g_tileManger.__tiles[0][0]);
     }
 
   });
