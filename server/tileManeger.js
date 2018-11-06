@@ -15,10 +15,10 @@ let g_tileManger = {
       For  : t is a g_tileManger object
              du is delta time /nominal rate
       After: calls the updater for each tile in __tiles */
-  updateTiles: function (du) {
+  updateTiles: function(du) {
     for(let i = 0; i < this.__tiles.length; i++) {
       for(let j=0; j < this.__tiles[i].length; j++) {
-        this.__tiles[i][j].updateTiles(du);
+        /* to do  */
       }
     }
   },
@@ -27,24 +27,16 @@ let g_tileManger = {
       For  : t is g_tileManger object
      After : creates tileSize*tileSize array of tiles where each tile entries
              are configured correctly */
-  createNewEmptyMap : function() {
+  createNewEmptyMap : function()  {
     for(let i = 0; i < this.__tileSize; i++){
       let tiles=[];
       for(let j=0; j < this.__tileSize; j++){
         let newTile =  new tile({ _TilePosX : i, _TilePosY: j });
-        // if its the top tiles then u cant enter them from the top
-        if(i === 0) { newTile._canEnterFrom.top = false; }
-        // if bottom tiles of the map then u cant enter from bottom
-        if(i === tileSize-1) { newTile._canEnterFrom.down = false; }
-        // if on the left corner of the map then u cant enter
-        if(j === 0 ){ newTile._canEnterFrom.left = false; }
-        // if on the left corner of the map then u cant enter
-        if(j === tileSize-1 ){  newTile._canEnterFrom.right = false; }
         tiles[j] = newTile;
       }
       this.__tiles[i] = tiles;
     }
-    //console.log("empty map has been initialized !");
+    console.log("empty map has been initialized !"); // for debbugin
     //console.log(this.__tiles);
   },
   
@@ -54,7 +46,6 @@ let g_tileManger = {
   generateNewMaze : function() {
     /* rafnar knock urself out BOI ! */
   },
-
 
 }
 

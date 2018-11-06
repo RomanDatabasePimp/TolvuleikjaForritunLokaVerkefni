@@ -23,15 +23,6 @@ function Tile(descr) {
      this tells you if this tile is a part of that house */
   this._amIAStructure=null;
 
-  /* this tells us from what position we can enter the tile f.x if we are in tile i,j 
-     and we try to enter this tile wich is at i,j+1 this would be a entry from the left side */
-  this._canEnterFrom = {
-    left:true,
-    right:true,
-    top:true,
-    down:true
-  };
-
   /* Usage : t.addEntity(ent)
       For  : t is a Tile 
              ent is a Entity
