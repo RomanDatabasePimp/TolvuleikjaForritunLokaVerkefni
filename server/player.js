@@ -11,8 +11,11 @@ function Player(descr,powerup) {
   
   // Common inherited setup logic from Entity
   this.setup(descr);
+  /* want the stamina , and whatPLayer */
+  for (var property in powerup) {
+    this[property] = powerup[property];
+  }
 
-  
 };
 
 Player.prototype = new Entity();

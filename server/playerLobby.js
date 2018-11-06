@@ -4,6 +4,8 @@
 */
 
 const Player = require('./player').Player; // fetch the tile
+// sadly need a quick and dirty way to get the spatialpos from the tile maneger ....
+const g_tileManger = require('./tileManeger').g_tileManger;
 
 /* logic for checking wich socket is playing what character since 
    many sockets can join the game but only 4 can play it we need to make somekind 
@@ -16,26 +18,59 @@ GameLobby.prototype._avivablePlayers = {
   bob: {
     playBy:null,        // socket who is playing bob
     inputRecived:false, // checks if bob has mabe a move
-    player:null         // bob player object
+    player:new Player(  // bob player object
+      {
+        shouldUpdateMe : true // tells the tile if it should update or not
+      },
+      {
+        // characters name is bob he has his power up in players class
+        character:"bob",
+        stamina:5 // init stamina of bob i.e how many tiles he can move in the start
+      }
+    )
   },
-  gill:{
+  fillip:{
     playBy:null,
     inputRecived:false,
-    player:null
+    player:new Player(
+      {
+        shouldUpdateMe : true
+      },
+      {
+        character:"filip",
+        stamina:3
+      }
+    )
   },
-  mike:{
+  sara:{
     playBy:null,
     inputRecived:false,
-    player:null
+    player:new Player(
+      {
+        shouldUpdateMe : true
+      },
+      {
+        character:"sara",
+        stamina:7
+      }
+    )
   },
   monster:{
     playBy:null,
     inputRecived:false,
-    player:null
+    player:new Player(
+      {
+        shouldUpdateMe : true
+      },
+      {
+        character:"monster",
+        stamina:10
+      }
+    )
   }
 };
 
-/* Usage : g.howManyPlaying()
+/* Usage : g.resetPlayerInputs()
     FOR  : g is a GameLobby
     After: sets inputRecived to false for players that are playing */
 GameLobby.prototype.resetPlayerInputs = function() {
@@ -52,9 +87,9 @@ GameLobby.prototype.resetPlayerInputs = function() {
     FOR  : g is a GameLobby
     After: returns the number of sockets that are playing the game */
 GameLobby.prototype.howManyPlaying = function() {
-  const amount = 0;
+  let amount = 0;
   for(let char in this._avivablePlayers){
-    if(!this._avivablePlayers[char].playBy){
+    if(this._avivablePlayers[char].playBy){
       amount +=1; 
     }
   }
@@ -65,7 +100,7 @@ GameLobby.prototype.howManyPlaying = function() {
     FOR  : g is a GameLobby
     After: checks if all players who are playing have made a move */
 GameLobby.prototype.allMadeMove = function() {
-  const playersPlaying = this.howManyPlaying();
+  let playersPlaying = this.howManyPlaying();
   for(let char in this._avivablePlayers){
     if(!this._avivablePlayers[char].playBy){
       if(this._avivablePlayers[char].inputRecived) {
@@ -86,7 +121,15 @@ GameLobby.prototype.allMadeMove = function() {
 GameLobby.prototype.tryJoinGame = function(sockId) {
   for(let char in this._avivablePlayers){
     if(!this._avivablePlayers[char].playBy){
-      this._avivablePlayers[char].playBy = sockId;
+      this._avivablePlayers[char].playBy = sockId; // now the socket is playing this character
+      // if the player is monster he starts in bottom right corner
+      if(this._avivablePlayers[char].character === 'monster'){
+        g_tileManger.__tiles[49][49].addEntity(this._avivablePlayers[char].player);
+      } else {
+        // all players start in the top left corner
+        g_tileManger.__tiles[0][0].addEntity(this._avivablePlayers[char].player);
+        console.log(this._avivablePlayers[char].player.entityPos);
+      }
       return true;  
     }
   }

@@ -9,13 +9,7 @@ function Entity() { };
 
 Entity.prototype.setup =  (descr) => {
 
-  /* for now i think  we only  need to pass down 2 thing
-    the entities location in the tile 
-    entityPos = {
-      tileX,
-      tileY,
-      spatialPos,
-    },
+  /* for now i think  we only  need to pass down 1 thing
     if the entity is important to update
     shouldUpdateMe = true/false 
     */
@@ -23,6 +17,11 @@ Entity.prototype.setup =  (descr) => {
     this[property] = descr[property];
   }
 };
+
+Entity.prototype.entityPos = {
+                               tileX: null,
+                               tileY: null,
+                               spatialPos:null };
 
 Entity.prototype.getEntityTilePos = function(){
   return this.entityPos;
@@ -32,7 +31,7 @@ Entity.prototype.updateEntityTilePos = function(nTileX,nTileY,nspatialPos) {
   this.entityPos = {
     tileX : nTileX,
     tileY : nTileY,
-    spatialPos,nspatialPos
+    spatialPos:nspatialPos
   }
 };
 

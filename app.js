@@ -36,9 +36,10 @@ app.get('/', (req, res) => { res.sendfile(__dirname+'/client/index.html'); });
   
   // our tile manager the one that keeps the state of the map
   const g_tileManger = require('./server/tileManeger').g_tileManger;
+  g_tileManger.createNewEmptyMap();
   // hold over the sockets that are playing the game
   const GameLobby =  new(require('./server/playerLobby').GameLobby);
-   
+  
 
   // our socket
   io.sockets.on('connect',(socket) => {
@@ -54,7 +55,6 @@ app.get('/', (req, res) => { res.sendfile(__dirname+'/client/index.html'); });
         GameLobby.leftGame(socket.id);
         console.log("A player has left ! \navivable chars left",GameLobby._avivablePlayers);//for loggin
       });
-      
       
     }
 

@@ -26,7 +26,7 @@ function Tile(descr) {
   /* Usage : t.addEntity(ent)
       For  : t is a Tile 
              ent is a Entity
-      After: adds the Entity in this tile */
+      After: adds the Entity in this tile  */
   this.addEntity = function(ent) {
     const newSpID = this._nextSpatialID ++; // get the new spatial id
     this._entities[newSpID] = ent; // add the entity in the tile
