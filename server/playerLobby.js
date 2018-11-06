@@ -70,6 +70,19 @@ GameLobby.prototype._avivablePlayers = {
   }
 };
 
+/* Usage : g.getPlayer(sockId)
+    FOR  : g is a GameLobby
+           sockID is the socket id
+    After: returns the player object that maches the sockID */
+GameLobby.prototype.getPlayer = function(sockID) {
+  for(let char in this._avivablePlayers){
+    if(this._avivablePlayers[char].playBy === sockID){
+      return this._avivablePlayers[char].player; // return the player
+    }
+  }
+  return null; // should almost never happen in a perfect world
+};
+
 /* Usage : g.resetPlayerInputs()
     FOR  : g is a GameLobby
     After: sets inputRecived to false for players that are playing */
@@ -111,7 +124,7 @@ GameLobby.prototype.allMadeMove = function() {
   if(playersPlaying === 0){ return true;}
   return false;
 };
-          
+
 
 /* Usage : g.tryJoinGame(sockId)
     FOR  : g is a GameLobby

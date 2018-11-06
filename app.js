@@ -54,8 +54,7 @@ app.get('/', (req, res) => { res.sendfile(__dirname+'/client/index.html'); });
       socket.on('disconnect',()=>{
         GameLobby.leftGame(socket.id);
         console.log("A player has left ! \navivable chars left",GameLobby._avivablePlayers);//for loggin
-      });
-      
+      }); 
     }
 
   });
