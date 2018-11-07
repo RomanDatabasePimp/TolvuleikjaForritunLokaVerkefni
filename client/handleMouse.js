@@ -14,7 +14,8 @@ function handleMouse(evt) {
         //
         return;
     }
-    drawPlayer(g_mouseX, g_mouseY);
+    //drawPlayer(g_mouseX, g_mouseY);
+    drawHighlight(g_mouseX,g_mouseY);
 }
 
 // Handle "down" and "move" events the same way.
