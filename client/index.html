@@ -14,9 +14,8 @@
   <!-- We need this to communicate using socket.io from client side -->
   <script src="/socket.io/socket.io.js"></script>
   <!-- Load all the client game code and assests from the server-->
-
+  <script src="/client/img/grassTile.png"></script>
   <script src="/client/js/utils.js"></script>
-  <script src="/client/js/renderGame.js"></script>
   
   <script>
      // establish our communication
@@ -24,7 +23,17 @@
     // our canvas
     const g_canvas = document.getElementById("myCanvas");
     const g_ctx = g_canvas.getContext("2d");
-   
+    
+
+    socket.on('gameStateChange', (data)=> {
+        
+      g_ctx.clearRect(0, 0, 600, 600);
+      for(let i=0; i < data.length; i++) {
+         g_ctx.fillText(data[i].id,data[i].x,data[i].y );
+      }
+      
+    });
+    
 
 
   </script>
