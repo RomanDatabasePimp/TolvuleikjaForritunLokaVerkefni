@@ -16,7 +16,7 @@ function Tile(descr) {
 
   this._nextSpatialID = 1; // make all valid IDs non-falsey (i.e. don't start at 0)
   this._entities = [];    // containter over all our entities
-  
+  this._size = 64;
   this._amITerrain= false;// tells us if this tile is just a terrain blocking the cell
 
   /* some tiles can be a part of somekind of structure f.x like a house and

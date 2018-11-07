@@ -48,7 +48,6 @@ let g_tileManager = {
   },
 
 }
-
 /* export the tile maneger so we can use it */
 module.exports = {
   g_tileManager,
