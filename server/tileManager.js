@@ -5,14 +5,14 @@
 const tile = require('./tile').Tile; // fetch the tile
 
 /* Our map is composed of a set of tiles, and the tileManeger holds all the tiles */
-let g_tileManger = {
+let g_tileManager = {
 
   // all the tiles inside the map
   __tiles: [],
   __tileSize: 10, // size of our map in terms of tileSize*tileSize
 
   /* Usage : t.updateTiles(du)
-      For  : t is a g_tileManger object
+      For  : t is a g_tileManager object
              du is delta time /nominal rate
       After: calls the updater for each tile in __tiles */
   updateTiles: function(du) {
@@ -24,7 +24,7 @@ let g_tileManger = {
   },
 
   /* Usage : t.createNewEmptyMap()
-      For  : t is g_tileManger object
+      For  : t is g_tileManager object
      After : creates tileSize*tileSize array of tiles where each tile entries
              are configured correctly */
   createNewEmptyMap : function()  {
@@ -41,7 +41,7 @@ let g_tileManger = {
   },
   
   /* Usage : t.generateNewMaze()
-      For  : t is g_tileManger object
+      For  : t is g_tileManager object
      After : create terrain on the map and maybe add houses and stuff*/
   generateNewMaze : function() {
     /* rafnar knock urself out BOI ! */
@@ -51,5 +51,5 @@ let g_tileManger = {
 
 /* export the tile maneger so we can use it */
 module.exports = {
-  g_tileManger,
+  g_tileManager,
 };

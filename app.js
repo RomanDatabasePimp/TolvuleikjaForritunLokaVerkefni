@@ -35,8 +35,8 @@ app.get('/', (req, res) => { res.sendfile(__dirname+'/client/index.html'); });
    clients where they have again 5 seconds to make a move  */
   
   // our tile manager the one that keeps the state of the map
-  const g_tileManger = require('./server/tileManeger').g_tileManger;
-  g_tileManger.createNewEmptyMap();
+  const g_tileManager = require('./server/tileManager').g_tileManager;
+  g_tileManager.createNewEmptyMap();
   // hold over the sockets that are playing the game
   const GameLobby =  new(require('./server/playerLobby').GameLobby);
   
@@ -46,17 +46,17 @@ app.get('/', (req, res) => { res.sendfile(__dirname+'/client/index.html'); });
     /* if a socket manages to get into our game then we need to keep track of it and 
        poll its input else we dont care what it does maybe later we can add a spectate feature ? */
     if(GameLobby.tryJoinGame(socket.id)){ 
-      console.log("new player joined ! \navivable chars left \n",GameLobby._avivablePlayers); // for loggin
+      console.log("new player joined ! \navailable chars left \n",GameLobby._availablePlayers); // for loggin
       
       /* like recursion its good to define rightaway what should happen if the socket disconects
          so we dont forgget about it, if the player leaves we set its char to null allowing
          a new socket to take over */
       socket.on('disconnect',()=>{
         GameLobby.leftGame(socket.id);
-        console.log("A player has left ! \navivable chars left \n",GameLobby._avivablePlayers);//for loggin
+        console.log("A player has left ! \navailable chars left \n",GameLobby._availablePlayers);//for loggin
       }); 
 
-      console.log(g_tileManger.__tiles[0][0]);
+      console.log(g_tileManager.__tiles[0][0]);
     }
 
   });
