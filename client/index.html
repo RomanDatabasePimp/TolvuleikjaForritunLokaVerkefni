@@ -26,10 +26,23 @@
     
     
     
-    window.onload = function(){
-      const img = new Image();
-    img.src ="./client/img/grassTile.png";
-    };
+    function draw() {
+  var img = new Image();
+  img.onload = function() {
+    g_ctx.drawImage(img, 0, 0);
+    g_ctx.drawImage(img, 64, 0);
+    g_ctx.drawImage(img, 128, 0);
+    g_ctx.drawImage(img, 192, 0);
+    g_ctx.drawImage(img, 256, 0);
+    g_ctx.drawImage(img, 320, 0);
+    g_ctx.drawImage(img, 384, 0);
+    g_ctx.drawImage(img, 448, 0);
+    g_ctx.drawImage(img, 512, 0);
+    g_ctx.drawImage(img, 576, 0);
+    g_ctx.beginPath();
+    g_ctx.stroke();
+  };
+  img.src = './client/img/grassTile.png';
 
 
   </script>
