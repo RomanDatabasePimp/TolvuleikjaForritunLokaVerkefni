@@ -24,16 +24,12 @@
     const g_canvas = document.getElementById("myCanvas");
     const g_ctx = g_canvas.getContext("2d");
     
-
-    socket.on('gameStateChange', (data)=> {
-        
-      g_ctx.clearRect(0, 0, 600, 600);
-      for(let i=0; i < data.length; i++) {
-         g_ctx.fillText(data[i].id,data[i].x,data[i].y );
-      }
-      
-    });
     
+    
+    window.onload = function(){
+      const img = new Image();
+    img.src ="./client/img/grassTile.png";
+    };
 
 
   </script>
