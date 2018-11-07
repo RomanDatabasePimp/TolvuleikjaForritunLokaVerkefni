@@ -9,7 +9,7 @@ let g_tileManger = {
 
   // all the tiles inside the map
   __tiles: [],
-  __tileSize: 2, // size of our map in terms of tileSize*tileSize
+  __tileSize: 10, // size of our map in terms of tileSize*tileSize
 
   /* Usage : t.updateTiles(du)
       For  : t is a g_tileManger object

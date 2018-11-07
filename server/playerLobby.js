@@ -139,7 +139,7 @@ GameLobby.prototype.tryJoinGame = function(sockId) {
       if(!this._avivablePlayers[char].player.entityPos.spatialPos) {
         // if the player is monster he starts in bottom right corner
         if(this._avivablePlayers[char].character === 'monster'){
-          g_tileManger.__tiles[49][49].addEntity(this._avivablePlayers[char].player);
+          g_tileManger.__tiles[9][9].addEntity(this._avivablePlayers[char].player);
         } else {
           // all players start in the top left corner
           g_tileManger.__tiles[0][0].addEntity(this._avivablePlayers[char].player);
