@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <title>Lokaverkefni</title>
+    <link rel="stylesheet" href="./client/styles.css">
   </head>
   <body>
-	  <canvas id="myCanvas" width="600" height="600" style="border: 1px solid black;">
+	  <canvas id="myCanvas" width="640" height="640" style="border: 1px solid black;">
 	  Sorry, but your browser does not support the HTML5 canvas tag.
 	  </canvas>
 
@@ -25,20 +26,14 @@
     const g_ctx = g_canvas.getContext("2d");
     
     
-    
     function draw() {
   var img = new Image();
   img.onload = function() {
-    g_ctx.drawImage(img, 0, 0);
-    g_ctx.drawImage(img, 64, 0);
-    g_ctx.drawImage(img, 128, 0);
-    g_ctx.drawImage(img, 192, 0);
-    g_ctx.drawImage(img, 256, 0);
-    g_ctx.drawImage(img, 320, 0);
-    g_ctx.drawImage(img, 384, 0);
-    g_ctx.drawImage(img, 448, 0);
-    g_ctx.drawImage(img, 512, 0);
-    g_ctx.drawImage(img, 576, 0);
+    for(let i = 0; i <= 640; i += 64){
+      for(let j = 0; j <= 640; j += 64){
+        g_ctx.drawImage(img, i, j);
+      }
+    }
     g_ctx.beginPath();
     g_ctx.stroke();
   };
