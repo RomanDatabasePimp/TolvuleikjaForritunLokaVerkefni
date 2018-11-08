@@ -20,7 +20,18 @@
   <script src="/client/js/utils.js"></script>
   <script src="/client/handleMouse.js"></script>
   <script src="/client/main.js"></script>
+   
+  <script>
+    // establish our communication
+    const socket = io();
+
+    socket.on('NextGameRound', (data)=> {
+        
+     console.log(data);
+    });
   
+  </script>
+
 </body>
 
 </html>

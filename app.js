@@ -31,34 +31,30 @@ app.get('/', (req, res) => { res.sendfile(__dirname+'/client/index.html'); });
 /* -----------------------------SOCKET LOGIC START ---------------------------------- */
 
 /* Okay basicly our socket will pull the user data from the clients and when it has
-   pulled all 5 clients it will update the game state and send the next state to the 
+   pulled all 3 clients it will update the game state and send the next state to the 
    clients where they have again 5 seconds to make a move  */
-  
-  // our tile manager the one that keeps the state of the map
-  const g_tileManager = require('./server/tileManager').g_tileManager;
-  g_tileManager.createNewEmptyMap();
-  // hold over the sockets that are playing the game
-  const GameLobby =  new(require('./server/playerLobby').GameLobby);
-  
+
+  // Fetch the game 
+  const FTL = require('./server/FTL');
+  FTL.createGameMap(); // need create the initial map before launching the server
 
   // our socket
   io.sockets.on('connect',(socket) => {
     /* if a socket manages to get into our game then we need to keep track of it and 
        poll its input else we dont care what it does maybe later we can add a spectate feature ? */
-    if(GameLobby.tryJoinGame(socket.id)){ 
-      console.log("new player joined ! \navailable chars left \n",GameLobby._availablePlayers); // for loggin
+    if(FTL.tryToJoinGame(socket.id)){ 
+      //console.log("new player joined ! \navailable chars left \n",GameLobby._availablePlayers);
       
       /* like recursion its good to define rightaway what should happen if the socket disconects
          so we dont forgget about it, if the player leaves we set its char to null allowing
          a new socket to take over */
       socket.on('disconnect',()=>{
-        GameLobby.leftGame(socket.id);
-        console.log("A player has left ! \navailable chars left \n",GameLobby._availablePlayers);//for loggin
+        FTL.leaveGame(socket.id);
+        // console.log("A player has left ! \navailable chars left \n",GameLobby._availablePlayers);
       }); 
-
-      console.log(g_tileManager.__tiles[0][0]);
+     
+      setInterval(() => {socket.broadcast.emit('NextGameRound', { data : 'need data' })},5000);
     }
-
   });
 
 /* -----------------------------SOCKET LOGIC END ------------------------------------ */
