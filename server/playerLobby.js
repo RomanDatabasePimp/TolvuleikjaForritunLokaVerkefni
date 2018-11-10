@@ -29,19 +29,6 @@ GameLobby.prototype._availablePlayers = {
       }
     )
   },
-  fillip:{
-    playBy:null,
-    inputReceived:false,
-    player:new Player(
-      {
-        shouldUpdateMe : true
-      },
-      {
-        character:"filip",
-        stamina:3
-      }
-    )
-  },
   sara:{
     playBy:null,
     inputReceived:false,
