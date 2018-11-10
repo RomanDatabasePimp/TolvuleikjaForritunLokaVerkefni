@@ -42,8 +42,8 @@ requestPreloads();
   function drawEmptyMapViaTiles(tile,id) {
     for(let i = 0; i < tile.__tiles.length;i++){
       for(let j = 0; j < tile.__tiles[i].length; j++){
-        g_sprites.grassTile.drawAt(g_ctx, i*63,j*64);
-        g_ctx.rect(i*63, j*64, 64, 64);
+        g_sprites.grassTileHighlight.drawAt(g_ctx, i*64,j*64);
+        g_ctx.rect(i*64, j*64, 64, 64);
         g_ctx.stroke();
       }
       
@@ -51,10 +51,9 @@ requestPreloads();
   };
 
  function returnTileAt(posX, posY){
+  console.log(posY/64,posX/64);
   // This is our valid play area, outside of -28 and 610, we don't want to do anything. 
-  if((posX > -28 && posX < 610) && (posY > -28 && posX < 610)){
-      console.log("valid play area");
-   }
+  
    
  }
 

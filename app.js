@@ -37,6 +37,7 @@ app.get('/', (req, res) => {
 
   // Fetch the game 
   const FTL = require('./server/FTL');
+  const delay = ms => new Promise(res => setTimeout(res, ms)); // create a delayer
   FTL.createGameMap(); // need create the initial map before launching the server
 
   // our socket
@@ -52,20 +53,48 @@ app.get('/', (req, res) => {
         FTL.leaveGame(socket.id);
         console.log("A player has left !");
       });
+
+      /* We listen to the player if he is ready for the next round  */
+      socket.on('clientreadyfornextround',(data)=>{
+        if(data) { FTL.setPlayerReadyForNextRound(socket.id); }
+      });
+
+      /* We listen to the player input */
+      socket.on('clientinput',(data)=>{
+    
+      });
     }
   });
 
-  setInterval(function() {
-    // start by checking if all players are playing
+  /* our server logic*/   
+  function ServerInit() {
+    // start by checking if all players have connected to the game
+    
+    // fetch a boolean array that tells us if all 3 players are connected to the server
     const allPLayersPLaying = FTL.allPlayersJoined();
     // if all 3 players havent joined or one left we send to the client that we are waiting to for someone
-    if(!allPLayersPLaying.alljoined) { 
+    if(!allPLayersPLaying.alljoined) {
       io.sockets.emit('NextGameRound', { hasnotgamestarted : allPLayersPLaying.hasnotgamestarted });
       return;
     }
-    io.sockets.emit('NextGameRound', FTL.updateStateAndReturn());
-  }, 5000);
+    
+    // if clients are not ready for the next class we wait
+    if(FTL.allPlayersReadyForNextRound()) { return; }
+    
+    // tells client they have 5 seconds to make a move
+    io.sockets.emit('roundstart', null );
 
+    // unready the players since they are finishing the current round
+    FTL.setPlayerNotReadyForNextRound();
+
+    // wait 5 seconds before updateting the map state and sending it back
+    delay(5000);
+    
+    // update the map state and send to clients 
+    io.sockets.emit('NextGameRound', FTL.updateStateAndReturn() );
+  }
+
+  setInterval(ServerInit,1000)
 
 /* -----------------------------SOCKET LOGIC END ------------------------------------ */
 
