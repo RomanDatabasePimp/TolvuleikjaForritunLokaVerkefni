@@ -1,7 +1,6 @@
   
   // our canvas
-  const g_canvas = document.getElementById("myCanvas");
-  const g_ctx = g_canvas.getContext("2d");
+
 
   function draw() {
     var img = new Image();

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Lokaverkefni</title>
-  <link rel="stylesheet" href="./client/styles.css">
+  <link rel="stylesheet" href="./client/css/styles.css">
 </head>
 
 <body>
@@ -14,30 +14,43 @@
     </div>
     Sorry, but your browser does not support the HTML5 canvas tag.
   </canvas>
+
   <!-- ------------------HTML END SCRIPTS START --------------------------------------->
-  
-  
+
   <!-- We need this to communicate using socket.io from client side -->
   <script src="/socket.io/socket.io.js"></script>
+  <script> 
+    const g_canvas = document.getElementById("myCanvas");
+    const g_ctx = g_canvas.getContext("2d");
+    const socket = io();// establish our communication
+  </script>
   
+  <!-- include all client game logic such as drawing the map waiting looby etc -->
+
+
+ 
+  <!-- Combine all the game logic into a client side game -->
   <script>
-    // establish our communication
-    const socket = io();
     /* Define what happens when a socket manages to connect to our server */
     socket.on('connect', function() {
       // in here we can pass our socket.id to the functions that need it
-
+      
       /* Next game round is send to us every x-seconds here we recive the map
          and call the necessary functions needed to draw the map based off 
          the data recived */
       socket.on('NextGameRound', (data)=> {
-          console.log(data);
-      });
+        
+      
+        // fallidhelgi(data)
+         
+        // kalla á teikni föllin
+        
+        // check if game over ? 
 
+      });
 
     });
   </script>
 
 </body>
-
 </html>
