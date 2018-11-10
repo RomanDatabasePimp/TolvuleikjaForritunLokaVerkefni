@@ -1,0 +1,44 @@
+#myCanvas {
+    padding: 0;
+    margin: auto;
+    display: block;
+    z-index: -1;
+}
+html{
+  background-color: black;
+}
+.myVideo{
+  display: flex;
+  justify-content: center;
+  top: 0;
+  width: 65%;
+  position: absolute;
+  padding-left: 17%;
+  padding-top:6%;
+}
+.players {
+  color: white;
+  font-size: 2rem;
+  position: absolute;
+  font-weight: bolder;
+  padding-left: 25%;
+}
+#one{
+  top: 20%;
+}
+#two{
+  top: 40%
+}
+#three {
+  top:60%;
+}
+.readyButton{
+    margin-left: 26%;
+    position: absolute;
+    top: 80%;
+    width: 15%;
+    border-radius: 5px;
+    font-size: 1.8rem;
+    background-color: gray;
+    color: white;
+}
