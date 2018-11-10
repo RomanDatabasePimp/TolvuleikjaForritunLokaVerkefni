@@ -44,6 +44,7 @@ let g_tileManager = {
       For  : t is g_tileManager object
      After : create terrain on the map and maybe add houses and stuff*/
   generateNewMaze : function() {
+    
     /* rafnar knock urself out BOI ! */
   },
 
