@@ -16,7 +16,6 @@ function GameLobby() {};
 // hold over the avivable players that can be still played by our clients
 GameLobby.prototype._availablePlayers = {
   bob: {
-    playBy:null,        // socket who is playing bob
     inputReceived:false, // checks if bob has mabe a move
     player:new Player(  // bob player object
       {
@@ -25,12 +24,12 @@ GameLobby.prototype._availablePlayers = {
       {
         // characters name is bob he has his power up in players class
         character:"bob",
+        playBy:null,        // socket who is playing bob
         stamina:5 // init stamina of bob i.e how many tiles he can move in the start
       }
     )
   },
   sara:{
-    playBy:null,
     inputReceived:false,
     player:new Player(
       {
@@ -38,12 +37,12 @@ GameLobby.prototype._availablePlayers = {
       },
       {
         character:"sara",
-        stamina:7
+        stamina:7,
+        playBy:null,
       }
     )
   },
   monster:{
-    playBy:null,
     inputReceived:false,
     player:new Player(
       {
@@ -51,7 +50,8 @@ GameLobby.prototype._availablePlayers = {
       },
       {
         character:"monster",
-        stamina:10
+        stamina:10,
+        playBy:null
       }
     )
   }
