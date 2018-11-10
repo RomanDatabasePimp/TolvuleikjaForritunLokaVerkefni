@@ -57,14 +57,15 @@ app.get('/', (req, res) => {
     }
   });
 
-  //   io.sockets.emit('NextGameRound', { countdown: countdown });
-
   setInterval(function() {
+    // start by checking if all players are playing
     const allPLayersPLaying = FTL.allPlayersJoined();
+    // if all 3 players havent joined or one left we send to the client that we are waiting to for someone
     if(!allPLayersPLaying.alljoined) { 
       io.sockets.emit('NextGameRound', { hasnotgamestarted : allPLayersPLaying.hasnotgamestarted });
+      return;
     }
-  
+    io.sockets.emit('NextGameRound', FTL.updateStateAndReturn());
   }, 5000);
 
 

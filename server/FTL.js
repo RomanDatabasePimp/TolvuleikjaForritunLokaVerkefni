@@ -47,6 +47,14 @@ function allPlayersJoined() {
   return { alljoined : true, hasnotgamestarted : null }
 }
 
+/* Usage : updateStateAndReturn()
+    For  : nothing
+    After:
+ */
+function updateStateAndReturn() {
+
+  return g_tileManager;
+}
 
 
 /* export the game functions  */
@@ -54,5 +62,6 @@ module.exports = {
   createGameMap,
   tryToJoinGame,
   leaveGame,
-  allPlayersJoined
+  allPlayersJoined,
+  updateStateAndReturn
 };
