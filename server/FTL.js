@@ -38,7 +38,7 @@ function leaveGame(sockId) {
      For : nothing
    After : returns boolean if all players are occupied by sockets */
 function allPlayersJoined() {
-  const lobbyState = GameLobby.GetAllPLayers(); // fetch array
+  const lobbyState = GameLobby.countAllPLayers(); // fetch array
   for(let i =0; i < lobbyState.length; i++){
      if(lobbyState[i] === false) {
       return { alljoined : false, hasnotgamestarted : lobbyState }
@@ -47,10 +47,31 @@ function allPlayersJoined() {
   return { alljoined : true, hasnotgamestarted : null }
 }
 
+/* Usage : allPlayersReadyForNextRound()
+    For  : nothing
+   After : returns true if all players are ready to start next round */
+function allPlayersReadyForNextRound(){
+  return GameLobby.AllReadyForNextRound();
+}
+
+/* Usage : setPlayerReadyForNextRound(sockID)
+    For  : sockId is a string
+   After : sets the player with the sockId ready to play next round */
+function setPlayerReadyForNextRound(sockID) {
+  GameLobby.setPlayerReady(sockID);
+}
+
+/* Usage : setPlayerNotReadyForNextRound()
+    For  : nothing
+   After : sets all players to not ready to do next round */
+function setPlayerNotReadyForNextRound() {
+  GameLobby.unreadyPlayers();
+}
+
+
 /* Usage : updateStateAndReturn()
     For  : nothing
-    After:
- */
+    After: updates the gameState and returns the updated tile maneger */
 function updateStateAndReturn() {
 
   return g_tileManager;
@@ -64,5 +85,7 @@ module.exports = {
   leaveGame,
   allPlayersJoined,
   updateStateAndReturn,
-  g_tileManager
+  allPlayersReadyForNextRound,
+  setPlayerReadyForNextRound,
+  setPlayerNotReadyForNextRound
 };

@@ -37,6 +37,9 @@ app.get('/', (req, res) => {
 
   // Fetch the game 
   const FTL = require('./server/FTL');
+  const delay = ms => new Promise(res => setTimeout(res, ms)); // create a delayer
+  let firstRound = true; // tells us if this is the first round
+
   FTL.createGameMap(); // need create the initial map before launching the server
   // our socket
   io.sockets.on('connect',(socket) => {
@@ -51,20 +54,54 @@ app.get('/', (req, res) => {
         FTL.leaveGame(socket.id);
         console.log("A player has left !");
       });
+
+      /* We listen to the player if he is ready for the next round  */
+      socket.on('clientreadyfornextround',(data)=>{
+        if(data) { FTL.setPlayerReadyForNextRound(socket.id); }
+      });
+
+      /* We listen to the player input */
+      socket.on('clientinput',(data)=>{
+    
+      });
     }
   });
 
-  setInterval(function() {
-    // start by checking if all players are playing
+  /* our server logic*/   
+  function gameloop() {
+    // start by checking if all players have connected to the game
+
+    // fetch a boolean array that tells us if all 3 players are connected to the server
     const allPLayersPLaying = FTL.allPlayersJoined();
     // if all 3 players havent joined or one left we send to the client that we are waiting to for someone
-    if(!allPLayersPLaying.alljoined) { 
+    if(!allPLayersPLaying.alljoined) {
       io.sockets.emit('NextGameRound', { hasnotgamestarted : allPLayersPLaying.hasnotgamestarted });
+      // if the lobby is not full we try again in 3 seconds
+      console.log("Waiting for lobby full (tryin in 3 sec) ");
+      setTimeout(gameloop, 3000);
       return;
     }
-    io.sockets.emit('NextGameRound', FTL.updateStateAndReturn());
-  }, 5000);
+   
+    // update the map and send it to the clients 
+    io.sockets.emit('NextGameRound', FTL.updateStateAndReturn() );
+    
+    // if clients are not ready for the next class we wait
+    if(!FTL.allPlayersReadyForNextRound()) {
+      console.log("Waiting for all clients to start next round (trying in 3 sec)");
+      setTimeout(gameloop,3000);
+      return;
+    }
+ 
+    // tells client they have 5 seconds to make a move
+    io.sockets.emit('roundstart', null );
 
+    // unready the players since they are finishing the current round
+    FTL.setPlayerNotReadyForNextRound();
+
+    // wait 5 seconds before updateting the map state and sending it back
+    console.log("Players making move trying updating state in 5 sec");
+    setTimeout(gameloop,5000);
+  }
 
 /* -----------------------------SOCKET LOGIC END ------------------------------------ */
 
@@ -87,4 +124,4 @@ const {
   HOST: host = '127.0.0.1',
 } = process.env;
 
-serv.listen(port, () => { console.info(`Server running at http://${host}:${port}/`); });
+serv.listen(port, () => {gameloop(); console.info(`Server running at http://${host}:${port}/`); });
