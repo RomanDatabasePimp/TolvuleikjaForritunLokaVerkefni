@@ -47,7 +47,6 @@ app.get('/', (req, res) => {
        poll its input else we dont care what it does maybe later we can add a spectate feature ? */
     if(FTL.tryToJoinGame(socket.id)){ 
       console.log("new player joined !");
-      
       /* its good to define rightaway what should happen if the socket disconects
          so we dont forgget about it, if the player leaves we set its char to null allowing
          a new socket to take over */
@@ -61,6 +60,10 @@ app.get('/', (req, res) => {
   //   io.sockets.emit('NextGameRound', { countdown: countdown });
 
   setInterval(function() {
+    const allPLayersPLaying = FTL.allPlayersJoined();
+    if(!allPLayersPLaying.alljoined) { 
+      io.sockets.emit('NextGameRound', { hasnotgamestarted : allPLayersPLaying.hasnotgamestarted });
+    }
   
   }, 5000);
 

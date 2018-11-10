@@ -36,10 +36,17 @@ function leaveGame(sockId) {
 
 /* Usage : allPlayersJoined()
      For : nothing
-   After : returns true if all players are occupied by sockets */
+   After : returns boolean if all players are occupied by sockets */
 function allPlayersJoined() {
-  return GameLobby.howManyPlaying() === 3;
+  const lobbyState = GameLobby.GetAllPLayers(); // fetch array
+  for(let i =0; i < lobbyState.length; i++){
+     if(lobbyState[i] === false) {
+      return { alljoined : false, hasnotgamestarted : lobbyState }
+     }
+  }
+  return { alljoined : true, hasnotgamestarted : null }
 }
+
 
 
 /* export the game functions  */
@@ -47,6 +54,5 @@ module.exports = {
   createGameMap,
   tryToJoinGame,
   leaveGame,
-  resetGame,
   allPlayersJoined
 };
