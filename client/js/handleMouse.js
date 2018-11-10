@@ -12,10 +12,9 @@ function handleMouse(evt) {
         //Checktile function, here we can hover over something.
         //Then draw the correct grassTileHighlighted if we are over it.
         //
-        returnTileAt(g_mouseX,g_mouseY);
         return;
     }
-    
+    returnTileAt(g_mouseX,g_mouseY);
 }
 
 // Handle "down" and "move" events the same way.
