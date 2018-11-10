@@ -25,7 +25,10 @@ app.use('/client',express.static(__dirname+'/client'));
 
 /* This is the first and only time we will send the client smth and thats our game 
    so he can load it */
-app.get('/', (req, res) => { res.sendfile(__dirname+'/client/index.html'); });
+app.get('/', (req, res) => { 
+  res.sendfile(__dirname+'/client/index.html'); 
+});
+
 
 
 /* -----------------------------SOCKET LOGIC START ---------------------------------- */
@@ -33,7 +36,7 @@ app.get('/', (req, res) => { res.sendfile(__dirname+'/client/index.html'); });
 /* Okay basicly our socket will pull the user data from the clients and when it has
    pulled all 5 clients it will update the game state and send the next state to the 
    clients where they have again 5 seconds to make a move  */
-  
+
   // our tile manager the one that keeps the state of the map
   const g_tileManager = require('./server/tileManager').g_tileManager;
   g_tileManager.createNewEmptyMap();
