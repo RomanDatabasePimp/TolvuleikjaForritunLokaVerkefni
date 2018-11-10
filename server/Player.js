@@ -12,11 +12,6 @@ function Player(descr,player) {
   // Common inherited setup logic from Entity
   this.setup(descr);
 
-  //Initial position for our character.
-  this.posX = 0;
-  this.posY = 0;
-
-  this.sprite = this.sprite;
   /* want the stamina , and whatPLayer */
   for (var property in player) {
     this[property] = player[property];
@@ -26,14 +21,6 @@ function Player(descr,player) {
 
 Player.prototype = new Entity(); // A player is an entity nuff said ...
 
-Player.prototype.update = function update(posX, posY){
-    this.posX = posX;
-    this.posY = posY;
-};
-
-Player.prototype.render = function render(ctx){
-  this.sprite.drawAt(ctx,this.posX,this.posY);
-};
 module.exports = {
   Player,
 };
