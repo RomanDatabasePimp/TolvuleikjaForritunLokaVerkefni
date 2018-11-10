@@ -9,15 +9,6 @@
 const g_tileManager = require('./tileManager').g_tileManager;
 // hold over the sockets that are playing the game
 const GameLobby =  new(require('./playerLobby').GameLobby);
- 
-let gameHasStarted = false; // tells us if the game has started
-
-/* Usage : resetGame()
-    For  : nothing
-   After : calls all the nessesary services to reset the game */
-function resetGame(){
-   this.createGameMap(); // start by generating the map
-}
 
 /* Usage : createGameMap()
     For  : nothing
