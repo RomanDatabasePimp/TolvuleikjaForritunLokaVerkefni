@@ -25,7 +25,10 @@ app.use('/client',express.static(__dirname+'/client'));
 
 /* This is the first and only time we will send the client smth and thats our game 
    so he can load it */
-app.get('/', (req, res) => { res.sendfile(__dirname+'/client/index.html'); });
+app.get('/', (req, res) => { 
+  res.sendfile(__dirname+'/client/index.html'); 
+});
+
 
 
 /* -----------------------------SOCKET LOGIC START ---------------------------------- */
