@@ -8,93 +8,80 @@ const Player = require('./Player').Player; // fetch the tile
 const g_tileManager = require('./tileManager').g_tileManager;
 
 /* logic for checking wich socket is playing what character since 
-   many sockets can join the game but only 4 can play it we need to make somekind 
+   many sockets can join the game but only 3 can play it we need to make somekind 
    of handler that keeps track of this */
 
 function GameLobby() {};
-
-// hold over the avivable players that can be still played by our clients
-GameLobby.prototype._availablePlayers = {
-  bob: {
-    inputReceived:false, // checks if bob has mabe a move
-    player:new Player(  // bob player object
-      {
-        shouldUpdateMe : true // tells the tile if it should update or not
-      },
-      {
-        // characters name is bob he has his power up in players class
-        character:"bob",
-        playBy:null,        // socket who is playing bob
-        stamina:5 // init stamina of bob i.e how many tiles he can move in the start
-      }
-    )
-  },
-  sara:{
-    inputReceived:false,
-    player:new Player(
-      {
-        shouldUpdateMe : true
-      },
-      {
-        character:"sara",
-        stamina:7,
-        playBy:null,
-      }
-    )
-  },
-  monster:{
-    inputReceived:false,
-    player:new Player(
-      {
-        shouldUpdateMe : true
-      },
-      {
-        character:"monster",
-        stamina:10,
-        playBy:null
-      }
-    )
-  }
-};
-
-/* Usage : g.getPlayer(sockId)
-    FOR  : g is a GameLobby
-           sockID is the socket id
-    After: returns the player object that maches the sockID */
-GameLobby.prototype.getPlayer = function(sockID) {
-  for(let char in this._availablePlayers){
-    if(this._availablePlayers[char].playBy === sockID){
-      return this._availablePlayers[char].player; // return the player
+  // hold over the avivable players that can be still played by our clients
+  GameLobby.prototype._availablePlayers = {
+    bob: {
+      inputReceived:false, // checks if bob has mabe a move
+      player:new Player(  // bob player object
+        {
+          shouldUpdateMe : true // tells the tile if it should update or not
+        },
+        {
+          // characters name is bob he has his power up in players class
+          character:"bob",
+          playBy:null,// socket who is playing bob
+          stamina:5// init stamina of bob i.e how many tiles he can move in the start
+        }
+      )
+    },
+    sara:{
+      inputReceived:false,
+      player:new Player(
+        {
+          shouldUpdateMe : true
+        },
+        {
+          character:"sara",
+          stamina:7,
+          playBy:null,
+        }
+      )
+    },
+    monster:{
+      inputReceived:false,
+      player:new Player(
+        {
+          shouldUpdateMe : true
+        },
+        {
+          character:"monster",
+          stamina:10,
+          playBy:null
+        }
+      )
     }
-  }
-  return null; // should almost never happen in a perfect world
 };
 
+/* Usage : g.GetAllPLayers()
+    For  : g is a GameLobby
+    After: creates a boolean array that says which players are joined */
+GameLobby.prototype.GetAllPLayers = function () {
+  const players = [false,false,false];
+  let inc = 0;
+  for(let char in this._availablePlayers){
+    if(this._availablePlayers[char].player.playBy){
+      players[inc] = true;
+    }
+    inc ++;
+  }
+  return players;
+}
+ 
 /* Usage : g.resetPlayerInputs()
     FOR  : g is a GameLobby
     After: sets inputReceived to false for players that are playing */
 GameLobby.prototype.resetPlayerInputs = function() {
   for(let char in this._availablePlayers){
-    if(!this._availablePlayers[char].playBy){
-      if(this._availablePlayers[char].inputReceived) {
-        this._availablePlayers[char].inputReceived = false;
-      } 
+    if(!this._availablePlayers[char].player.playBy){
+      this._availablePlayers[char].inputReceived = false;
     }
   }
 };
 
-/* Usage : g.howManyPlaying()
-    FOR  : g is a GameLobby
-    After: returns the number of sockets that are playing the game */
-GameLobby.prototype.howManyPlaying = function() {
-  let amount = 0;
-  for(let char in this._availablePlayers){
-    if(this._availablePlayers[char].playBy){
-      amount +=1; 
-    }
-  }
-  return amount;
-};
 
 /* Usage : g.allMadeMove()
     FOR  : g is a GameLobby
@@ -102,7 +89,7 @@ GameLobby.prototype.howManyPlaying = function() {
 GameLobby.prototype.allMadeMove = function() {
   let playersPlaying = this.howManyPlaying();
   for(let char in this._availablePlayers){
-    if(!this._availablePlayers[char].playBy){
+    if(!this._availablePlayers[char].player.playBy){
       if(this._availablePlayers[char].inputReceived) {
         playersPlaying -=1;
       } 
@@ -120,8 +107,8 @@ GameLobby.prototype.allMadeMove = function() {
            and return true */
 GameLobby.prototype.tryJoinGame = function(sockId) {
   for(let char in this._availablePlayers){
-    if(!this._availablePlayers[char].playBy){
-      this._availablePlayers[char].playBy = sockId; // now the socket is playing this character
+    if(!this._availablePlayers[char].player.playBy){
+      this._availablePlayers[char].player.playBy = sockId; // now the socket is playing this character
       // if the player is already initialized we just let the socket take over
       if(!this._availablePlayers[char].player.entityPos.spatialPos) {
         // if the player is monster he starts in bottom right corner
@@ -144,10 +131,10 @@ GameLobby.prototype.tryJoinGame = function(sockId) {
     After: search in the _availablePlayers for the sockId and set its value to null  */
 GameLobby.prototype.leftGame = function(sockId) {
   for(let char in this._availablePlayers){
-    if(this._availablePlayers[char].playBy === sockId) {
+    if(this._availablePlayers[char].player.playBy === sockId) {
       /* we want to just remove him from lobby, the player can still be in the 
          tile so the next person can take over if he wants to */
-      this._availablePlayers[char].playBy = null;
+      this._availablePlayers[char].player.playBy = null;
       return; 
     }
   }

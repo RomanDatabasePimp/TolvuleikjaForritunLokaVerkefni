@@ -9,15 +9,6 @@
 const g_tileManager = require('./tileManager').g_tileManager;
 // hold over the sockets that are playing the game
 const GameLobby =  new(require('./playerLobby').GameLobby);
- 
-let gameHasStarted = false; // tells us if the game has started
-
-/* Usage : resetGame()
-    For  : nothing
-   After : calls all the nessesary services to reset the game */
-function resetGame(){
-   this.createGameMap(); // start by generating the map
-}
 
 /* Usage : createGameMap()
     For  : nothing
@@ -45,10 +36,17 @@ function leaveGame(sockId) {
 
 /* Usage : allPlayersJoined()
      For : nothing
-   After : returns true if all players are occupied by sockets */
+   After : returns boolean if all players are occupied by sockets */
 function allPlayersJoined() {
-  return GameLobby.howManyPlaying() === 3;
+  const lobbyState = GameLobby.GetAllPLayers(); // fetch array
+  for(let i =0; i < lobbyState.length; i++){
+     if(lobbyState[i] === false) {
+      return { alljoined : false, hasnotgamestarted : lobbyState }
+     }
+  }
+  return { alljoined : true, hasnotgamestarted : null }
 }
+
 
 
 /* export the game functions  */
@@ -56,6 +54,5 @@ module.exports = {
   createGameMap,
   tryToJoinGame,
   leaveGame,
-  resetGame,
   allPlayersJoined
 };
