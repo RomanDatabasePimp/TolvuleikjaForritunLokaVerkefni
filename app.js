@@ -41,7 +41,6 @@ app.get('/', (req, res) => {
   let firstRound = true; // tells us if this is the first round
 
   FTL.createGameMap(); // need create the initial map before launching the server
-
   // our socket
   io.sockets.on('connect',(socket) => {
     /* if a socket manages to get into our game then we need to keep track of it and 
