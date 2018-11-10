@@ -63,5 +63,6 @@ module.exports = {
   tryToJoinGame,
   leaveGame,
   allPlayersJoined,
-  updateStateAndReturn
+  updateStateAndReturn,
+  g_tileManager
 };
