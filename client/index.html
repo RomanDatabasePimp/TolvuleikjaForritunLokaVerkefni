@@ -56,7 +56,7 @@
       socket.on('roundstart', ()=> {
         turnCountDown = 5;
         readyForNextRound=false;
-        // call the countdown function
+        // poll client input
       });
 
       /* client will send to the Server every 3 seconds if he is ready to for the next round
