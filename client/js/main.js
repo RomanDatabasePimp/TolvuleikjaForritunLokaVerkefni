@@ -42,6 +42,7 @@ requestPreloads();
  * @param {Socket.id} id 
  */
   function drawEmptyMapViaTiles(tile,id) {
+    clearCanvas(g_ctx);
     if(!(tile.hasOwnProperty("__tiles"))) return null;
 
 
