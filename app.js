@@ -43,19 +43,24 @@ app.get('/', (req, res) => { res.sendfile(__dirname+'/client/index.html'); });
     /* if a socket manages to get into our game then we need to keep track of it and 
        poll its input else we dont care what it does maybe later we can add a spectate feature ? */
     if(FTL.tryToJoinGame(socket.id)){ 
-      //console.log("new player joined ! \navailable chars left \n",GameLobby._availablePlayers);
+      //console.log("new player joined ! \navailable chars left \n");
       
-      /* like recursion its good to define rightaway what should happen if the socket disconects
+      /* its good to define rightaway what should happen if the socket disconects
          so we dont forgget about it, if the player leaves we set its char to null allowing
          a new socket to take over */
       socket.on('disconnect',()=>{
         FTL.leaveGame(socket.id);
-        // console.log("A player has left ! \navailable chars left \n",GameLobby._availablePlayers);
-      }); 
-     
-      setInterval(() => {socket.broadcast.emit('NextGameRound', { data : 'need data' })},5000);
+        //console.log("A player has left ! \navailable chars left \n);
+      });
     }
   });
+
+  setInterval(function() {  countdown--;
+    io.sockets.emit('NextGameRound', { countdown: countdown });
+  }, 5000);
+
+  var countdown = 1000;  
+
 
 /* -----------------------------SOCKET LOGIC END ------------------------------------ */
 

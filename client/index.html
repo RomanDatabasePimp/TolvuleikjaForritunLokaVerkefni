@@ -16,20 +16,23 @@
 
   <!-- We need this to communicate using socket.io from client side -->
   <script src="/socket.io/socket.io.js"></script>
-  <!-- Load all the client game code and assests from the server-->
-  <script src="/client/js/utils.js"></script>
-  <script src="/client/handleMouse.js"></script>
-  <script src="/client/main.js"></script>
-   
+  
   <script>
     // establish our communication
     const socket = io();
+    /* Define what happens when a socket manages to connect to our server */
+    socket.on('connect', function() {
+      // in here we can pass our socket.id to the functions that need it
 
-    socket.on('NextGameRound', (data)=> {
-        
-     console.log(data);
+      /* Next game round is send to us every x-seconds here we recive the map
+         and call the necessary functions needed to draw the map based off 
+         the data recived */
+      socket.on('NextGameRound', (data)=> {
+          console.log(data);
+      });
+
+
     });
-  
   </script>
 
 </body>
