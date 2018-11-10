@@ -33,6 +33,7 @@ function allPlayerReady(data){
 
   }
 }
+
 function drawGameBackground() {
   if(first == true){
     
@@ -43,6 +44,7 @@ function drawGameBackground() {
       first = false;
   }
 }
+
 function drawFirstView() {
     /*  Get the location of main in HTML  */
     main = document.querySelector('body');
