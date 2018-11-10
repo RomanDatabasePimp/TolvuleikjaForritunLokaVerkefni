@@ -37,15 +37,37 @@ let g_tileManager = {
       this.__tiles[i] = tiles;
     }
     console.log("empty map has been initialized !"); // for debbugin
-    //console.log(this.__tiles);
+    this.generateNewMaze();
   },
   
   /* Usage : t.generateNewMaze()
       For  : t is g_tileManager object
      After : create terrain on the map and maybe add houses and stuff*/
   generateNewMaze : function() {
-    
-    /* rafnar knock urself out BOI ! */
+    // matrix generated to quickly create maps.
+    // 1 is terrain, 2 is a structure. 0 is area which can be traversed
+    let mapMatrix = [
+      [0,0,0,1,0,0,0,2,2,2],
+      [0,0,0,0,0,1,0,2,2,2],
+      [0,0,1,0,0,0,0,2,2,2],
+      [1,0,0,0,1,1,0,0,0,0],
+      [1,0,1,0,1,1,0,0,0,0],
+      [0,0,0,0,0,0,0,0,1,0],
+      [0,0,0,1,0,2,2,0,0,0],
+      [2,2,2,0,0,2,2,0,0,1],
+      [2,2,2,0,0,0,0,1,0,0],
+      [2,2,2,0,0,1,0,0,0,0]
+    ];
+    for(let i = 0; i < this.__tileSize; i++){
+      for(let j = 0; j < this.__tileSize;j++){
+        if(mapMatrix[i][j] == 1){
+          this.__tiles[i][j]._amITerrain = true;
+        }
+        if(mapMatrix[i][j] == 2){
+          this.__tiles[i][j]._amIAStructure = true;
+        }
+      }
+    }
   },
 
 }
