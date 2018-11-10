@@ -12,7 +12,8 @@ function requestPreloads() {
     var requiredImages = {
         grassTile   : './client/img/grassTile.png',
         grassTileHighlight  : './client/img/grassTileHighlight.png',
-        player   : './client/img/Player/player_01.png'
+        player   : './client/img/Player/player_01.png',
+        highLight : './client/img/highLight.png'
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -28,7 +29,8 @@ function preloadDone() {
 
     g_sprites.grassTile  = new Sprite(g_images.grassTile);
     g_sprites.grassTileHighlight = new Sprite(g_images.grassTileHighlight);
-    g_sprites.player  = new Sprite(g_images.player);    
+    g_sprites.player  = new Sprite(g_images.player);
+    g_sprites.highLight = new Sprite(g_images.highLight);    
 }
 
 // Kick it off
@@ -40,9 +42,10 @@ requestPreloads();
  * @param {Socket.id} id 
  */
   function drawEmptyMapViaTiles(tile,id) {
+    clearCanvas(g_ctx);
     if(!(tile.hasOwnProperty("__tiles"))) return null;
 
-    
+
     for(let i = 0; i < tile.__tiles.length;i++){
       for(let j = 0; j < tile.__tiles[i].length; j++){
         g_sprites.grassTile.drawAt(g_ctx, i*64,j*64);
@@ -53,8 +56,7 @@ requestPreloads();
   };
 
  function returnTileAt(posX, posY){
-  
-   
+  g_sprites.grassTileHighlight.drawAt(g_ctx,convertToMatrix(posX),convertToMatrix(posY));
  }
 
  // draw();
