@@ -40,6 +40,9 @@ requestPreloads();
  * @param {Socket.id} id 
  */
   function drawEmptyMapViaTiles(tile,id) {
+    if(!(tile.hasOwnProperty("__tiles"))) return null;
+
+    
     for(let i = 0; i < tile.__tiles.length;i++){
       for(let j = 0; j < tile.__tiles[i].length; j++){
         g_sprites.grassTile.drawAt(g_ctx, i*64,j*64);
