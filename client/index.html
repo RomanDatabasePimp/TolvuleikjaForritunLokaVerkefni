@@ -29,19 +29,25 @@
   <script src="./client/js/imagesPreload.js"></script>
   <script src="./client/js/Sprite.js"></script>
   <script src="./client/js/main.js"></script>
-  
+  <script src ="/client/js/firstView.js"></script>
+
+
  
   <!-- Combine all the game logic into a client side game -->
   <script>
+    drawFirstView();
     /* Define what happens when a socket manages to connect to our server */
     socket.on('connect', function() {
       // in here we can pass our socket.id to the functions that need it
       
       /* Next game round is send to us every x-seconds here we recive the map
-         and call the necessary functions needed to draw the map based off 
-         the data recived */
+      and call the necessary functions needed to draw the map based off 
+      the data recived */
       socket.on('NextGameRound', (data)=> {
-        console.log(data);
+        allPlayerReady(data);
+        
+    
+        
         // fallidhelgi(data)
          
         // kalla á teikni föllin
