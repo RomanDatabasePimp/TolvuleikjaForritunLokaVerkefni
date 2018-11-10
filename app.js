@@ -29,8 +29,6 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname+'/client/index.html'); 
 });
 
-
-
 /* -----------------------------SOCKET LOGIC START ---------------------------------- */
 
 /* Okay basicly our socket will pull the user data from the clients and when it has

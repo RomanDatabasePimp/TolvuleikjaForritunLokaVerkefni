@@ -112,11 +112,14 @@ GameLobby.prototype.tryJoinGame = function(sockId) {
       // if the player is already initialized we just let the socket take over
       if(!this._availablePlayers[char].player.entityPos.spatialPos) {
         // if the player is monster he starts in bottom right corner
+        if(this._availablePlayers[char].player.character === 'bob'){
+          g_tileManager.__tiles[0][0].addEntity(this._availablePlayers[char].player);
+        }
+        if(this._availablePlayers[char].player.character === 'sara') {
+          g_tileManager.__tiles[0][1].addEntity(this._availablePlayers[char].player);
+        }
         if(this._availablePlayers[char].character === 'monster'){
           g_tileManager.__tiles[9][9].addEntity(this._availablePlayers[char].player);
-        } else {
-          // all players start in the top left corner
-          g_tileManager.__tiles[0][0].addEntity(this._availablePlayers[char].player);
         }
       }
       return true;  
