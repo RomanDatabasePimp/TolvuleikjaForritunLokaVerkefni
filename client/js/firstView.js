@@ -1,16 +1,54 @@
 // Upphafstilla alla playera sem waiting
-let player1 = "Player one waiting";
-let player2 = "Player two waiting";
-let monster = "Player three waiting";
+let player1 = "Bob is waiting";
+let player2 = "Sara is waiting";
+let monster = "Monster is waiting";
+let playerOne;
+let playerTwo;
+let playerThree;
+// Kalla á fall sem upphafstillir playerana eftir því hvort þeir eru ready eða waiting. Tek inn booolean fylki
 let video;// er childid sem er video
 let main;// er parent sem er body
-function draw() {
+let first = true;
+function allPlayerReady(data){
+  player1 = "Bob is waiting";
+  player2 = "Sara is waiting";
+  monster = "Monster is waiting";
+  if(data.hasOwnProperty("hasnotgamestarted"))
+  {  
+    if(data.hasnotgamestarted[0] == true){player1 = "Bob is ready to roll";}
+    if(data.hasnotgamestarted[1] == true){player2 = "Sara will kick your ass"}
+    if(data.hasnotgamestarted[2] == true){monster= "The monster will eat all of you";}
+    // þarf aðs setja try og catch tiol þess að htmlid fyllist ekki 
+    try {
+      playerContainer.remove();
+    }catch{}
+    drawFirstView();
+    drawPlayers();
+    video.remove();
+    first = true;
+  }else{
+    try{video.remove()}catch{}
+      drawGameBackground();
+    // hér þarf að gera bakgrun sem er í gangi á meðan leikinum stendur.
+
+  }
+}
+function drawGameBackground() {
+  if(first == true){
+    
+      main = document.querySelector('body');
+      backVideo = appendChild(main, 'video', 'backgroundvideo');
+      backVideo.setAttribute('src','/client/videos/frontPic.mp4')
+      backVideo.setAttribute('autoplay','')
+      first = false;
+  }
+}
+function drawFirstView() {
     /*  Get the location of main in HTML  */
     main = document.querySelector('body');
     video = appendChild(main, 'video', 'myVideo');
     video.setAttribute('src','/client/videos/frontPic.mp4')
     video.setAttribute('autoplay','')
-
 }
 function createElement(element, className = '') {
     const div = document.createElement(element);
@@ -26,14 +64,14 @@ function createElement(element, className = '') {
     node.appendChild(document.createTextNode(text));
   }
   function drawPlayers(){
-    playerOne = appendChild(main,'div','players');
+    playerContainer = appendChild(main,'div','container');
+    playerOne = appendChild(playerContainer,'div','players');
     playerOne.setAttribute('id','one');
-    console.log(player1);
     addTextToNode(playerOne,player1);
-    playerTwo = appendChild(main,'div','players');
+    playerTwo = appendChild(playerContainer,'div','players');
     playerTwo.setAttribute('id','two');
     addTextToNode(playerTwo,player2);
-    playerThree = appendChild(main,'div','players');
+    playerThree = appendChild(playerContainer,'div','players');
     playerThree.setAttribute('id','three');
     addTextToNode(playerThree,monster);
   }
@@ -43,14 +81,5 @@ function createElement(element, className = '') {
     playerTwo.remove();
     playerThree.remove();
     drawPlayers();
-    
-
   }
-  draw();
-  drawPlayers();
-  
-  setInterval(function(){
-    draw()
-    video.remove();
-  }, 60000);
 
