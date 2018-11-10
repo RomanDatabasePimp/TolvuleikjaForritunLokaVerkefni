@@ -41,4 +41,4 @@
     img.src = './client/img/Player/player_01.png';
   };
 
-  draw();
+ // draw();
