@@ -3,8 +3,8 @@ var g_mouseX = 0,
 
 function handleMouse(evt) {
     // Margin added to send perfect middle.
-    g_mouseX = evt.clientX - g_canvas.offsetLeft - 30;
-    g_mouseY = evt.clientY - g_canvas.offsetTop - 30;
+    g_mouseX = evt.clientX - g_canvas.offsetLeft;
+    g_mouseY = evt.clientY - g_canvas.offsetTop;
     
     // If no button is being pressed, then bail
     var button = evt.buttons === undefined ? evt.which : evt.buttons;

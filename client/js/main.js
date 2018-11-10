@@ -40,21 +40,20 @@ requestPreloads();
  * @param {Socket.id} id 
  */
   function drawEmptyMapViaTiles(tile,id) {
+    if(!(tile.hasOwnProperty("__tiles"))) return null;
+
+    
     for(let i = 0; i < tile.__tiles.length;i++){
       for(let j = 0; j < tile.__tiles[i].length; j++){
-        g_sprites.grassTile.drawAt(g_ctx, i*63,j*64);
-        g_ctx.rect(i*63, j*64, 64, 64);
+        g_sprites.grassTile.drawAt(g_ctx, i*64,j*64);
+        g_ctx.rect(i*64, j*64, 64, 64);
         g_ctx.stroke();
       }
-      
     }
   };
 
  function returnTileAt(posX, posY){
-  // This is our valid play area, outside of -28 and 610, we don't want to do anything. 
-  if((posX > -28 && posX < 610) && (posY > -28 && posX < 610)){
-      console.log("valid play area");
-   }
+  
    
  }
 
