@@ -41,9 +41,34 @@ function Tile(descr) {
     delete this._entities[spId];
   };
 
-  /* Usage : t.updateTile()
+  /* Usage : t.doIContainPlayer()
       For  : t is a Tile
-    After  : u */
+    After  : checks if this tile has a player in it if so return sed player */
+  this.doIContainPlayer = function(){
+    for(let i=0; i < this._entities.length; i++){
+      if(this._entities[i]) {
+        if(this._entities[i].hasOwnProperty('character')){
+          return this._entities[i];
+        }
+      }
+    }
+    return null;
+  }
+
+  /* Usage : t.doIContainPickUps()
+      For  : t is a tile
+      After: returns a array of entities that can be picked up */
+  this.doIContainPickUps = function(){
+    const pickups = [];
+    for(let i=0; i < this._entities.length; i++){
+      if(this._entities[i]) {
+        if(!this._entities[i].hasOwnProperty('character')){
+          pickups.push(_entities[i]);
+        }
+      }
+    }
+    return pickups;
+  }
 
 };
 
