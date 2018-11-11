@@ -8,7 +8,7 @@ var g_images = {};
  * then link the file here and add the name of the sprite.
  */
 
- 
+
 function requestPreloads() {
 
   var requiredImages = {
@@ -67,7 +67,7 @@ function drawMapViaTiles(tile, id) {
   if (!(tile.hasOwnProperty("__tiles"))) return null;
   for (let i = 0; i < tile.__tiles.length; i++) {
     for (let j = 0; j < tile.__tiles[i].length; j++) {
-      checkTile(tile.__tiles,i,j,id);
+      checkTile(tile.__tiles, i, j, id);
       g_ctx.rect(i * 64, j * 64, 64, 64);
       g_ctx.stroke();
     }
@@ -80,7 +80,7 @@ function drawMapViaTiles(tile, id) {
  * @param {int} i x-axis 
  * @param {int} j y-axis
  */
-function checkTile(tile, i, j,id) {
+function checkTile(tile, i, j, id) {
   if (tile[i][j]._amITerrain) {
     g_sprites.terrain.drawAt(g_ctx, i * 64, j * 64);
   } else if (tile[i][j]._amIAStructure) {
@@ -88,26 +88,59 @@ function checkTile(tile, i, j,id) {
   } else {
     g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
   }
-  if (tile[i][j]._entities[1]) {
-    drawCorrectChar(tile[i][j]._entities[1].character, i, j);
-    checkPlayer(tile[i][j]._entities[1], id);
+  if (tile[i][j]._amIAStructure && playerExistsInTile(tile[i][j]._entities)) {
+    let entity = playerExistsInTile(tile[i][j]._entities);
+    checkPlayer(entity, id);
+    player = getPlayer();
+    drawCorrectChar(player.character, player.entityPos.tileX, player.entityPos.tileY);
+    return;
+  }
+  if (playerExistsInTile(tile[i][j]._entities)) {
+    let entity = playerExistsInTile(tile[i][j]._entities);
+    drawCorrectChar(entity.character, i, j);
+    checkPlayer(entity, id);
   }
 };
-
-function drawCorrectChar(char, i, j){
-  switch(char) {
+/**
+ * Draws the correct character at the corresponding location.
+ * @param {tile} char 
+ * @param {int} i 
+ * @param {int} j 
+ */
+function drawCorrectChar(char, i, j) {
+  switch (char) {
     case char = "bob":
-         g_sprites.player.drawAt(g_ctx, i * 64, j * 64);
-        break;
+      g_sprites.player.drawAt(g_ctx, i * 64, j * 64);
+      break;
     case char = "sara":
       g_sprites.saraPlayer.drawAt(g_ctx, i * 64, j * 64);
-        break;
+      break;
     case char = "monster":
       g_sprites.monster.drawAt(g_ctx, i * 64, j * 64);
       break;
     default:
-        
-}
+
+  }
 
 }
- 
+/**
+ * finds the entity at our location.
+ * @param {Entity} entity 
+ */
+function findEntity(entity){
+  var foundEnt = entity.find(function(ent) {
+    return ent;
+  });
+  return foundEnt;
+}
+
+function playerExistsInTile(tile){
+  for(let i=0; i < tile.length ; i++) {
+    if(tile[i]){
+      if(tile[i].hasOwnProperty("character")) {
+        return tile[i];
+      }
+    }
+  }
+  return null;
+}

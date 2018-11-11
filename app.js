@@ -34,20 +34,20 @@ app.get('/', (req, res) => {
   // Fetch the game 
   const FTL = require('./server/FTL');
   FTL.createGameMap(); // need create the initial map before launching the server
- 
+
   // our socket
   io.sockets.on('connect',(socket) => {
+    
     /* if a socket manages to get into our game then we need to keep track of it and 
        poll its input else we dont care what it does maybe later we can add a spectate feature ? */
     if(FTL.tryToJoinGame(socket.id)){ 
-
-      console.log("new player joined !");
+      // console.log("new player joined !");
       /* its good to define rightaway what should happen if the socket disconects
          so we dont forgget about it, if the player leaves we set its char to null allowing
          a new socket to take over */
       socket.on('disconnect',()=>{
         FTL.leaveGame(socket.id);
-        console.log("A player has left !");
+        // console.log("A player has left !");
       });
 
       /* We listen to the player if he is ready for the next round  */

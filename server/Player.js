@@ -27,6 +27,10 @@ Player.prototype = new Entity(); // A player is an entity nuff said ...
     After: updates the stamina of the player */
 Player.prototype.staminaBuff = function(stamina) {
   this.stamina += stamina;
+  // if stamina exeds 10 we cap it at 10
+  if(this.stamina > 10) {
+    this.stamina = 10;
+  }
 }
 
 /* Usage : p.staminaDrain()

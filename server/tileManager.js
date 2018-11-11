@@ -3,6 +3,7 @@
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
 */
 const tile = require('./tile').Tile; // fetch the tile
+const Key = require('./key').Key; // our key
 
 /* Our map is composed of a set of tiles, and the tileManeger holds all the tiles */
 let g_tileManager = {
@@ -10,7 +11,15 @@ let g_tileManager = {
   // all the tiles inside the map
   __tiles: [],
   __tileSize: 10, // size of our map in terms of tileSize*tileSize
+  __objPickedUp: 0,
+  __gameWon: { players: false, monster: false},
 
+  /* Usage : t.objPickedUp()
+      For  : t is a g_tileManager object
+      After: adds one 1 to objPickedUp  */
+  objPickedUp : function(){
+    this.__objPickedUp++;
+  },
 
   /* Usage : t.tyToMoveToNextTile(source,dest)
       For  : t is a g_tileManager object
@@ -73,16 +82,16 @@ let g_tileManager = {
     // matrix generated to quickly create maps.
     // 1 is terrain, 2 is a structure. 0 is area which can be traversed
     let mapMatrix = [
-      [0,0,0,1,0,0,0,2,2,2],
+      [0,0,0,1,0,0,0,2,2,3],
       [0,0,0,0,0,1,0,2,2,2],
       [0,0,1,0,0,0,0,2,2,2],
       [1,0,0,0,1,1,0,0,0,0],
       [1,0,1,0,1,1,0,0,0,0],
-      [0,0,0,0,0,0,0,0,1,0],
+      [0,0,0,0,4,0,0,0,1,0],
       [0,0,0,1,0,2,2,0,0,0],
       [2,2,2,0,0,2,2,0,0,1],
       [2,2,2,0,0,0,0,1,0,0],
-      [2,2,2,0,0,1,0,0,0,0]
+      [3,2,2,0,0,1,0,0,0,0]
     ];
     for(let i = 0; i < this.__tileSize; i++){
       for(let j = 0; j < this.__tileSize;j++){
@@ -91,6 +100,13 @@ let g_tileManager = {
         }
         if(mapMatrix[i][j] == 2){
           this.__tiles[i][j]._amIAStructure = true;
+        }
+        if(mapMatrix[i][j] == 3){
+          this.__tiles[i][j]._amIAStructure = true;
+          this.__tiles[i][j].addEntity(new Key ({ shouldUpdateMe:false }));
+        }
+        if(mapMatrix[i][j] == 4){
+          this.__tiles[i][j].addEntity(new Key ({ shouldUpdateMe:false }));
         }
       }
     }
