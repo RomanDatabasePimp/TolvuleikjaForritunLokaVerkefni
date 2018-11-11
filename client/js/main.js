@@ -21,7 +21,10 @@ function requestPreloads() {
     validWalk: './client/img/environment_10.png',
     invalidWalk: './client/img/environment_05.png',
     saraPlayer: './client/img/Player/sara_player.png',
-    monster: './client/img/Player/monster.png'
+    monster: './client/img/Player/monster.png',
+    rightWalk1:'./client/img/Player/player_17.png',
+    rightWalk2:'./client/img/Player/player_18.png',
+    rightWalk3:'./client/img/Player/player_19.png'
   };
 
   imagesPreload(requiredImages, g_images, preloadDone);
@@ -45,6 +48,10 @@ function preloadDone() {
   g_sprites.invalidWalk = new Sprite(g_images.invalidWalk);
   g_sprites.saraPlayer = new Sprite(g_images.saraPlayer);
   g_sprites.monster = new Sprite(g_images.monster);
+  g_sprites.rightWalk1 = new Sprite(g_images.rightWalk1);
+  g_sprites.rightWalk2 = new Sprite(g_images.rightWalk2);
+  g_sprites.rightWalk3 = new Sprite(g_images.rightWalk3);
+
 }
 
 // Kick it off
