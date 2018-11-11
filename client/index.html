@@ -8,11 +8,14 @@
 </head>
 
 <body>
-  <div class="Headerinn" id="headTitle"></div>
   <div class="gameContainer">
-    <div id="grad1">
-      <div id="bar">
-        <div id ="status"></div>
+    <div class="sideBar">
+      <div class="Headerinn" id="headTitle"></div>
+      <img class="heads" id="playerHeads">
+      <div id="grad1">
+        <div id="bar">
+          <div id ="status"></div>
+        </div>
       </div>
     </div>
     <canvas id="myCanvas" width="640" height="640" style="border: 1px solid black;"> Sorry, but your browser does not support the HTML5 canvas tag.</canvas>
@@ -74,8 +77,9 @@
 
       socket.on('roundstart', ()=> {
         player = getPlayer();
-        console.log(player.character, "nafnid",player.stamina+" this is player");
+   
         setStamina(player);
+        console.log("Server is telling progressBar to procced");
         startProgressBar();
         g_readyForNextRound=false;
         setTimeout(() => {

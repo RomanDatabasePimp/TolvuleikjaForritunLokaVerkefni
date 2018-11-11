@@ -16,8 +16,6 @@ function allPlayerReady(data){
   if(data.hasOwnProperty("hasnotgamestarted"))
   {  
     document.getElementById('videoContainerinn').style.display = '';
-    console.log(data.hasnotgamestarted)
-    console.log("ég er að teikna playera")
     if(data.hasnotgamestarted[0] == true){player1 = "Bob is ready to roll";}
     if(data.hasnotgamestarted[1] == true){player2 = "Sara will kick your ass"}
     if(data.hasnotgamestarted[2] == true){monster= "The monster will eat all of you";}
@@ -26,12 +24,10 @@ function allPlayerReady(data){
   }else{
     document.getElementById('videoContainerinn').style.display = 'none';
     document.getElementById('myVideoBackground').style.display='';
-    console.log("Game has started");
   }
 }
 function drawPlayers(){
   document.getElementById('myVideoBackground').style.display='none';
-  console.log("drawing");
   let first = document.getElementById('one');
   first.innerHTML = player1;
   let second = document.getElementById('two');
