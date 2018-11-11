@@ -79,6 +79,7 @@ function drawTile(tile, i, j, id) {
     g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
   }
 };
+
 /**
  * Draws the corresponding character sprite in accordance to our map made server-side
  * @param {Tile} tile 
