@@ -1,7 +1,7 @@
 // Upphafstilla alla playera sem waiting
-let player1 = "Bob is ready to roll";
-let player2 = "Sara is waiting";
-let monster = "Monster is waiting";
+let player1 = "Waiting for Bob";
+let player2 = "Waiting for Sara";
+let monster = "Waiting for monster";
 let playerOne;
 let playerTwo;
 let playerThree;
@@ -10,12 +10,13 @@ let Container;
 let video;// er childid sem er video
 let main;// er parent sem er body
 function allPlayerReady(data){
-  player1 = "Bob is ready to roll";
-  player2 = "Sara is waiting";
-  monster = "Monster is waiting";
+  player1 = "Waiting for Bob";
+  player2 = "Waiting for Sara";
+  monster = "Waiting for monster";
   if(data.hasOwnProperty("hasnotgamestarted"))
   {  
-    
+    document.getElementById('videoContainerinn').style.display = '';
+    console.log(data.hasnotgamestarted)
     console.log("ég er að teikna playera")
     if(data.hasnotgamestarted[0] == true){player1 = "Bob is ready to roll";}
     if(data.hasnotgamestarted[1] == true){player2 = "Sara will kick your ass"}
