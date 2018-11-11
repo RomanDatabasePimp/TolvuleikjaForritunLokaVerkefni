@@ -77,7 +77,6 @@ function checkTile(tile, i, j) {
 }
 /* Herna verðu að taka client input og vista þau til að færa það */
 function returnTileAt(posX, posY) {
-  
   g_sprites.highLight.drawAt(g_ctx, convertToMatrix(posX), convertToMatrix(posY));
 }
 

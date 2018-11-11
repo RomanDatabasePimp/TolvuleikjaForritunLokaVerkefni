@@ -59,7 +59,7 @@ app.get('/', (req, res) => {
     
       /* We listen to the player input */
       socket.on('clientinput',(data)=>{
-         console.log("Player made move");
+        /* expect that data will come in a form of { step: {x,y}, step:{x,y }, step: {x,y}, step: {x,y}} */
       });
       
     }
