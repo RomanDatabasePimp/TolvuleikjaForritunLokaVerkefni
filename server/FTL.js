@@ -122,11 +122,13 @@ function updatePlayer(sockid,inp) {
           // you collided with a monster
           else {
             deadorkilled = true;
+            player.isAlive = false;
           }
         }
         // this client is  a monster
         else {
           deadorkilled = true;
+          playerExists.isAlive = false; // kill the one who collided with player
         }
       }
 
@@ -178,7 +180,9 @@ function updatePlayer(sockid,inp) {
     For  : nothing
     After: updates the gameState and returns the updated tile maneger */
 function updateStateAndReturn() {
+  /* We need to check if the players are alive if they are no we remove them */
 
+  /* check if the game is over */
   return g_tileManager;
 }
 

@@ -37,6 +37,7 @@ app.get('/', (req, res) => {
 
   // our socket
   io.sockets.on('connect',(socket) => {
+    
     /* if a socket manages to get into our game then we need to keep track of it and 
        poll its input else we dont care what it does maybe later we can add a spectate feature ? */
     if(FTL.tryToJoinGame(socket.id)){ 

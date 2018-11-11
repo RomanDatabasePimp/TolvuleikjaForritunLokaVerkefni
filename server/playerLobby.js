@@ -23,8 +23,8 @@ function GameLobby() {};
         {
           // characters name is bob he has his power up in players class
           character:"bob",
-          playBy:null,// socket who is playing bob
           stamina:6,// init stamina of bob i.e how many tiles he can move in the start
+          playBy:null,// socket who is playing bob
           mademove: false,
           movement:[]
         }
@@ -161,6 +161,7 @@ GameLobby.prototype.tryJoinGame = function(sockId) {
         }
         if(this._availablePlayers[char].player.character === 'monster'){
           g_tileManager.__tiles[9][9].addEntity(this._availablePlayers[char].player);
+         
         }
       }
       return true;  
