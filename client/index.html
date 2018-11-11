@@ -8,10 +8,16 @@
 </head>
 
 <body>
-  <canvas id="myCanvas" width="640" height="640" style="border: 1px solid black;">
+  <div class="gameContainer">
+    <div id="grad1">
+      <div id="bar">
+        <div id ="status"></div>
+      </div>
+    </div>
+    <canvas id="myCanvas" width="640" height="640" style="border: 1px solid black;"> Sorry, but your browser does not support the HTML5 canvas tag.</canvas>
+</div>
         
-    Sorry, but your browser does not support the HTML5 canvas tag.
-  </canvas>
+   
   <div class="firstViewContainer" id="videoContainerinn">
       <video class="myVideo" src="/client/videos/frontPic.mp4" autoplay=""></video>
       <div class="players">
@@ -19,8 +25,10 @@
         <h2 id ="two"></h2>
         <h2 id ="three"></h2>
       </div>
-  </div>
-  <video id="myVideoBackground" src="/client/videos/frontPic.mp4" autoplay=""></video>
+    </div>
+    <video id="myVideoBackground" src="/client/videos/frontPic.mp4" autoplay=""></video>
+      
+    </div>
 
   <!-- ------------------HTML END SCRIPTS START --------------------------------------->
 
@@ -42,6 +50,7 @@
   <script src="./client/js/Sprite.js"></script>
   <script src="./client/js/main.js"></script>
   <script src ="/client/js/firstView.js"></script>
+  <script src="/client/js/progressBar.js"></script>
 
 
  
@@ -62,6 +71,9 @@
       });
 
       socket.on('roundstart', ()=> {
+        console.log("Begin");
+        startProgressBar();
+        turnCountDown = 5;
         g_readyForNextRound=false;
         setTimeout(() => {
           socket.emit('clientinput',{ steps:g_steps, powerUp:false});
