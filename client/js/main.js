@@ -60,7 +60,8 @@ function drawMapViaTiles(tile, id) {
   if (!(tile.hasOwnProperty("__tiles"))) return null;
   for (let i = 0; i < tile.__tiles.length; i++) {
     for (let j = 0; j < tile.__tiles[i].length; j++) {
-      checkTile(tile.__tiles, i, j, id);
+      drawTile(tile.__tiles, i, j, id);
+      drawCharacters(tile.__tiles, i, j, id);
       g_ctx.rect(i * 64, j * 64, 64, 64);
       g_ctx.stroke();
     }
@@ -68,12 +69,12 @@ function drawMapViaTiles(tile, id) {
   g_readyForNextRound = true;
 };
 /**
- * Draws the corresponding pixel in accordance to our map made server-side
+ * Draws the corresponding map sprite in accordance to our map made server-side
  * @param {Tile} tile 
  * @param {int} i x-axis 
  * @param {int} j y-axis
  */
-function checkTile(tile, i, j, id) {
+function drawTile(tile, i, j, id) {
   if (tile[i][j]._amITerrain) {
     g_sprites.terrain.drawAt(g_ctx, i * 64, j * 64);
   } else if (tile[i][j]._amIAStructure) {
@@ -81,6 +82,14 @@ function checkTile(tile, i, j, id) {
   } else {
     g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
   }
+};
+/**
+ * Draws the corresponding character sprite in accordance to our map made server-side
+ * @param {Tile} tile 
+ * @param {int} i x-axis 
+ * @param {int} j y-axis
+ */
+function drawCharacters(tile, i, j, id) {
   if (tile[i][j]._amIAStructure && playerExistsInTile(tile[i][j]._entities)) {
     let entity = playerExistsInTile(tile[i][j]._entities);
     checkPlayer(entity, id);
@@ -93,7 +102,13 @@ function checkTile(tile, i, j, id) {
     drawCorrectChar(entity.character, i, j);
     checkPlayer(entity, id);
   }
-};
+  console.log(tile[i][j]._entities);
+  if (tile[i][j]._entities.hasOwnProperty("key")) {
+    g_sprites.validWalk.drawAt(g_ctx, i * 64, j * 64);
+  }
+
+
+}
 /**
  * Draws the correct character at the corresponding location.
  * @param {tile} char 
@@ -120,17 +135,17 @@ function drawCorrectChar(char, i, j) {
  * finds the entity at our location.
  * @param {Entity} entity 
  */
-function findEntity(entity){
-  var foundEnt = entity.find(function(ent) {
+function findEntity(entity) {
+  var foundEnt = entity.find(function (ent) {
     return ent;
   });
   return foundEnt;
 }
 
-function playerExistsInTile(tile){
-  for(let i=0; i < tile.length ; i++) {
-    if(tile[i]){
-      if(tile[i].hasOwnProperty("character")) {
+function playerExistsInTile(tile) {
+  for (let i = 0; i < tile.length; i++) {
+    if (tile[i]) {
+      if (tile[i].hasOwnProperty("character")) {
         return tile[i];
       }
     }
