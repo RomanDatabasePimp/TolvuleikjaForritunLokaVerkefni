@@ -63,6 +63,10 @@
 
       socket.on('roundstart', ()=> {
         g_readyForNextRound=false;
+        setTimeout(() => {
+          socket.emit('clientinput',{ steps:g_steps, powerUp:false});
+          g_steps = [];
+        }, 5000);
         // poll steps
         g_steps = [];
       });

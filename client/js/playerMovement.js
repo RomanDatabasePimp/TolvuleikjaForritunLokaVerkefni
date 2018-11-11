@@ -35,6 +35,9 @@ function checkPlayer(player,id){
     g_sprites.highLight.drawAt(g_ctx, convertToMatrix(posX), convertToMatrix(posY));
     g_steps.push({step:{x:roundDown(posX), y:roundDown(posY)}});
   };
+
+
+  
 /**
  * TODO COMMENT THSI RAFNAR
  * @param {*} posX 
