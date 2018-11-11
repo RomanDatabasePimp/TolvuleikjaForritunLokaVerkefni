@@ -76,6 +76,8 @@
       });
 
       socket.on('roundstart', ()=> {
+        window.addEventListener("mousedown", handleMouse);
+        window.addEventListener("mousemove", handleMouse);
         player = getPlayer();
    
         setStamina(player);
@@ -84,6 +86,8 @@
         setTimeout(() => {
           socket.emit('clientinput',{ steps:g_steps, powerUp:false});
           g_steps = [];
+          window.removeEventListener("mousedown",handleMouse);
+          window.removeEventListener("mousemove",handleMouse);
         }, 5000);
       });
 
