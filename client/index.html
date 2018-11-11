@@ -53,9 +53,10 @@
   <script src="./client/js/handleMouse.js"></script>
   <script src="./client/js/Sprite.js"></script>
   <script src="./client/js/main.js"></script>
-  <script src ="/client/js/firstView.js"></script>
-  <script src="/client/js/progressBar.js"></script>
-  <script src="/client/js/staminaScores.js"></script>
+  <script src ="./client/js/firstView.js"></script>
+  <script src="./client/js/progressBar.js"></script>
+  <script src="./client/js/staminaScores.js"></script>
+  <script src="./client/js/animation.js"></script>
 
 
  
@@ -80,10 +81,11 @@
         window.addEventListener("mousedown", handleMouse);
         window.addEventListener("mousemove", handleMouse);
         player = getPlayer();
-   
+        
         setStamina(player);
         startProgressBar();
         g_readyForNextRound=false;
+        moveMen(0,5);
         setTimeout(() => {
           socket.emit('clientinput',{ steps:g_steps, powerUp:false});
           g_steps = [];

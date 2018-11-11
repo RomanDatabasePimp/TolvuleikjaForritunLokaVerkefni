@@ -95,18 +95,18 @@ let g_tileManager = {
     ];
     for(let i = 0; i < this.__tileSize; i++){
       for(let j = 0; j < this.__tileSize;j++){
-        if(mapMatrix[i][j] == 1){
-          this.__tiles[i][j]._amITerrain = true;
+        if(mapMatrix[j][i] == 1){
+          this.__tiles[j][i]._amITerrain = true;
         }
-        if(mapMatrix[i][j] == 2){
-          this.__tiles[i][j]._amIAStructure = true;
+        if(mapMatrix[j][i] == 2){
+          this.__tiles[j][i]._amIAStructure = true;
         }
-        if(mapMatrix[i][j] == 3){
-          this.__tiles[i][j]._amIAStructure = true;
-          this.__tiles[i][j].addEntity(new Key ({ shouldUpdateMe:false }));
+        if(mapMatrix[j][i] == 3){
+          this.__tiles[j][i]._amIAStructure = true;
+          this.__tiles[j][i].addEntity(new Key ({ shouldUpdateMe:false }));
         }
-        if(mapMatrix[i][j] == 4){
-          this.__tiles[i][j].addEntity(new Key ({ shouldUpdateMe:false }));
+        if(mapMatrix[j][i] == 4){
+          this.__tiles[j][i].addEntity(new Key ({ shouldUpdateMe:false }));
         }
       }
     }
