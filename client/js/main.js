@@ -13,15 +13,13 @@ function requestPreloads() {
 
   var requiredImages = {
     grassTile: './client/img/grassTile.png',
-    grassTileHighlight: './client/img/grassTileHighlight.png',
     player: './client/img/Player/player_06.png',
     highLight: './client/img/highLight.png',
     house: './client/img/house.png',
     terrain: './client/img/crate_04.png',
-    validWalk: './client/img/environment_10.png',
-    invalidWalk: './client/img/environment_05.png',
+    key: './client/img/keys/platformPack_item014.png',
     saraPlayer: './client/img/Player/sara_player.png',
-    monster: './client/img/Player/monster.png'
+    monster: './client/img/Monster/platformChar_idle.png'
   };
 
   imagesPreload(requiredImages, g_images, preloadDone);
@@ -36,13 +34,11 @@ var g_sprites = {};
 function preloadDone() {
 
   g_sprites.grassTile = new Sprite(g_images.grassTile);
-  g_sprites.grassTileHighlight = new Sprite(g_images.grassTileHighlight);
   g_sprites.player = new Sprite(g_images.player);
   g_sprites.highLight = new Sprite(g_images.highLight);
   g_sprites.house = new Sprite(g_images.house);
   g_sprites.terrain = new Sprite(g_images.terrain);
-  g_sprites.validWalk = new Sprite(g_images.validWalk);
-  g_sprites.invalidWalk = new Sprite(g_images.invalidWalk);
+  g_sprites.key = new Sprite(g_images.key);
   g_sprites.saraPlayer = new Sprite(g_images.saraPlayer);
   g_sprites.monster = new Sprite(g_images.monster);
 }
@@ -83,6 +79,7 @@ function drawTile(tile, i, j, id) {
     g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
   }
 };
+
 /**
  * Draws the corresponding character sprite in accordance to our map made server-side
  * @param {Tile} tile 
@@ -103,7 +100,7 @@ function drawCharacters(tile, i, j, id) {
     checkPlayer(entity, id);
   }
   if (treasureExistsInTile(tile[i][j]._entities)) {
-    g_sprites.validWalk.drawAt(g_ctx, i * 64, j * 64);
+    g_sprites.key.drawAt(g_ctx, i * 64, j * 64);
   }
 
 
