@@ -55,6 +55,7 @@ function drawEmptyMapViaTiles(tile, id) {
       g_ctx.stroke();
     }
   }
+  g_readyForNextRound = true;
 };
 /**
  * Draws the corresponding pixel in accordance to our map made server-side
@@ -74,6 +75,7 @@ function checkTile(tile, i, j) {
     g_sprites.player.drawAt(g_ctx, i * 64, j * 64);
   }
 }
+/* Herna verðu að taka client input og vista þau til að færa það */
 function returnTileAt(posX, posY) {
   g_sprites.highLight.drawAt(g_ctx, convertToMatrix(posX), convertToMatrix(posY));
 }

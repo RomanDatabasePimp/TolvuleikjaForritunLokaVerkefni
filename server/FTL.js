@@ -68,6 +68,17 @@ function setPlayerNotReadyForNextRound() {
   GameLobby.unreadyPlayers();
 }
 
+/* Usage : updatePlayer(sockid,inp)
+    For  : sockid is a string
+           inp is a obj { nX, nY }
+    After: updates the player that has the sockid */
+function updatePlayer(sockid,inp) {
+  // fetch the player that is trying to make the move
+  let player = GameLobby.GetPlayer(sockid);
+
+  let inputDone = true;
+ 
+}
 
 /* Usage : updateStateAndReturn()
     For  : nothing
@@ -87,5 +98,6 @@ module.exports = {
   updateStateAndReturn,
   allPlayersReadyForNextRound,
   setPlayerReadyForNextRound,
-  setPlayerNotReadyForNextRound
+  setPlayerNotReadyForNextRound,
+  updatePlayer
 };

@@ -34,12 +34,14 @@ app.get('/', (req, res) => {
   // Fetch the game 
   const FTL = require('./server/FTL');
   FTL.createGameMap(); // need create the initial map before launching the server
-
+ 
   // our socket
   io.sockets.on('connect',(socket) => {
     /* if a socket manages to get into our game then we need to keep track of it and 
        poll its input else we dont care what it does maybe later we can add a spectate feature ? */
     if(FTL.tryToJoinGame(socket.id)){ 
+
+
       console.log("new player joined !");
       /* its good to define rightaway what should happen if the socket disconects
          so we dont forgget about it, if the player leaves we set its char to null allowing
@@ -51,15 +53,24 @@ app.get('/', (req, res) => {
 
       /* We listen to the player if he is ready for the next round  */
       socket.on('clientreadyfornextround',(data)=>{
-        if(data) { FTL.setPlayerReadyForNextRound(socket.id); }
+        if(data) {
+          console.log("A player is rdy for the next round");
+          FTL.setPlayerReadyForNextRound(socket.id);
+        }
       });
-
+    
       /* We listen to the player input */
       socket.on('clientinput',(data)=>{
+        /* expect that data will come in a form of 
+           { steps : [ step: {x,y}, step:{x,y}, step:{x,y} ] ,
+             powerUp: true } */
         
       });
+      
     }
   });
+  
+  
 
   
   /* Okay basicly this looks abit wierd but stay with me, when the game starts we need to check

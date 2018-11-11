@@ -11,18 +11,6 @@ let g_tileManager = {
   __tiles: [],
   __tileSize: 10, // size of our map in terms of tileSize*tileSize
 
-  /* Usage : t.updateTiles(du)
-      For  : t is a g_tileManager object
-             du is delta time /nominal rate
-      After: calls the updater for each tile in __tiles */
-  updateTiles: function(du) {
-    for(let i = 0; i < this.__tiles.length; i++) {
-      for(let j=0; j < this.__tiles[i].length; j++) {
-        /* to do  */
-      }
-    }
-  },
-
   /* Usage : t.createNewEmptyMap()
       For  : t is g_tileManager object
      After : creates tileSize*tileSize array of tiles where each tile entries
