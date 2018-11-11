@@ -9,9 +9,13 @@
 
 <body>
   <div class="gameContainer">
-    <div id="grad1">
-      <div id="bar">
-        <div id ="status"></div>
+    <div class="sideBar">
+      <div class="Headerinn" id="headTitle"></div>
+      <img class="heads" id="playerHeads">
+      <div id="grad1">
+        <div id="bar">
+          <div id ="status"></div>
+        </div>
       </div>
     </div>
     <canvas id="myCanvas" width="640" height="640" style="border: 1px solid black;"> Sorry, but your browser does not support the HTML5 canvas tag.</canvas>
@@ -51,6 +55,7 @@
   <script src="./client/js/main.js"></script>
   <script src ="/client/js/firstView.js"></script>
   <script src="/client/js/progressBar.js"></script>
+  <script src="/client/js/staminaScores.js"></script>
 
 
  
@@ -72,7 +77,8 @@
 
       socket.on('roundstart', ()=> {
         player = getPlayer();
-        console.log(player+" this is player");
+   
+        setStamina(player);
         startProgressBar();
         g_readyForNextRound=false;
         setTimeout(() => {

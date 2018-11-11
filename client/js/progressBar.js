@@ -2,13 +2,10 @@ var h = 0;
 var start = true;
 var x ;
 function startProgressBar() {
-  console.log(start);
     x = setInterval(progresBar, 10);
-  
+}
   function progresBar(){
-  
   h++;
-
   document.getElementById("bar").style.height =h + "px";
   let seconds = 0;
   if(h<=80){
@@ -38,11 +35,9 @@ function startProgressBar() {
   if (document.getElementById("bar").style.height == 400 + "px")
 
   {
-    h =0;
+    h = 0;
     document.getElementById("bar").style.height = 0 + "px";
     clearInterval(x);
-
   }
-
-}
+  return;
 }
