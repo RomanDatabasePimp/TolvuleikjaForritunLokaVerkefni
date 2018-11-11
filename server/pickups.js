@@ -2,16 +2,20 @@
 
 const Entity = require('./entity').Entity; // fetch the tile
 
-function Key(descr) {
+function PickUp(descr,whatpickup) {
+
   // Common inherited setup logic from Entity
   this.setup(descr);
+
+  for (var property in whatpickup) {
+    this[property] = whatpickup[property];
+  }
+  
 };
 
-Key.prototype = new Entity(); // A key  is an entity nuff said ...
-
-Key.prototype.key = 'Key';
+PickUp.prototype = new Entity(); // A key  is an entity nuff said ...
 
 /* export the Entity so others can use it */
 module.exports = {
-  Key,
+  PickUp,
 };

@@ -62,12 +62,26 @@ function Tile(descr) {
     const pickups = [];
     for(let i=0; i < this._entities.length; i++){
       if(this._entities[i]) {
-        if(!this._entities[i].hasOwnProperty('character')){
-          pickups.push(_entities[i]);
+        if(this._entities[i].hasOwnProperty('type')){
+          pickups.push(this._entities[i]);
         }
       }
     }
     return pickups;
+  }
+
+  /* Usage : t.update()
+      For  : t is a tile
+     After : checks if there are dead entities in the tile
+             if there are it removes them form the tile */
+  this.update = function() {
+    for(let i=0; i < this._entities.length; i++){
+      if(this._entities[i]) {
+        if(!this._entities[i].isAlive){
+          this.removeEntity(this._entities[i].getEntityTilePos().spatialPos);
+        }
+      }
+    }
   }
 
 };
