@@ -78,7 +78,7 @@ function updatePlayer(sockid,inp) {
 
   // if player dosent exists we dont update duh
   if(!player) { return;}
-  
+
   // total legal path the player took 
   let steps = [];
   
@@ -148,5 +148,6 @@ module.exports = {
   allPlayersReadyForNextRound,
   setPlayerReadyForNextRound,
   setPlayerNotReadyForNextRound,
-  updatePlayer
+  updatePlayer,
+  g_tileManager
 };

@@ -41,9 +41,19 @@ function Tile(descr) {
     delete this._entities[spId];
   };
 
-  /* Usage : t.updateTile()
+  /* Usage : t.doIContainPlayer()
       For  : t is a Tile
-    After  : u */
+    After  : checks if this tile has a player in it if so return sed player */
+  this.doIContainPlayer = function(){
+    for(let i=0; i < this._entities.length; i++){
+      if(this._entities[i]) {
+        if(this._entities[i].hasOwnProperty('character')){
+          return this._entities[i];
+        }
+      }
+    }
+    return null;
+  }
 
 };
 
