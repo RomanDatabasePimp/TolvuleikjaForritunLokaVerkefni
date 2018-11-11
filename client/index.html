@@ -84,15 +84,15 @@
         setStamina(player);
         startProgressBar();
         g_readyForNextRound=false;
-        moveMen(0,5);
         setTimeout(() => {
           socket.emit('clientinput',{ steps:g_steps, powerUp:false});
           g_steps = [];
           window.removeEventListener("mousedown",handleMouse);
           window.removeEventListener("mousemove",handleMouse);
+          moveMen();
         }, 5000);
       });
-
+      
       /* client will send to the Server every 3 seconds if he is ready to for the next round
          the idea is that different clients take different time to render the game, so we will
          wait for all clients to render the map and the animations and then play next round */
