@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
   // Fetch the game 
   const FTL = require('./server/FTL');
   FTL.createGameMap(); // need create the initial map before launching the server
-
+ 
   // our socket
   io.sockets.on('connect',(socket) => {
     /* if a socket manages to get into our game then we need to keep track of it and 
@@ -51,15 +51,20 @@ app.get('/', (req, res) => {
 
       /* We listen to the player if he is ready for the next round  */
       socket.on('clientreadyfornextround',(data)=>{
-        if(data) { FTL.setPlayerReadyForNextRound(socket.id); }
+        if(data) {
+          console.log("A player is rdy for the next round");
+          FTL.setPlayerReadyForNextRound(socket.id);
+        }
       });
-
+    
       /* We listen to the player input */
       socket.on('clientinput',(data)=>{
-        
+         console.log("Player made move");
       });
+      
     }
   });
+
 
   
   /* Okay basicly this looks abit wierd but stay with me, when the game starts we need to check

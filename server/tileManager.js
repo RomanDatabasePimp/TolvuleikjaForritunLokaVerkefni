@@ -11,17 +11,37 @@ let g_tileManager = {
   __tiles: [],
   __tileSize: 10, // size of our map in terms of tileSize*tileSize
 
-  /* Usage : t.updateTiles(du)
-      For  : t is a g_tileManager object
-             du is delta time /nominal rate
-      After: calls the updater for each tile in __tiles */
-  updateTiles: function(du) {
-    for(let i = 0; i < this.__tiles.length; i++) {
-      for(let j=0; j < this.__tiles[i].length; j++) {
-        /* to do  */
+  /* Usage : t.getShortestPath(source,dest) 
+      For  : t is g_tileManager object
+             source the starting point
+             dest is the destination point
+      After: returns the shortest path from source to dest, null otherwise */
+  getShortestPath(source,dest){
+    // if the starting or end point are on terrain then we dont proccede
+   // if(this.__tiles[source.nx][source.ny]._amITerrain || this.__tiles[dest.nx][dest.ny]._amITerrain ){
+   //   return null;
+   // }
+    // fix path id'S 
+    let pathind = 1;
+    let path = [];// map out the path to the dest
+    let qp = []; // queue for finding the distance 
+    
+    // current path starts at 0
+    let current = { parrpos:pathind,x: source.x, y:source.y, dist:0};
+    qp.push(current);
+    path[pathind++] = current;
+
+    while (qp.length > 0) {
+      // get the current tile pos
+      current = qp.pop();
+      // check if we have arrived in our dest
+      if(current.x === dest.nx && current.y === dest.ny) {
+        let dist = current.dist + 1;
+        path[pathind++] =  { parrpos:pathind,x: current.x, y:current.y, dist:dist};
       }
+    
     }
-  },
+  }, 
 
   /* Usage : t.createNewEmptyMap()
       For  : t is g_tileManager object

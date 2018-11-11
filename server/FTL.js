@@ -68,6 +68,14 @@ function setPlayerNotReadyForNextRound() {
   GameLobby.unreadyPlayers();
 }
 
+/* Usage : updatePlayer(sockid,inp)
+    For  : sockid is a string
+           inp is a obj { nX, nY }
+    After: updates the player that has the sockid */
+function updatePlayer(sockid,inp) {
+  
+}
+
 
 /* Usage : updateStateAndReturn()
     For  : nothing
@@ -87,5 +95,6 @@ module.exports = {
   updateStateAndReturn,
   allPlayersReadyForNextRound,
   setPlayerReadyForNextRound,
-  setPlayerNotReadyForNextRound
+  setPlayerNotReadyForNextRound,
+  g_tileManager
 };

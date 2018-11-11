@@ -23,7 +23,7 @@
     const g_canvas = document.getElementById("myCanvas");
     const g_ctx = g_canvas.getContext("2d");
     const socket = io();// establish our communication
-    let readyForNextRound = false;
+    let g_readyForNextRound = false;
     let turnCountDown = 5;
   </script>
   
@@ -55,15 +55,14 @@
 
       socket.on('roundstart', ()=> {
         turnCountDown = 5;
-        readyForNextRound=false;
-        // poll client input
+        g_readyForNextRound=false;
+        //
       });
 
       /* client will send to the Server every 3 seconds if he is ready to for the next round
          the idea is that different clients take different time to render the game, so we will
          wait for all clients to render the map and the animations and then play next round */
-      setInterval(() => { socket.emit('clientreadyfornextround',readyForNextRound)},3000);
-
+      setInterval(() => { socket.emit('clientreadyfornextround',g_readyForNextRound)},3000);
     });
   </script>
 
