@@ -21,6 +21,30 @@ function Player(descr,player) {
 
 Player.prototype = new Entity(); // A player is an entity nuff said ...
 
+/* Usage : p.staminaBuff(stamina)
+    For  : p is a Player
+           stamina is a integer
+    After: updates the stamina of the player */
+Player.prototype.staminaBuff = function(stamina) {
+  this.stamina += stamina;
+}
+
+/* Usage : p.staminaDrain()
+    For  : p is a Player
+    After: decreases players stamina by one */
+Player.prototype.staminaDrain = function() {
+  this.stamina -= 1;
+}
+
+/* Usage : p.setNextMovement(steps)
+    For  : steps is a array of steps each step is { x, y}
+    After: sets the steps on the player */
+Player.prototype.setNextMovement = function(steps) {
+  // if there are more than 2 steps that means player has changed tiles
+  if(steps.length > 1) { this.mademove = true; }
+  this.movement = steps;
+ }
+
 module.exports = {
   Player,
 };

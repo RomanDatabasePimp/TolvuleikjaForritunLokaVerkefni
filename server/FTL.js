@@ -76,9 +76,58 @@ function updatePlayer(sockid,inp) {
   // fetch the player that is trying to make the move
   let player = GameLobby.GetPlayer(sockid);
 
-  let inputDone = true;
+  // if player dosent exists we dont update duh
+  if(!player) { return;}
+  
+  // total legal path the player took 
+  let steps = [];
+  
+  // add where the player is originally
+  steps.push({step :{ x: player.getEntityTilePos().tileX,
+                      y: player.getEntityTilePos().tileY}});
+
+  /* if the player did not move or used power ups he gets extra stamina 
+      because he is well reseted */
+  if(inp.steps.length === 0 && !inp.powerUp){
+    player.staminaBuff(4);
+    return; // we dont need to update the since he dint do anything
+  }
+  /* TO DO IMPLEMENT POWER UP */
+  
+  // try to go over all the moves but stop when its imposible
+  for(let i= 0; i < inp.steps.length; i++) {
+    let nextMove = inp.steps[i].step; // get next step
+  
+    /* check if player has enough stamina to move and if the movement is legal */
+    if(player.stamina > 0 && g_tileManager.tyToMoveToNextTile({x: player.getEntityTilePos().tileX,
+                                                               y: player.getEntityTilePos().tileY},
+                                                               nextMove)){
+      /* We can move here so we move the player to a new tile and add this step 
+         to legal steps */
  
+      // remove the player from the tile 
+      g_tileManager.__tiles[player.getEntityTilePos().tileX][player.getEntityTilePos().tileY]
+                   .removeEntity(player.getEntityTilePos().spatialPos);
+      // set the player in the new tile 
+      g_tileManager.__tiles[nextMove.x][nextMove.y].addEntity(player);
+      
+      // add the step into our legal
+      steps.push({step :{ x: player.getEntityTilePos().tileX,
+        y: player.getEntityTilePos().tileY}});
+ 
+      // subtrack one stamina from player
+      player.staminaDrain();
+                                            
+    } else {
+      break; // no more legal steps
+    }
+  }
+  //update the players next steps for drawing out no game logic
+  player.setNextMovement(steps);
+  // add player stamina
+  player.staminaBuff(2);
 }
+
 
 /* Usage : updateStateAndReturn()
     For  : nothing
