@@ -83,7 +83,7 @@ let g_tileManager = {
     // 1 is terrain, 2 is a structure. 0 is area which can be traversed
     let mapMatrix = [
       [0,0,0,1,0,0,0,2,2,3],
-      [0,4,4,0,0,1,0,2,2,2],
+      [0,0,0,0,0,1,0,2,2,2],
       [0,0,1,0,0,0,0,2,2,2],
       [1,0,0,0,1,1,0,0,0,0],
       [1,0,1,0,1,1,0,0,0,0],
