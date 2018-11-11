@@ -11,15 +11,6 @@ let g_tileManager = {
   __tiles: [],
   __tileSize: 10, // size of our map in terms of tileSize*tileSize
 
-  /* Usage : t.tryToMovePlayer(source,dest) 
-      For  : t is g_tileManager object
-             source the starting point
-             dest is the destination point
-      After: returns the shortest path from source to dest, null otherwise */
-  tryToMovePlayer(source,dest){
-   
-  }, 
-
   /* Usage : t.createNewEmptyMap()
       For  : t is g_tileManager object
      After : creates tileSize*tileSize array of tiles where each tile entries

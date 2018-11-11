@@ -40,6 +40,8 @@ app.get('/', (req, res) => {
     /* if a socket manages to get into our game then we need to keep track of it and 
        poll its input else we dont care what it does maybe later we can add a spectate feature ? */
     if(FTL.tryToJoinGame(socket.id)){ 
+
+
       console.log("new player joined !");
       /* its good to define rightaway what should happen if the socket disconects
          so we dont forgget about it, if the player leaves we set its char to null allowing
@@ -67,7 +69,8 @@ app.get('/', (req, res) => {
       
     }
   });
-
+  
+  
 
   
   /* Okay basicly this looks abit wierd but stay with me, when the game starts we need to check

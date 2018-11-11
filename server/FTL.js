@@ -73,15 +73,11 @@ function setPlayerNotReadyForNextRound() {
            inp is a obj { nX, nY }
     After: updates the player that has the sockid */
 function updatePlayer(sockid,inp) {
-  
-}
+  // fetch the player that is trying to make the move
+  let player = GameLobby.GetPlayer(sockid);
 
-/* Usage : updatePlayer(data,sockId)
-    For  : data is a json obj
-           sockId is a string
-    After: updates the player with sockId with the data given */
-function updatePlayer(data,sockId) {
-  
+  let inputDone = true;
+ 
 }
 
 /* Usage : updateStateAndReturn()
