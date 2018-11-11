@@ -76,6 +76,13 @@ function updatePlayer(sockid,inp) {
   
 }
 
+/* Usage : updatePlayer(data,sockId)
+    For  : data is a json obj
+           sockId is a string
+    After: updates the player with sockId with the data given */
+function updatePlayer(data,sockId) {
+  
+}
 
 /* Usage : updateStateAndReturn()
     For  : nothing
@@ -96,5 +103,5 @@ module.exports = {
   allPlayersReadyForNextRound,
   setPlayerReadyForNextRound,
   setPlayerNotReadyForNextRound,
-  g_tileManager
+  updatePlayer
 };

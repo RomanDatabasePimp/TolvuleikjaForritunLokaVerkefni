@@ -173,6 +173,7 @@ GameLobby.prototype.leftGame = function(sockId) {
       /* we want to just remove him from lobby, the player can still be in the 
          tile so the next person can take over if he wants to */
       this._availablePlayers[char].player.playBy = null;
+      this._availablePlayers[char].readyForNextRound = false;
       return; 
     }
   }

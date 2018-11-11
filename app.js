@@ -59,7 +59,10 @@ app.get('/', (req, res) => {
     
       /* We listen to the player input */
       socket.on('clientinput',(data)=>{
-        /* expect that data will come in a form of { step: {x,y}, step:{x,y }, step: {x,y}, step: {x,y}} */
+        /* expect that data will come in a form of 
+           { steps : [ step: {x,y}, step:{x,y}, step:{x,y} ] ,
+             powerUp: true } */
+        
       });
       
     }
