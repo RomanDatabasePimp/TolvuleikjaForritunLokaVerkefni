@@ -19,7 +19,9 @@ function requestPreloads() {
     house: './client/img/house.png',
     terrain: './client/img/crate_04.png',
     validWalk: './client/img/environment_10.png',
-    invalidWalk: './client/img/environment_05.png'
+    invalidWalk: './client/img/environment_05.png',
+    saraPlayer: './client/img/Player/sara_player.png',
+    monster: './client/img/Player/monster.png'
   };
 
   imagesPreload(requiredImages, g_images, preloadDone);
@@ -41,6 +43,8 @@ function preloadDone() {
   g_sprites.terrain = new Sprite(g_images.terrain);
   g_sprites.validWalk = new Sprite(g_images.validWalk);
   g_sprites.invalidWalk = new Sprite(g_images.invalidWalk);
+  g_sprites.saraPlayer = new Sprite(g_images.saraPlayer);
+  g_sprites.monster = new Sprite(g_images.monster);
 }
 
 // Kick it off
@@ -78,9 +82,25 @@ function checkTile(tile, i, j,id) {
     g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
   }
   if (tile[i][j]._entities[1]) {
-    g_sprites.player.drawAt(g_ctx, i * 64, j * 64);
+    drawCorrectChar(tile[i][j]._entities[1].character, i, j);
     checkPlayer(tile[i][j]._entities[1], id);
   }
 };
 
+function drawCorrectChar(char, i, j){
+  switch(char) {
+    case char = "bob":
+         g_sprites.player.drawAt(g_ctx, i * 64, j * 64);
+        break;
+    case char = "sara":
+      g_sprites.saraPlayer.drawAt(g_ctx, i * 64, j * 64);
+        break;
+    case char = "monster":
+      g_sprites.monster.drawAt(g_ctx, i * 64, j * 64);
+      break;
+    default:
+        
+}
+
+}
  
