@@ -38,7 +38,9 @@ function Tile(descr) {
              spdID is the location in the tile
       After: removes the entity in tiles container */
   this.removeEntity = function(spId) {
+    console.log("Before removing char from tile \n",this._entities);
     delete this._entities[spId];
+    console.log("After removing char from tile \n",this._entities);
   };
 
   /* Usage : t.doIContainPlayer()
