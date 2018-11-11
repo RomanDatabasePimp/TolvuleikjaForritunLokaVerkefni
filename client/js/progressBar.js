@@ -2,7 +2,6 @@ var h = 0;
 var start = true;
 var x ;
 function startProgressBar() {
-  console.log(start);
     x = setInterval(progresBar, 10);
   
   function progresBar(){
