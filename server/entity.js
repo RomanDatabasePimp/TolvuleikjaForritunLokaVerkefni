@@ -18,6 +18,9 @@ Entity.prototype.setup =  (descr) => {
   }
 };
 
+Entity.prototype.isAlive = true; // all entities are
+
+
 Entity.prototype.entityPos = {
                                tileX: null,
                                tileY: null,

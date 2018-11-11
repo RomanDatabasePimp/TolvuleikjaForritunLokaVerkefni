@@ -76,6 +76,10 @@ function updatePlayer(sockid,inp) {
   // fetch the player that is trying to make the move
   let player = GameLobby.GetPlayer(sockid);
 
+  /* if client is monster deadorkilled says that he can killed someone
+     if client is suvior deadorkilled says they have been killed by monster  */
+  let deadorkilled = false; 
+  
   // if player dosent exists we dont update duh
   if(!player) { return;}
 
@@ -102,9 +106,47 @@ function updatePlayer(sockid,inp) {
     if(player.stamina > 0 && g_tileManager.tyToMoveToNextTile({x: player.getEntityTilePos().tileX,
                                                                y: player.getEntityTilePos().tileY},
                                                                nextMove)){
-      /* We can move here so we move the player to a new tile and add this step 
-         to legal steps */
- 
+      /* since we have enough stamina and can move in tile we need to check if this tile 
+         contains objective pick up entities or colliles with monster/player */
+
+      // check if player exists in this tile
+      const playerExists = g_tileManager.__tiles[nextMove.x][nextMove.y].doIContainPlayer();
+      /* if player exists in next tile we need to check if its monster or suvivor */
+      if(playerExists) {
+        // this client is a suvior 
+        if(player.character === 'bob' || player.character === 'sara' ) {
+          // if colliding player is a suvivor we stop
+          if(playerExists.character === 'bob' || playerExists.character === 'sara' ){
+            break;
+          } 
+          // you collided with a monster
+          else {
+            deadorkilled = true;
+          }
+        }
+        // this client is  a monster
+        else {
+          deadorkilled = true;
+        }
+      }
+
+      /* if player is still alive and the client is not a monster we need to check 
+         the tile for pick ups  */
+      if(!deadorkilled && !player.character==='monster') {
+        // get things that can be picked up in the tile
+        const pickups = g_tileManager.__tiles[nextMove.x][nextMove.y].doIContainPickUps();
+        /* At this point the game will contain 2 interactibles 
+           -pill (powerup) : increases stamina by 5 when used */
+        for(let i = 0; i < pickups.length; i++){
+          // if its a key we pick it up
+          if(pickups[i].hasOwnProperty('key')) {
+            g_tileManager.objPickedUp(); // pick the obj up
+            pickups[i].isAlive = false;  // kill the key
+          }
+
+        }
+      }
+
       // remove the player from the tile 
       g_tileManager.__tiles[player.getEntityTilePos().tileX][player.getEntityTilePos().tileY]
                    .removeEntity(player.getEntityTilePos().spatialPos);
@@ -114,14 +156,17 @@ function updatePlayer(sockid,inp) {
       // add the step into our legal
       steps.push({step :{ x: player.getEntityTilePos().tileX,
         y: player.getEntityTilePos().tileY}});
- 
+         
       // subtrack one stamina from player
       player.staminaDrain();
-                                            
+
+      // if killed someone or died then we stop
+      if(deadorkilled) { break; }                                      
     } else {
       break; // no more legal steps
     }
   }
+
   //update the players next steps for drawing out no game logic
   player.setNextMovement(steps);
   // add player stamina

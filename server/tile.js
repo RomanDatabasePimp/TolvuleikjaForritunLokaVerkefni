@@ -55,6 +55,21 @@ function Tile(descr) {
     return null;
   }
 
+  /* Usage : t.doIContainPickUps()
+      For  : t is a tile
+      After: returns a array of entities that can be picked up */
+  this.doIContainPickUps = function(){
+    const pickups = [];
+    for(let i=0; i < this._entities.length; i++){
+      if(this._entities[i]) {
+        if(!this._entities[i].hasOwnProperty('character')){
+          pickups.push(_entities[i]);
+        }
+      }
+    }
+    return pickups;
+  }
+
 };
 
 /* export the tile so we can work with it in tileManeger */

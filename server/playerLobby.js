@@ -24,7 +24,7 @@ function GameLobby() {};
           // characters name is bob he has his power up in players class
           character:"bob",
           playBy:null,// socket who is playing bob
-          stamina:5,// init stamina of bob i.e how many tiles he can move in the start
+          stamina:6,// init stamina of bob i.e how many tiles he can move in the start
           mademove: false,
           movement:[]
         }
@@ -38,7 +38,7 @@ function GameLobby() {};
         },
         {
           character:"sara",
-          stamina:7,
+          stamina:4,
           playBy:null,
           mademove: false,
           movement:[]
