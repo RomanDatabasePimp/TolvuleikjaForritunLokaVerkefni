@@ -63,6 +63,7 @@ app.get('/', (req, res) => {
         /* expect that data will come in a form of 
            { steps : [ step: {x,y}, step:{x,y}, step:{x,y} ] ,
              powerUp: true } */
+        console.log("input",data);
         FTL.updatePlayer(socket.id,data);
       });
       
@@ -86,7 +87,7 @@ app.get('/', (req, res) => {
     if(!allPLayersPLaying.alljoined) {
       io.sockets.emit('NextGameRound', { hasnotgamestarted : allPLayersPLaying.hasnotgamestarted });
       // if the lobby is not full we try again in 3 seconds
-      console.log("Waiting for lobby full (tryin in 3 sec) ");
+      //console.log("Waiting for lobby full (tryin in 3 sec) ");
       setTimeout(gameinit, 3000);
       return;
     }
@@ -107,7 +108,7 @@ app.get('/', (req, res) => {
     if(!allPLayersPLaying.alljoined) {
       io.sockets.emit('NextGameRound', { hasnotgamestarted : allPLayersPLaying.hasnotgamestarted });
       // if the lobby is not full we try again in 3 seconds
-      console.log("Waiting for lobby full (tryin in 3 sec) ");
+      //console.log("Waiting for lobby full (tryin in 3 sec) ");
       // go back to the start to be safe to ensure all clients are in the same state
       setTimeout(gameinit, 3000);
       return;
@@ -115,7 +116,7 @@ app.get('/', (req, res) => {
 
     // if clients are not ready for the next class we wait
     if(!FTL.allPlayersReadyForNextRound()) {
-      console.log("Waiting for all clients to start next round (trying in 3 sec)");
+      //console.log("Waiting for all clients to start next round (trying in 3 sec)");
       setTimeout(startRound,3000);
       return;
     }
@@ -127,7 +128,7 @@ app.get('/', (req, res) => {
     FTL.setPlayerNotReadyForNextRound();
 
     // wait 6 seconds before updateting the map state and sending it back
-    console.log("Players making move trying updating state in 6 sec");
+    //console.log("Players making move trying updating state in 6 sec");
     setTimeout(gameinit,6000);
   }
 
