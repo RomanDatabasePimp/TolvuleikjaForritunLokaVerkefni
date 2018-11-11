@@ -9,11 +9,17 @@
 
 <body>
   <canvas id="myCanvas" width="640" height="640" style="border: 1px solid black;">
-    <div class="videoContainer">
-      
-    </div>
+        
     Sorry, but your browser does not support the HTML5 canvas tag.
   </canvas>
+  <div class="firstViewContainer" id="videoContainerinn">
+      <video class="myVideo" src="/client/videos/frontPic.mp4" autoplay=""></video>
+      <div class="players">
+        <h2 id ="one"></h2>
+        <h2 id ="two"></h2>
+        <h2 id ="three"></h2>
+      </div>
+  </div>
 
   <!-- ------------------HTML END SCRIPTS START --------------------------------------->
 
@@ -39,7 +45,6 @@
  
   <!-- Combine all the game logic into a client side game -->
   <script>
-    drawFirstView();
     /* Define what happens when a socket manages to connect to our server */
     socket.on('connect', function() {
       // in here we can pass our socket.id to the functions that need it
@@ -47,6 +52,7 @@
       /* Next game round is send to us every x-seconds here we recive the map
       and call the necessary functions needed to draw the map based off 
       the data recived */
+      drawPlayers();
       socket.on('NextGameRound', (data)=> {
         allPlayerReady(data);
         drawEmptyMapViaTiles(data, socket.id);
