@@ -25,16 +25,18 @@ function allPlayerReady(data){
     // þarf aðs setja try og catch tiol þess að htmlid fyllist ekki 
   }else{
     document.getElementById('videoContainerinn').style.display = 'none';
+    document.getElementById('myVideoBackground').style.display='';
     console.log("Game has started");
   }
 }
-  function drawPlayers(){
-    console.log("drawing");
-    let first = document.getElementById('one');
-    first.innerHTML = player1;
-    let second = document.getElementById('two');
-    second.innerHTML = player2;
-    let third = document.getElementById('three');
-    third.innerHTML = monster;
-  }
+function drawPlayers(){
+  document.getElementById('myVideoBackground').style.display='none';
+  console.log("drawing");
+  let first = document.getElementById('one');
+  first.innerHTML = player1;
+  let second = document.getElementById('two');
+  second.innerHTML = player2;
+  let third = document.getElementById('three');
+  third.innerHTML = monster;
+}
 
