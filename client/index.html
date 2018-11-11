@@ -71,9 +71,9 @@
       });
 
       socket.on('roundstart', ()=> {
-        console.log("Begin");
+        player = getPlayer();
+        console.log(player+" this is player");
         startProgressBar();
-        turnCountDown = 5;
         g_readyForNextRound=false;
         setTimeout(() => {
           socket.emit('clientinput',{ steps:g_steps, powerUp:false});
