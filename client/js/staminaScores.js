@@ -14,7 +14,7 @@ function setStamina(player){
         break;
         case playername = "monster":
         rightPlayerName = "Monster"
-        document.getElementById("playerHeads").src =  './client/img/Player/Heads/monsterFace.png';
+        document.getElementById("playerHeads").src =  './client/img/Monster/platformChar_happy.png';
         break;
         default: 
     }
