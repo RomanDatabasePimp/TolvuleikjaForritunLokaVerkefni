@@ -80,7 +80,6 @@ function imagesPreload(requiredImages,
     //
     preloadHandler = function () {
 
-        console.log("preloadHandler called with this=", this);
         loadedImages[this.name] = this;
 
         if (0 === this.width) {
@@ -94,15 +93,8 @@ function imagesPreload(requiredImages,
         numImagesHandled += 1;
 
         if (numImagesHandled === numImagesRequired) {
-            console.log("all preload images handled");
-            console.log("loadedImages=", loadedImages);
-            console.log("");
-            console.log("performing completion callback");
 
             completionCallback();
-
-            console.log("completion callback done");
-            console.log("");
         }
     };
 

@@ -13,9 +13,6 @@ function handleMouse(evt) {
         //Checktile function, here we can hover over something.
         //Then draw the correct grassTileHighlighted if we are over it.
         //
-        if(insidePlayArea(g_mouseX,g_mouseY)){
-            showPlayerMoves(g_mouseX,g_mouseY);
-        };
         return;
     }
     if(insidePlayArea(g_mouseX,g_mouseY)){
