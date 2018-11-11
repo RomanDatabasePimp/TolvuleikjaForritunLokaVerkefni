@@ -31,7 +31,7 @@
     const g_ctx = g_canvas.getContext("2d");
     const socket = io();// establish our communication
     let g_readyForNextRound = false;
-    let turnCountDown = 5;
+    let g_steps=[];
   </script>
   
   <!-- include all client game logic such as drawing the map waiting looby etc -->
@@ -61,9 +61,9 @@
       });
 
       socket.on('roundstart', ()=> {
-        turnCountDown = 5;
         g_readyForNextRound=false;
-        //
+        // poll steps
+        g_steps = [];
       });
 
       /* client will send to the Server every 3 seconds if he is ready to for the next round

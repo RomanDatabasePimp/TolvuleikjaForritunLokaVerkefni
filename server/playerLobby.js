@@ -25,6 +25,8 @@ function GameLobby() {};
           character:"bob",
           playBy:null,// socket who is playing bob
           stamina:5,// init stamina of bob i.e how many tiles he can move in the start
+          mademove: false,
+          movement:[]
         }
       )
     },
@@ -38,6 +40,8 @@ function GameLobby() {};
           character:"sara",
           stamina:7,
           playBy:null,
+          mademove: false,
+          movement:[]
         }
       )
     },
@@ -51,6 +55,8 @@ function GameLobby() {};
           character:"monster",
           stamina:10,
           playBy:null,
+          mademove: false,
+          movement:[]
         }
       )
     }
