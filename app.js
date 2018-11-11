@@ -128,7 +128,7 @@ app.get('/', (req, res) => {
     FTL.setPlayerNotReadyForNextRound();
 
     // wait 6 seconds before updateting the map state and sending it back
-    //console.log("Players making move trying updating state in 6 sec");
+    console.log("Players making move trying updating state in 6 sec");
     setTimeout(gameinit,6000);
   }
 
