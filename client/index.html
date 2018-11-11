@@ -70,6 +70,7 @@
       the data recived */
       drawPlayers();
       socket.on('NextGameRound', (data)=> {
+        console.log("We picked it up ",data.__tiles[0][9].key);
         allPlayerReady(data);
         drawMapViaTiles(data, socket.id);
         // check if game over ?

@@ -135,6 +135,7 @@ function updatePlayer(sockid,inp) {
       /* if player is still alive and the client is not a monster we need to check 
          the tile for pick ups  */
       if(!deadorkilled && !player.character==='monster') {
+        
         // get things that can be picked up in the tile
         const pickups = g_tileManager.__tiles[nextMove.x][nextMove.y].doIContainPickUps();
         /* At this point the game will contain 2 interactibles 
@@ -180,9 +181,34 @@ function updatePlayer(sockid,inp) {
     For  : nothing
     After: updates the gameState and returns the updated tile maneger */
 function updateStateAndReturn() {
+  let deadplayers = 0;
   /* We need to check if the players are alive if they are no we remove them */
+  for(let player in GameLobby._availablePlayers){
+    // if player is not alive we delete him
+    if(!GameLobby._availablePlayers[player].player.isAlive){
+      deadplayers ++; // count the dead suvivors
+      // the pos of the dead player
+      const pos = GameLobby._availablePlayers[player].player.getEntityTilePos();
+      // if the players died this round
+      if(pos.tileX) {
+        g_tileManager.__tiles[pos.tileX][pos.tileY].removeEntity(pos.spatialPos);
+        GameLobby._availablePlayers[player].player.updateEntityTilePos(null,null,null);
+      }
+    }
+  }
 
   /* check if the game is over */
+
+  // if players have collected all the keys they win
+  if(g_tileManager.__objPickedUp === 3) {
+    g_tileManager.__gameWon.players = true;
+  }
+
+  // if all players died then the monster won
+  if(deadplayers === 2) {
+    g_tileManager.__gameWon.monster = true;
+  }
+
   return g_tileManager;
 }
 
