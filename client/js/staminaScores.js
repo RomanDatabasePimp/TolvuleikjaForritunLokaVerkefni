@@ -20,6 +20,4 @@ function setStamina(player){
     }
     const headerString = playerStamina;
     document.getElementById("headTitle").innerHTML = headerString;
-    
-
 }
