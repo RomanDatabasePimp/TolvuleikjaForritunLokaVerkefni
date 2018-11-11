@@ -81,18 +81,25 @@ function checkTile(tile, i, j, id) {
   } else {
     g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
   }
-  if (tile[i][j]._amIAStructure && tile[i][j]._entities[1]) {
-    checkPlayer(tile[i][j]._entities[1], id);
+  if (tile[i][j]._amIAStructure && playerExistsInTile(tile[i][j]._entities)) {
+    let entity = playerExistsInTile(tile[i][j]._entities);
+    checkPlayer(entity, id);
     player = getPlayer();
     drawCorrectChar(player.character, player.entityPos.tileX, player.entityPos.tileY);
     return;
   }
-  if (tile[i][j]._entities[1]) {
-    drawCorrectChar(tile[i][j]._entities[1].character, i, j);
-    checkPlayer(tile[i][j]._entities[1], id);
+  if (playerExistsInTile(tile[i][j]._entities)) {
+    let entity = playerExistsInTile(tile[i][j]._entities);
+    drawCorrectChar(entity.character, i, j);
+    checkPlayer(entity, id);
   }
 };
-
+/**
+ * Draws the correct character at the corresponding location.
+ * @param {tile} char 
+ * @param {int} i 
+ * @param {int} j 
+ */
 function drawCorrectChar(char, i, j) {
   switch (char) {
     case char = "bob":
@@ -109,4 +116,24 @@ function drawCorrectChar(char, i, j) {
   }
 
 }
+/**
+ * finds the entity at our location.
+ * @param {Entity} entity 
+ */
+function findEntity(entity){
+  var foundEnt = entity.find(function(ent) {
+    return ent;
+  });
+  return foundEnt;
+}
 
+function playerExistsInTile(tile){
+  for(let i=0; i < tile.length ; i++) {
+    if(tile[i]){
+      if(tile[i].hasOwnProperty("character")) {
+        return tile[i];
+      }
+    }
+  }
+  return null;
+}
