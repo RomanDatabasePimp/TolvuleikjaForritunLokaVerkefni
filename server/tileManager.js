@@ -3,7 +3,7 @@
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
 */
 const tile = require('./tile').Tile; // fetch the tile
-const Key = require('./key').Key; // our key
+const pickup = require('./pickups').PickUp; // our key
 
 /* Our map is composed of a set of tiles, and the tileManeger holds all the tiles */
 let g_tileManager = {
@@ -103,10 +103,10 @@ let g_tileManager = {
         }
         if(mapMatrix[j][i] == 3){
           this.__tiles[j][i]._amIAStructure = true;
-          this.__tiles[j][i].addEntity(new Key ({ shouldUpdateMe:false }));
+          this.__tiles[j][i].addEntity(new pickup ({ shouldUpdateMe:false },{ type:"key"}));
         }
         if(mapMatrix[j][i] == 4){
-          this.__tiles[j][i].addEntity(new Key ({ shouldUpdateMe:false }));
+          this.__tiles[j][i].addEntity(new pickup ({ shouldUpdateMe:false },{ type:"key"}));
         }
       }
     }
