@@ -81,16 +81,16 @@ function checkTile(tile, i, j, id) {
   } else {
     g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
   }
-  if (tile[i][j]._amIAStructure && tile[i][j]._entities) {
-    let entity = findEntity(tile[i][j]._entities);
+  if (tile[i][j]._amIAStructure && playerExistsInTile(tile[i][j]._entities)) {
+    let entity = playerExistsInTile(tile[i][j]._entities);
     checkPlayer(entity, id);
     player = getPlayer();
     drawCorrectChar(player.character, player.entityPos.tileX, player.entityPos.tileY);
     return;
   }
-  if (tile[i][j]._entities) {
-    let entity = findEntity(tile[i][j]._entities);
-    //drawCorrectChar(entity.character, i, j);
+  if (playerExistsInTile(tile[i][j]._entities)) {
+    let entity = playerExistsInTile(tile[i][j]._entities);
+    drawCorrectChar(entity.character, i, j);
     checkPlayer(entity, id);
   }
 };
@@ -121,11 +121,19 @@ function drawCorrectChar(char, i, j) {
  * @param {Entity} entity 
  */
 function findEntity(entity){
-  let entityReturned;
-  entity.map(ent => {
-    if(ent) {
-      char = entityReturned;
-    }
+  var foundEnt = entity.find(function(ent) {
+    return ent;
   });
-  return entityReturned;
+  return foundEnt;
+}
+
+function playerExistsInTile(tile){
+  for(let i=0; i < tile.length ; i++) {
+    if(tile[i]){
+      if(tile[i].hasOwnProperty("character")) {
+        return tile[i];
+      }
+    }
+  }
+  return null;
 }
