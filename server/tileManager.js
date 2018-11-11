@@ -11,6 +11,44 @@ let g_tileManager = {
   __tiles: [],
   __tileSize: 10, // size of our map in terms of tileSize*tileSize
 
+
+  /* Usage : t.tyToMoveToNextTile(source,dest)
+      For  : t is a g_tileManager object
+             source is a obj {x: , y:}
+             dest is a obj   {x: , y:} 
+      After: returns true if you can move from tile source to tile dest
+             note this only checks for one step !!!!!! */
+  tyToMoveToNextTile : function(source,dest) {
+
+    // if we try to move down
+    if((source.x+1 === dest.x && source.y === dest.y) && !(source.x+1 >= this.__tileSize))  {
+      if(!this.__tiles[dest.x][dest.y]._amITerrain) { return true;}
+      return false;
+    }
+
+    // if we try to move up
+    else if((source.x-1 === dest.x && source.y === dest.y) && !(source.x-1 < 0)){
+      if(!this.__tiles[dest.x][dest.y]._amITerrain) { return true;}
+      return false;
+    }
+
+    // if we try to move left
+    else if((source.x === dest.x && source.y-1 === dest.y) && !(source.y-1 < 0)){
+      if(!this.__tiles[dest.x][dest.y]._amITerrain) { return true;}
+      return false;
+    }
+
+    // if we try to move right
+    else if((source.x === dest.x && source.y+1 === dest.y) && !(source.y+1 >= this.__tileSize)){
+      if(!this.__tiles[dest.x][dest.y]._amITerrain) { return true;}
+      return false;
+    }
+    
+    // no legal moves found
+    else {
+      return false
+    }
+  },
   /* Usage : t.createNewEmptyMap()
       For  : t is g_tileManager object
      After : creates tileSize*tileSize array of tiles where each tile entries
