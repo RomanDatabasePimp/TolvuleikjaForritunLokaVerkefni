@@ -33,7 +33,7 @@ function checkPlayer(player,id){
   function movePlayerTo(posX, posY) {
     let myPlayer = getPlayer();
     g_sprites.highLight.drawAt(g_ctx, convertToMatrix(posX), convertToMatrix(posY));
-    g_steps.push({step:{x:roundDown(posX), y:roundDown(posY)}});
+    g_steps.push({step:{x:roundDown(posX/64), y:roundDown(posY/64)}});
   };
 
 
