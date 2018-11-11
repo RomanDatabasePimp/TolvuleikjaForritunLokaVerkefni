@@ -31,31 +31,36 @@ function checkPlayer(player,id){
    * @param {int} posY 
    */
   function movePlayerTo(posX, posY) {
-    let myPlayer = getPlayer();
-    g_sprites.highLight.drawAt(g_ctx, convertToMatrix(posX), convertToMatrix(posY));
-    g_steps.push({step:{x:roundDown(posX/64), y:roundDown(posY/64)}});
+      // Checks if we are clicking ourselves.
+    if(checkValidMoves(posX,posY)){
+        g_sprites.highLight.drawAt(g_ctx, convertToMatrix(posX), convertToMatrix(posY));
+        g_steps.push({step:{x:roundDown(posX/64), y:roundDown(posY/64)}});
+    }     
   };
 
 
   
 /**
- * TODO COMMENT THSI RAFNAR
- * @param {*} posX 
- * @param {*} posY 
+ * Checks if the sum of the positions selected are 0
+ * thus meaning the character selected himself.
+ * only returns true if the sum of the positions is not 0.
+ * @param {int} posX 
+ * @param {int} posY 
  */
-  function showPlayerMoves(posX, posY){
+  function checkValidMoves(posX, posY){
       let myPlayer = getPlayer();
       let gridPosition = {
         x : roundDown(posX/64),
         y : roundDown(posY/64)
     };
+    // Distance between two points.
     let distX = gridPosition.x - myPlayer.entityPos.tileX;
     let distY = gridPosition.y - myPlayer.entityPos.tileY;
-    showValid(distX, posX, posY);
-    showValid(distY, posX, posY);
-    
+
+    if(distX + distY != 0) return true;
   };
   // Shows for both directions
+  // ----------------UNUSED!!!--------------------
   function showValid(dist,posX, posY){
     switch(Math.abs(dist)) {
         case dist = 1:
