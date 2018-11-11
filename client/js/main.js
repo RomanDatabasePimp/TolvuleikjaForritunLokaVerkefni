@@ -21,10 +21,7 @@ function requestPreloads() {
     validWalk: './client/img/environment_10.png',
     invalidWalk: './client/img/environment_05.png',
     saraPlayer: './client/img/Player/sara_player.png',
-    monster: './client/img/Player/monster.png',
-    rightWalk1:'./client/img/Player/player_17.png',
-    rightWalk2:'./client/img/Player/player_18.png',
-    rightWalk3:'./client/img/Player/player_19.png'
+    monster: './client/img/Player/monster.png'
   };
 
   imagesPreload(requiredImages, g_images, preloadDone);
@@ -48,10 +45,6 @@ function preloadDone() {
   g_sprites.invalidWalk = new Sprite(g_images.invalidWalk);
   g_sprites.saraPlayer = new Sprite(g_images.saraPlayer);
   g_sprites.monster = new Sprite(g_images.monster);
-  g_sprites.rightWalk1 = new Sprite(g_images.rightWalk1);
-  g_sprites.rightWalk2 = new Sprite(g_images.rightWalk2);
-  g_sprites.rightWalk3 = new Sprite(g_images.rightWalk3);
-
 }
 
 // Kick it off
@@ -109,8 +102,7 @@ function drawCharacters(tile, i, j, id) {
     drawCorrectChar(entity.character, i, j);
     checkPlayer(entity, id);
   }
-  console.log(tile[i][j]._entities);
-  if (tile[i][j]._entities.hasOwnProperty("key")) {
+  if (treasureExistsInTile(tile[i][j]._entities)) {
     g_sprites.validWalk.drawAt(g_ctx, i * 64, j * 64);
   }
 
@@ -148,7 +140,16 @@ function findEntity(entity) {
   });
   return foundEnt;
 }
-
+function treasureExistsInTile(tile){
+  for (let i = 0; i < tile.length; i++) {
+    if (tile[i]) {
+      if (tile[i].hasOwnProperty("type")) {
+        return tile[i];
+      }
+    }
+  }
+  return null;
+}
 function playerExistsInTile(tile) {
   for (let i = 0; i < tile.length; i++) {
     if (tile[i]) {
