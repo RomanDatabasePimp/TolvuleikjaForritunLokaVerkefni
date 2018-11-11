@@ -26,31 +26,7 @@ function allPlayerReady(data){
     document.getElementById('videoContainerinn').style.display = 'none';
     console.log("Game has started");
   }
-
- // drawGameBackground();
-
 }
-/*function drawFirstView() {
-    /*  Get the location of main in HTML  
-    main = document.querySelector('body');
-    Container = appendChild(main,'div','container');
-    video = appendChild(Container, 'video', 'myVideo');
-    video.setAttribute('src','/client/videos/frontPic.mp4')
-    video.setAttribute('autoplay','')
-}
-function createElement(element, className = '') {
-    const div = document.createElement(element);
-    div.setAttribute('class', className);
-    return div;
-  }
-  function appendChild(node, elementType, className = '') {
-    const div = document.createElement(elementType);
-    div.setAttribute('class', className);
-    return node.appendChild(div);
-  }
-  function addTextToNode(node, text) {
-    node.appendChild(document.createTextNode(text));
-  }*/
   function drawPlayers(){
     console.log("drawing");
     let first = document.getElementById('one');

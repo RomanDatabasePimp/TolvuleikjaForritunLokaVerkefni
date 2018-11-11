@@ -31,10 +31,6 @@ app.get('/', (req, res) => {
 
 /* -----------------------------SOCKET LOGIC START ---------------------------------- */
 
-/* Okay basicly our socket will pull the user data from the clients and when it has
-   pulled all 3 clients it will update the game state and send the next state to the 
-   clients where they have again 5 seconds to make a move  */
-
   // Fetch the game 
   const FTL = require('./server/FTL');
   FTL.createGameMap(); // need create the initial map before launching the server
@@ -52,20 +48,78 @@ app.get('/', (req, res) => {
         FTL.leaveGame(socket.id);
         console.log("A player has left !");
       });
+
+      /* We listen to the player if he is ready for the next round  */
+      socket.on('clientreadyfornextround',(data)=>{
+        if(data) { FTL.setPlayerReadyForNextRound(socket.id); }
+      });
+
+      /* We listen to the player input */
+      socket.on('clientinput',(data)=>{
+        
+      });
     }
   });
 
-  setInterval(function() {
-    // start by checking if all players are playing
+  
+  /* Okay basicly this looks abit wierd but stay with me, when the game starts we need to check
+     - if all the players have joined the lobby
+     - if all joined then we send the game state to  all the clients
+     - the clients have to take their time to draw it out and play the animations
+       before they can begin the next round (different computers different speeds)
+     - if all clients drawed the map out then we can start the next round
+     - BUT if a client disconects we need to start from the top again. */
+  function gameinit() {
+    // fetch a boolean array that tells us if all 3 players are connected to the server
     const allPLayersPLaying = FTL.allPlayersJoined();
     // if all 3 players havent joined or one left we send to the client that we are waiting to for someone
-    if(!allPLayersPLaying.alljoined) { 
+    if(!allPLayersPLaying.alljoined) {
       io.sockets.emit('NextGameRound', { hasnotgamestarted : allPLayersPLaying.hasnotgamestarted });
+      // if the lobby is not full we try again in 3 seconds
+      console.log("Waiting for lobby full (tryin in 3 sec) ");
+      setTimeout(gameinit, 3000);
       return;
     }
+    // update the map and send it to the clients 
     io.sockets.emit('NextGameRound', FTL.updateStateAndReturn());
-  }, 5000);
+    // try to start the next round
+    startRound();
+  }
 
+  /* the next round is only going to start if all players are ready. the problem here is 
+     if we would combine these to functions we would essentially not know when to send the map 
+     to the clients. if we send the map to soon we would be stuck at rerendering the maps client side
+     we would never start the next round , to late the map would not be sent we could not start next round*/
+  function startRound() {
+    // still need to check if the player disconected to be safe
+    const allPLayersPLaying = FTL.allPlayersJoined();
+    // if all 3 players havent joined or one left we send to the client that we are waiting to for someone
+    if(!allPLayersPLaying.alljoined) {
+      io.sockets.emit('NextGameRound', { hasnotgamestarted : allPLayersPLaying.hasnotgamestarted });
+      // if the lobby is not full we try again in 3 seconds
+      console.log("Waiting for lobby full (tryin in 3 sec) ");
+      // go back to the start to be safe to ensure all clients are in the same state
+      setTimeout(gameinit, 3000);
+      return;
+    }
+
+    // if clients are not ready for the next class we wait
+    if(!FTL.allPlayersReadyForNextRound()) {
+      console.log("Waiting for all clients to start next round (trying in 3 sec)");
+      setTimeout(startRound,3000);
+      return;
+    }
+
+    // tells client they have 5 seconds to make a move
+    io.sockets.emit('roundstart', null );
+
+    // unready the players since they are finishing the current round
+    FTL.setPlayerNotReadyForNextRound();
+
+    // wait 6 seconds before updateting the map state and sending it back
+    console.log("Players making move trying updating state in 6 sec");
+    setTimeout(gameinit,6000);
+  }
 
 /* -----------------------------SOCKET LOGIC END ------------------------------------ */
 
@@ -88,4 +142,4 @@ const {
   HOST: host = '127.0.0.1',
 } = process.env;
 
-serv.listen(port, () => { console.info(`Server running at http://${host}:${port}/`); });
+serv.listen(port, () => {gameinit(); console.info(`Server running at http://${host}:${port}/`); });
