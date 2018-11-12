@@ -24,19 +24,21 @@
         
    
   <div class="firstViewContainer" id="videoContainerinn">
-      <video class="myVideo" src="/client/videos/frontPic.mp4" autoplay=""></video>
+      <video class="myVideo" src="/client/videos/frontPic.mp4" autoplay="" muted></video>
       <div class="players">
         <h2 id ="one"></h2>
         <h2 id ="two"></h2>
         <h2 id ="three"></h2>
       </div>
     </div>
-    <video id="myVideoBackground" src="/client/videos/frontPic.mp4" autoplay=""></video>
+    <video id="myVideoBackground" src="/client/videos/frontPic.mp4" autoplay="" muted></video>
       
     </div>
-    <div class="pyro">
-      <div class="before"></div>
-      <div class="after"></div>
+    <div class="fireWorksContainer" id = "fireWorksContainerID">
+      <div class="pyro">
+        <div class="before"></div>
+        <div class="after"></div>
+      </div>
     </div>
   <!-- ------------------HTML END SCRIPTS START --------------------------------------->
 
@@ -129,6 +131,7 @@
       function gameOver(whowon) {
         /* Helgi ur functions come here */
         console.log("GAME IS OVER THE ",whowon," has won the game");
+        victorySound();
         setTimeout(() => { socket.emit('resetgamerequest',null); }, 8000);
       }
 

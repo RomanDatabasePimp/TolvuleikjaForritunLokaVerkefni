@@ -16,6 +16,7 @@ function allPlayerReady(data){
   if(data.hasOwnProperty("hasnotgamestarted"))
   {  
     document.getElementById('videoContainerinn').style.display = '';
+    document.getElementById('fireWorksContainerID').style.display = 'none';
     if(data.hasnotgamestarted[0] == true){player1 = "Bob is ready to roll";}
     if(data.hasnotgamestarted[1] == true){player2 = "Sara will kick your ass"}
     if(data.hasnotgamestarted[2] == true){monster= "The monster will eat all of you";}
@@ -27,6 +28,7 @@ function allPlayerReady(data){
   }
 }
 function drawPlayers(){
+  document.getElementById('fireWorksContainerID').style.display = 'none';
   document.getElementById('myVideoBackground').style.display='none';
   let first = document.getElementById('one');
   first.innerHTML = player1;
