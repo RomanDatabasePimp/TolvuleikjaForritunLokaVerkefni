@@ -19,7 +19,15 @@ function requestPreloads() {
     terrain: './client/img/crate_04.png',
     key: './client/img/keys/platformPack_item014.png',
     saraPlayer: './client/img/Player/sara_player.png',
-    monster: './client/img/Monster/platformChar_idle.png'
+    monster: './client/img/Monster/platformChar_idle.png',
+    bobRight1: './client/img/Player/player_17.png',
+    bobRight2: './client/img/Player/player_18.png',
+    bobLeft1:'./client/img/Player/player_20.png',
+    bobLeft2: './client/img/Player/player_21.png',
+    bobDown1: './client/img/Player/player_6.png',
+    bobDown2:'./client/img/Player/player_7.png',
+    bobUp1:'./client/img/Player/player_8.png',
+    bobUp2:'./client/img/Player/player_9.png'
   };
 
   imagesPreload(requiredImages, g_images, preloadDone);
@@ -41,6 +49,14 @@ function preloadDone() {
   g_sprites.key = new Sprite(g_images.key);
   g_sprites.saraPlayer = new Sprite(g_images.saraPlayer);
   g_sprites.monster = new Sprite(g_images.monster);
+  g_sprites.bobRight1 = new Sprite(g_images.bobRight1);
+  g_sprites.bobRight2 = new Sprite(g_images.bobRight2);
+  g_sprites.bobLeft1 = new Sprite(g_images.bobLeft1);
+  g_sprites.bobLeft2 = new Sprite(g_images.bobLeft2);
+  g_sprites.bobDown1 = new Sprite(g_images.bobDown1);
+  g_sprites.bobDown2 = new Sprite(g_images.bobDown2);
+  g_sprites.bobUp1 = new Sprite(g_images.bobUp1);
+  g_sprites.bobUp2 = new Sprite(g_images.bobUp2);
 }
 
 // Kick it off
