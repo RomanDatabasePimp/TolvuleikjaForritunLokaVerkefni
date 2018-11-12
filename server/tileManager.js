@@ -12,7 +12,7 @@ let g_tileManager = {
   __tiles: [],
   __tileSize: 10, // size of our map in terms of tileSize*tileSize
   __objPickedUp: 0,
-  __gameWon: { players: false, monster: false},
+  __gameWon: { players: true, monster: false},
 
   /* Usage : t.objPickedUp()
       For  : t is a g_tileManager object

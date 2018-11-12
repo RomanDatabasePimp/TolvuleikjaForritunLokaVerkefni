@@ -251,6 +251,19 @@ GameLobby.prototype.resetLobby = function() {
   console.log("Lobby reseted !");
 };
 
+/* Usage : g.getClient(sockid)
+    For  : g is a GameLobby
+           sockid is a string
+    After: returns the bob,sata or monster if sockId is accosiacted them */
+GameLobby.prototype.getClient = function(sockid){
+  for(let char in this._availablePlayers){
+    if(this._availablePlayers[char].player.playBy === sockid){
+      return this._availablePlayers[char];
+    }
+  }
+  return null;
+}
+
 /* Usage: g.handleClientReset(sockid)
      For: g is a GameLobby
           sockid is a string
@@ -258,12 +271,14 @@ GameLobby.prototype.resetLobby = function() {
           it sets it resetgame to true and if all players are 
           requesting for reset it will return true else false  */
 GameLobby.prototype.handleClientReset = function(sockid) {
-  const player = this.GetPlayer(sockid); // fetch player
+  const client = this.getClient(sockid); // fetch player
   // if player exists
-  if(player) {
-    player.resetgame = true;
+  if(client) {
+    
+    client.resetgame = true;
     // check if all players want to reset the game
     for(let char in this._availablePlayers){
+
       // if one client is not ready to reset then we dont
       if(!this._availablePlayers[char].resetgame) {
         return false;

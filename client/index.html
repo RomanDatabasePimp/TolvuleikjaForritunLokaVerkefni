@@ -71,21 +71,39 @@
       the data recived */
       drawPlayers();
       socket.on('NextGameRound', (data)=> {
-        console.log(data);
-        allPlayerReady(data);
-        drawMapViaTiles(data, socket.id);
-        // check if game over ?
+        // we check if this is a map and in the proccesses check if the game is over 
+        if (data.hasOwnProperty("__gameWon")) {
+          // check if the game is over by players
+          if(data.__gameWon.players){
+            gameOver("Players");
+          }
+          // check if the game is over by monaster
+          else if(data.__gameWon.monster) {
+            gameOver("Monster");
+          }
+        }
+          allPlayerReady(data);
+          drawMapViaTiles(data, socket.id);
       });
 
       socket.on('roundstart', ()=> {
+        // when the round starts we allow the user to click on the tiles
         window.addEventListener("mousedown", handleMouse);
         window.addEventListener("mousemove", handleMouse);
-        player = getPlayer();
         
+        
+        player = getPlayer();
         setStamina(player);
-        console.log("server segiru go");
+
+        // start the count down that the user has 5 seconds to make a move
         startProgressBar();
+        // declare that the client is not ready for the next round 
+        // (NOT THIS ROUND BUT THE NEXT THAT IS YET TO BE CALCULATED AND RENDERED)
         g_readyForNextRound=false;
+        
+        /* Set a lambda function to go off in 5 seconds that will emit to the server what 
+           has the user done, clearing the client side on what has he done and removing
+           the listeners so he cant select the tiles*/
         setTimeout(() => {
           socket.emit('clientinput',{ steps:g_steps, powerUp:false});
           g_steps = [];
@@ -93,8 +111,21 @@
           window.removeEventListener("mousemove",handleMouse);
           moveMen();
         }, 5000);
+
       });
       
+
+      /* Usage : gameOver(whowon)
+           For : who won is a string telling who won
+          After: calls the nessesary functions to end the game also emits
+                 after 5 seconds a request to reset the game
+      */
+      function gameOver(whowon) {
+        /* Helgi ur functions come here */
+        console.log("GAME IS OVER THE ",whowon," has won the game");
+        setTimeout(() => { socket.emit('resetgamerequest',null); }, 8000);
+      }
+
       /* client will send to the Server every 3 seconds if he is ready to for the next round
          the idea is that different clients take different time to render the game, so we will
          wait for all clients to render the map and the animations and then play next round */
