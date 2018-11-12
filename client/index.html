@@ -78,6 +78,7 @@
       the data recived */
       drawPlayers();
       socket.on('NextGameRound', (data)=> {
+        console.log(data);
         // we check if this is a map and in the proccesses check if the game is over 
         if (data.hasOwnProperty("__gameWon")) {
           // check if the game is over by players

@@ -18,6 +18,13 @@ Entity.prototype.setup =  (descr) => {
   }
 };
 
+Entity.prototype.resetToDefaultEnt = function(){
+  this.isAlive = true;
+  this.entityPos.tileX = null;
+  this.entityPos.tileY = null;
+  this.entityPos.spatialPos = null;
+};
+
 Entity.prototype.isAlive = true; // all entities are
 
 

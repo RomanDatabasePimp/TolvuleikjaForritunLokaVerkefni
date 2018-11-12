@@ -12,7 +12,7 @@ let g_tileManager = {
   __tiles: [],
   __tileSize: 10, // size of our map in terms of tileSize*tileSize
   __objPickedUp: 0,
-  __gameWon: { players: true, monster: false},
+  __gameWon: { players: false, monster: false},
 
   /* Usage : t.objPickedUp()
       For  : t is a g_tileManager object
@@ -63,6 +63,9 @@ let g_tileManager = {
      After : creates tileSize*tileSize array of tiles where each tile entries
              are configured correctly */
   createNewEmptyMap : function()  {
+    let newArray = [];
+    this.__tiles = newArray;
+
     for(let i = 0; i < this.__tileSize; i++){
       let tiles=[];
       for(let j=0; j < this.__tileSize; j++){

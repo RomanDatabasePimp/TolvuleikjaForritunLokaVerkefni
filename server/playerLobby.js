@@ -193,57 +193,13 @@ GameLobby.prototype.leftGame = function(sockId) {
     For  : g is a GameLobby
     After: Resets the game lobby to its initial state */
 GameLobby.prototype.resetLobby = function() {
-  this._availablePlayers = {
-    bob: {
-      resetgame: false, // holds if the client wants a reset of the game to happen
-      readyForNextRound:false, // checks if bob has mabe a move
-      player:new Player(  // bob player object
-        {
-          shouldUpdateMe : true // tells the tile if it should update or not
-        },
-        {
-          // characters name is bob he has his power up in players class
-          character:"bob",
-          stamina:6,// init stamina of bob i.e how many tiles he can move in the start
-          playBy:null,// socket who is playing bob
-          mademove: false,
-          movement:[]
-        }
-      )
-    },
-    sara:{
-      resetgame: false, // holds if the client wants a reset of the game to happen
-      readyForNextRound:false,
-      player:new Player(
-        {
-          shouldUpdateMe : true
-        },
-        {
-          character:"sara",
-          stamina:4,
-          playBy:null,
-          mademove: false,
-          movement:[]
-        }
-      )
-    },
-    monster:{
-      resetgame: false, // holds if the client wants a reset of the game to happen
-      readyForNextRound:false,
-      player:new Player(
-        {
-          shouldUpdateMe : true
-        },
-        {
-          character:"monster",
-          stamina:10,
-          playBy:null,
-          mademove: false,
-          movement:[]
-        }
-      )
-    }
-  };
+  
+  for(let client in this._availablePlayers){
+    this._availablePlayers[client].resetgame = false;
+    this._availablePlayers[client].readyForNextRound = false;
+    this._availablePlayers[client].player.resetToDefaultEnt();
+    this._availablePlayers[client].player.resetToDefaultPlayer();
+  }
 
   g_tileManager.__tiles[0][0].addEntity(this._availablePlayers["bob"].player);
   g_tileManager.__tiles[0][1].addEntity(this._availablePlayers["sara"].player);
