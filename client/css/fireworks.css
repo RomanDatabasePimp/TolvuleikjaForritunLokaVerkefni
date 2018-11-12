@@ -179,4 +179,12 @@
     80%, 99.9% {
       margin-top: 30%;
       margin-left: 80%; } }
+/*Container fyrir fireworks*/
+.fireWorksContainer{
+  position: absolute;
+    top: 10;
+    background-color: red;
+    margin-left: 44%;
+    margin-top: -9%;
+}
   

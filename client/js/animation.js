@@ -57,14 +57,14 @@ function frame() {
                 case path = "down":
                     playerX = player.movement[0].step.x*64;
                     playerY = player.movement[0].step.y*64+count;
-                    img1 =  g_sprites.bobLeft1;
-                    img2 =  g_sprites.player;
+                    img1 =  g_sprites.bobDown1;
+                    img2 =  g_sprites.bobDown2;
                   break;
                 case path = "up":
                     playerX = player.movement[0].step.x*64;
                     playerY = player.movement[0].step.y*64-count;
-                    img1 =  g_sprites.bobRight1;
-                    img2 =  g_sprites.player;
+                    img1 =  g_sprites.bobUp1;
+                    img2 =  g_sprites.bobUp2;
                 break;
                 case path = "stay":
                     noDraw = true;

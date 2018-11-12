@@ -24,10 +24,10 @@ function requestPreloads() {
     bobRight2: './client/img/Player/player_18.png',
     bobLeft1:'./client/img/Player/player_20.png',
     bobLeft2: './client/img/Player/player_21.png',
-    bobDown1: './client/img/Player/player_6.png',
-    bobDown2:'./client/img/Player/player_7.png',
-    bobUp1:'./client/img/Player/player_8.png',
-    bobUp2:'./client/img/Player/player_9.png'
+    bobDown1: './client/img/Player/player_06.png',
+    bobDown2:'./client/img/Player/player_07.png',
+    bobUp1:'./client/img/Player/player_08.png',
+    bobUp2:'./client/img/Player/player_09.png'
   };
 
   imagesPreload(requiredImages, g_images, preloadDone);
