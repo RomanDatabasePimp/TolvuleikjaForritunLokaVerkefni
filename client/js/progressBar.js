@@ -2,9 +2,13 @@ var h = 0;
 var start = true;
 var x ;
 function startProgressBar() {
+  console.log("byrjun");
     x = setInterval(progresBar, 10);
+    return;
+    console.log("byrjun");
 }
   function progresBar(){
+    console.log("fall nr 2");
   h++;
   document.getElementById("bar").style.height =h + "px";
   let seconds = 0;
