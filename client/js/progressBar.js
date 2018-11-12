@@ -3,6 +3,7 @@ var start = true;
 var x ;
 function startProgressBar() {
     x = setInterval(progresBar, 10);
+    return;
 }
   function progresBar(){
   h++;

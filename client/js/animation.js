@@ -18,8 +18,7 @@ function moveMen(){
 function frame() {
     if (pos == 200) {
         try{
-            clearInterval(id);
-           
+            clearInterval(id);           
             pos = 0;
             count =0;
             console.log(player.movement);
@@ -30,13 +29,14 @@ function frame() {
         }
     } else {
         // hér þarf að gera animation frá punkt a til punkt b
-        try{
-            oldX =  player.movement[0].step.x;
-            oldY =  player.movement[0].step.y;
-        }catch{
-            
-        }
-        checkWichDirection(player.movement[1].step.x, player.movement[1].step.y);
+        
+            if(player.movement[0] && player.movement[1]){
+                oldX =  player.movement[0].step.x;
+                oldY =  player.movement[0].step.y;
+                checkWichDirection(player.movement[1].step.x, player.movement[1].step.y);
+            }else{
+                return;
+            }   
         try{
             // Hér þarf að determa í hvaða átt
             count += 0.32;
@@ -57,14 +57,14 @@ function frame() {
                 case path = "down":
                     playerX = player.movement[0].step.x*64;
                     playerY = player.movement[0].step.y*64+count;
-                    img1 =  g_sprites.bobDown1;
-                    img2 =  g_sprites.bobRight2;
+                    img1 =  g_sprites.bobLeft1;
+                    img2 =  g_sprites.player;
                   break;
                 case path = "up":
                     playerX = player.movement[0].step.x*64;
                     playerY = player.movement[0].step.y*64-count;
-                    img1 =  g_sprites.bobLeft1;
-                    img2 =  g_sprites.bobUp2;
+                    img1 =  g_sprites.bobRight1;
+                    img2 =  g_sprites.player;
                 break;
                 case path = "stay":
                     noDraw = true;
