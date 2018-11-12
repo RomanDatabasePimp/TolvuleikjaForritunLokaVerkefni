@@ -182,7 +182,10 @@ function updatePlayer(sockid,inp) {
     After: updates the gameState and returns the updated tile maneger */
 function updateStateAndReturn() {
   let deadplayers = 0;
-  /* We need to check if the players are alive if they are no we remove them */
+  
+  /* since players are stored in the GameLobby and in the tiles
+     we can plock them out and update them right away and remove them from the tiles
+     but not from the gamelobby  */
   for(let player in GameLobby._availablePlayers){
     // if player is not alive we delete him
     if(!GameLobby._availablePlayers[player].player.isAlive){
@@ -197,14 +200,13 @@ function updateStateAndReturn() {
     }
   }
   
+  /* this loop just every entity that is dead and is only stored in the tiles
+     if you remove these types of entities they will be collected by the garbage colloector */
   for(let i = 0; i < g_tileManager.__tiles.length; i++) {
     for(let j=0; j < g_tileManager.__tiles.length; j++) {
       g_tileManager.__tiles[i][j].update();
     }
   }
- 
-  
-
 
   /* check if the game is over */
 
@@ -221,6 +223,18 @@ function updateStateAndReturn() {
   return g_tileManager;
 }
 
+/* Usage : checkforreset(sockid)
+    For  : sockid is a string
+    After: sets the reset request of sockid to true 
+           if all clients wish to reset the game then the reset will go through */
+function checkforreset(sockid) {
+  if(GameLobby.handleClientReset(sockid)) {
+    g_tileManager.generateNewMaze();
+    GameLobby.resetLobby();
+    console.log("Game Reseting!");
+  }
+}
+
 
 /* export the game functions  */
 module.exports = {
@@ -233,5 +247,6 @@ module.exports = {
   setPlayerReadyForNextRound,
   setPlayerNotReadyForNextRound,
   updatePlayer,
+  checkforreset,
   g_tileManager
 };

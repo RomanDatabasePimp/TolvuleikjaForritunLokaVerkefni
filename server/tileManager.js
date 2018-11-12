@@ -28,7 +28,7 @@ let g_tileManager = {
       After: returns true if you can move from tile source to tile dest
              note this only checks for one step !!!!!! */
   tyToMoveToNextTile : function(source,dest) {
-
+    console.log("movement source =",source, " to dest=",dest);
     // if we try to move down
     if((source.x+1 === dest.x && source.y === dest.y) && !(source.x+1 >= this.__tileSize))  {
       if(!this.__tiles[dest.x][dest.y]._amITerrain) { return true;}
