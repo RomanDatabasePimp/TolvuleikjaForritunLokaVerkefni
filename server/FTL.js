@@ -231,6 +231,9 @@ function updateStateAndReturn() {
            if all clients wish to reset the game then the reset will go through */
 function checkforreset(sockid) {
   if(GameLobby.handleClientReset(sockid)) {
+    g_tileManager.__gameWon.players = false;
+    g_tileManager.__gameWon.monster = false;
+    g_tileManager.__objPickedUp = 0;
     g_tileManager.generateNewMaze();
     GameLobby.resetLobby();
     console.log("Game Reseting!");
