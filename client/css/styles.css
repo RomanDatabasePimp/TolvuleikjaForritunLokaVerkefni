@@ -97,3 +97,18 @@ button{
 .sideBar {
   margin-top: 5%;
 }
+/*Container fyrir winner border*/
+.winnerNote{
+  background: gray;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    color: white;
+    width: 40%;
+    min-height: 10%;
+    margin-top: -20%;
+    margin-left: 31%;
+    position: absolute;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
