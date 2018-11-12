@@ -15,6 +15,7 @@ function GameLobby() {};
   // hold over the avivable players that can be still played by our clients
   GameLobby.prototype._availablePlayers = {
     bob: {
+      resetgame: false, // holds if the client wants a reset of the game to happen
       readyForNextRound:false, // checks if bob has mabe a move
       player:new Player(  // bob player object
         {
@@ -31,6 +32,7 @@ function GameLobby() {};
       )
     },
     sara:{
+      resetgame: false, // holds if the client wants a reset of the game to happen
       readyForNextRound:false,
       player:new Player(
         {
@@ -46,6 +48,7 @@ function GameLobby() {};
       )
     },
     monster:{
+      resetgame: false, // holds if the client wants a reset of the game to happen
       readyForNextRound:false,
       player:new Player(
         {
@@ -184,6 +187,92 @@ GameLobby.prototype.leftGame = function(sockId) {
       return; 
     }
   }
+};
+
+/* Usage : g.resetLobby()
+    For  : g is a GameLobby
+    After: Resets the game lobby to its initial state */
+GameLobby.prototype.resetLobby = function() {
+  this._availablePlayers = {
+    bob: {
+      resetgame: false, // holds if the client wants a reset of the game to happen
+      readyForNextRound:false, // checks if bob has mabe a move
+      player:new Player(  // bob player object
+        {
+          shouldUpdateMe : true // tells the tile if it should update or not
+        },
+        {
+          // characters name is bob he has his power up in players class
+          character:"bob",
+          stamina:6,// init stamina of bob i.e how many tiles he can move in the start
+          playBy:null,// socket who is playing bob
+          mademove: false,
+          movement:[]
+        }
+      )
+    },
+    sara:{
+      resetgame: false, // holds if the client wants a reset of the game to happen
+      readyForNextRound:false,
+      player:new Player(
+        {
+          shouldUpdateMe : true
+        },
+        {
+          character:"sara",
+          stamina:4,
+          playBy:null,
+          mademove: false,
+          movement:[]
+        }
+      )
+    },
+    monster:{
+      resetgame: false, // holds if the client wants a reset of the game to happen
+      readyForNextRound:false,
+      player:new Player(
+        {
+          shouldUpdateMe : true
+        },
+        {
+          character:"monster",
+          stamina:10,
+          playBy:null,
+          mademove: false,
+          movement:[]
+        }
+      )
+    }
+  };
+
+  g_tileManager.__tiles[0][0].addEntity(this._availablePlayers["bob"].player);
+  g_tileManager.__tiles[0][1].addEntity(this._availablePlayers["sara"].player);
+  g_tileManager.__tiles[9][9].addEntity(this._availablePlayers["monster"].player);
+  console.log("Lobby reseted !");
+};
+
+/* Usage: g.handleClientReset(sockid)
+     For: g is a GameLobby
+          sockid is a string
+   After: checks if sockid is assosiated with player if it is
+          it sets it resetgame to true and if all players are 
+          requesting for reset it will return true else false  */
+GameLobby.prototype.handleClientReset = function(sockid) {
+  const player = this.GetPlayer(sockid); // fetch player
+  // if player exists
+  if(player) {
+    player.resetgame = true;
+    // check if all players want to reset the game
+    for(let char in this._availablePlayers){
+      // if one client is not ready to reset then we dont
+      if(!this._availablePlayers[char].resetgame) {
+        return false;
+      }
+    }
+
+    return true; // all players agree to reset
+  }
+  return false;
 };
 
 module.exports = {

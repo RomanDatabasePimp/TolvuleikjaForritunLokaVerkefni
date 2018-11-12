@@ -33,24 +33,28 @@ app.get('/', (req, res) => {
 
   // Fetch the game 
   const FTL = require('./server/FTL');
+
   FTL.createGameMap(); // need create the initial map before launching the server
 
   // our socket
   io.sockets.on('connect',(socket) => {
-    
+
     /* if a socket manages to get into our game then we need to keep track of it and 
        poll its input else we dont care what it does maybe later we can add a spectate feature ? */
     if(FTL.tryToJoinGame(socket.id)){
-      // console.log("new player joined !");
+      
+      console.log("new player joined !");
+      
       /* its good to define rightaway what should happen if the socket disconects
          so we dont forgget about it, if the player leaves we set its char to null allowing
          a new socket to take over */
       socket.on('disconnect',()=>{
         FTL.leaveGame(socket.id);
-        // console.log("A player has left !");
+        console.log("A player has left !");
       });
 
-      /* We listen to the player if he is ready for the next round  */
+      /* We listen to the player if he is ready for the next round in ourcase
+         we have 3 players all of them have to be ready for the next round to begin  */
       socket.on('clientreadyfornextround',(data)=>{
         if(data) {
           console.log("A player is rdy for the next round");
@@ -65,6 +69,12 @@ app.get('/', (req, res) => {
              powerUp: true } */
         console.log("input",data);
         FTL.updatePlayer(socket.id,data);
+      });
+
+      /* We listen to the player requests to reset the game  */
+      socket.on('resetgamerequest',()=>{
+        console.log("A client is requesting reset of the game");
+        FTL.checkforreset(socket.id);
       });
       
     }
@@ -87,7 +97,7 @@ app.get('/', (req, res) => {
     if(!allPLayersPLaying.alljoined) {
       io.sockets.emit('NextGameRound', { hasnotgamestarted : allPLayersPLaying.hasnotgamestarted });
       // if the lobby is not full we try again in 3 seconds
-      //console.log("Waiting for lobby full (tryin in 3 sec) ");
+      // console.log("Waiting for lobby full (tryin in 3 sec) ");
       setTimeout(gameinit, 3000);
       return;
     }
