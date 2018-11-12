@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>Lokaverkefni</title>
   <link rel="stylesheet" href="./client/css/styles.css">
+  <link rel="stylesheet" href="./client/css/fireworks.css">
 </head>
 
 <body>
@@ -33,7 +34,10 @@
     <video id="myVideoBackground" src="/client/videos/frontPic.mp4" autoplay=""></video>
       
     </div>
-
+    <div class="pyro">
+      <div class="before"></div>
+      <div class="after"></div>
+    </div>
   <!-- ------------------HTML END SCRIPTS START --------------------------------------->
 
   <!-- We need this to communicate using socket.io from client side -->
@@ -57,6 +61,7 @@
   <script src="./client/js/progressBar.js"></script>
   <script src="./client/js/staminaScores.js"></script>
   <script src="./client/js/animation.js"></script>
+  <script src="./client/js/audioPlayer.js"></script>
 
 
  
@@ -71,7 +76,6 @@
       the data recived */
       drawPlayers();
       socket.on('NextGameRound', (data)=> {
-        console.log(data);
         allPlayerReady(data);
         drawMapViaTiles(data, socket.id);
         // check if game over ?
@@ -83,7 +87,7 @@
         player = getPlayer();
         
         setStamina(player);
-        console.log("server segiru go");
+        console.log("server segiru go")
         startProgressBar();
         g_readyForNextRound=false;
         setTimeout(() => {
