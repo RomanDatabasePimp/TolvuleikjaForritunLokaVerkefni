@@ -21,6 +21,22 @@ function Player(descr,player) {
 
 Player.prototype = new Entity(); // A player is an entity nuff said ...
 
+Player.prototype.resetToDefaultPlayer = function(){
+  
+  this.mademove = false;
+  this.movement = [];
+  if(this.character ==="monster") {
+    this.stamina = 10;
+  }
+  else if(this.character === "bob") {
+    this.stamina = 6;
+  }
+  else {
+    this.stamina = 4;
+  }
+  
+}
+
 /* Usage : p.staminaBuff(stamina)
     For  : p is a Player
            stamina is a integer

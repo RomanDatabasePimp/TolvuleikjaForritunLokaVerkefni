@@ -234,7 +234,7 @@ function checkforreset(sockid) {
     g_tileManager.__gameWon.players = false;
     g_tileManager.__gameWon.monster = false;
     g_tileManager.__objPickedUp = 0;
-    g_tileManager.generateNewMaze();
+    g_tileManager.createNewEmptyMap();
     GameLobby.resetLobby();
     console.log("Game Reseting!");
   }
