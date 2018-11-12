@@ -3,7 +3,8 @@
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
 */
 
-/* You can say this is where our components come together to form the awesome game */
+/* This is the holy place which our server logic comes together and forms 
+   our game some functions here might be onliner calling others onelines. */
 
 // our tile manager the one that keeps the state of the map
 const g_tileManager = require('./tileManager').g_tileManager;
@@ -75,6 +76,8 @@ function setPlayerNotReadyForNextRound() {
 function updatePlayer(sockid,inp) {
   // fetch the player that is trying to make the move
   let player = GameLobby.GetPlayer(sockid);
+  /* if the player picked up a power up he cant used it on the same round */
+  let pickedupthisround = false; 
 
   /* if client is monster deadorkilled says that he can killed someone
      if client is suvior deadorkilled says they have been killed by monster  */
@@ -133,9 +136,8 @@ function updatePlayer(sockid,inp) {
           playerExists.isAlive = false; // kill the one who collided with player
         }
       }
-      /* if player is still alive and the client is not a monster we need to check 
-         the tile for pick ups  */
-      if(!deadorkilled && !(player.character==='monster')) {
+      /* if player is still alive  */
+      if(!deadorkilled) {
        
         // get things that can be picked up in the tile
         const pickups = g_tileManager.__tiles[nextMove.x][nextMove.y].doIContainPickUps();
@@ -143,10 +145,15 @@ function updatePlayer(sockid,inp) {
            -pill (powerup) : increases stamina by 5 when used */
         for(let i = 0; i < pickups.length; i++){
           
-          // if its a key
-          if(pickups[i].type === 'key') {
-            console.log("found key");
+          // if its a key the monster cant pick up the key duh would be unfair
+          if(pickups[i].type === 'key' && !(player.character==='monster')) {
             g_tileManager.objPickedUp(); // pick the obj up
+            pickups[i].isAlive = false;  // kill the key
+          }
+          // if its redbull we add it to the clients power up
+          if(pickups[i].type === 'redbull'){
+            pickedupthisround = true;
+            player.powerup = "redbull";
             pickups[i].isAlive = false;  // kill the key
           }
         }
@@ -171,7 +178,11 @@ function updatePlayer(sockid,inp) {
       break; // no more legal steps
     }
   }
-
+  
+  // if client activated the power up
+  if(inp.powerUp && !pickedupthisround){
+    player.activatePowerUp();
+  }
   //update the players next steps for drawing out no game logic
   player.setNextMovement(steps);
   // add player stamina
@@ -234,7 +245,7 @@ function checkforreset(sockid) {
     g_tileManager.__gameWon.players = false;
     g_tileManager.__gameWon.monster = false;
     g_tileManager.__objPickedUp = 0;
-    g_tileManager.createNewEmptyMap();
+    this.createGameMap();
     GameLobby.resetLobby();
     console.log("Game Reseting!");
   }
@@ -252,6 +263,5 @@ module.exports = {
   setPlayerReadyForNextRound,
   setPlayerNotReadyForNextRound,
   updatePlayer,
-  checkforreset,
-  g_tileManager
+  checkforreset
 };

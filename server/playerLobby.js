@@ -27,6 +27,7 @@ function GameLobby() {};
           stamina:6,// init stamina of bob i.e how many tiles he can move in the start
           playBy:null,// socket who is playing bob
           mademove: false,
+          powerup:null, // the red bull players can pick up (redbull for now maybe more later)
           movement:[]
         }
       )
@@ -43,6 +44,7 @@ function GameLobby() {};
           stamina:4,
           playBy:null,
           mademove: false,
+          powerup:null,
           movement:[]
         }
       )
@@ -59,6 +61,7 @@ function GameLobby() {};
           stamina:10,
           playBy:null,
           mademove: false,
+          powerup:"redbull", // since its 2v1 monster gets his red bull
           movement:[]
         }
       )
