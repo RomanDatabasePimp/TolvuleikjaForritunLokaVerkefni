@@ -86,14 +86,14 @@ let g_tileManager = {
     // 1 is terrain, 2 is a structure. 0 is area which can be traversed
     let mapMatrix = [
       [0,0,0,1,0,0,0,2,2,3],
-      [0,0,0,0,0,1,0,2,2,2],
-      [0,0,1,0,0,0,0,2,2,2],
-      [1,0,0,0,1,1,0,0,0,0],
+      [0,0,0,0,0,1,5,2,2,2],
+      [0,5,1,0,0,0,0,2,2,2],
+      [1,0,0,0,1,1,5,0,0,0],
       [1,0,1,0,1,1,0,0,0,0],
       [0,0,0,0,4,0,0,0,1,0],
-      [0,0,0,1,0,2,2,0,0,0],
+      [0,0,0,1,0,2,2,0,5,0],
       [2,2,2,0,0,2,2,0,0,1],
-      [2,2,2,0,0,0,0,1,0,0],
+      [2,6,2,0,0,0,0,1,0,0],
       [3,2,2,0,0,1,0,0,0,0]
     ];
     for(let i = 0; i < this.__tileSize; i++){
@@ -110,6 +110,13 @@ let g_tileManager = {
         }
         if(mapMatrix[j][i] == 4){
           this.__tiles[j][i].addEntity(new pickup ({ shouldUpdateMe:false },{ type:"key"}));
+        }
+        if(mapMatrix[j][i] == 5){
+          this.__tiles[j][i].addEntity(new pickup ({ shouldUpdateMe:false },{ type:"redbull"}));
+        }
+        if(mapMatrix[j][i] == 6){
+          this.__tiles[j][i]._amIAStructure = true;
+          this.__tiles[j][i].addEntity(new pickup ({ shouldUpdateMe:false },{ type:"redbull"}));
         }
       }
     }
