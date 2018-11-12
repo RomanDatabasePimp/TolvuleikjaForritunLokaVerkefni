@@ -93,6 +93,8 @@ function updatePlayer(sockid,inp) {
   /* if the player did not move or used power ups he gets extra stamina 
       because he is well reseted */
   if(inp.steps.length === 0 && !inp.powerUp){
+    //update the players next steps for drawing out no game logic
+    player.setNextMovement(steps);
     player.staminaBuff(4);
     return; // we dont need to update the since he dint do anything
   }
