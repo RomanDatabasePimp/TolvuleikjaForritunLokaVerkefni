@@ -49,6 +49,7 @@
     const g_ctx = g_canvas.getContext("2d");
     const socket = io();// establish our communication
     let g_readyForNextRound = false;
+    let g_usedPowerUp = false;
     let g_steps=[];
   </script>
   
@@ -64,7 +65,7 @@
   <script src="./client/js/staminaScores.js"></script>
   <script src="./client/js/animation.js"></script>
   <script src="./client/js/audioPlayer.js"></script>
-
+  <script src="./client/js/keys.js"></script>
 
  
   <!-- Combine all the game logic into a client side game -->
@@ -78,7 +79,6 @@
       the data recived */
       drawPlayers();
       socket.on('NextGameRound', (data)=> {
-        console.log(data);
         // we check if this is a map and in the proccesses check if the game is over 
         if (data.hasOwnProperty("__gameWon")) {
           // check if the game is over by players
@@ -98,8 +98,8 @@
         // when the round starts we allow the user to click on the tiles
         window.addEventListener("mousedown", handleMouse);
         window.addEventListener("mousemove", handleMouse);
-        
-        
+        window.addEventListener("keydown", handleKeydown);
+
         player = getPlayer();
         setStamina(player);
 
@@ -113,10 +113,12 @@
            has the user done, clearing the client side on what has he done and removing
            the listeners so he cant select the tiles*/
         setTimeout(() => {
-          socket.emit('clientinput',{ steps:g_steps, powerUp:false});
+          socket.emit('clientinput',{ steps:g_steps, powerUp:g_usedPowerUp});
           g_steps = [];
+          g_usedPowerUp = false;
           window.removeEventListener("mousedown",handleMouse);
           window.removeEventListener("mousemove",handleMouse);
+          window.removeEventListener("keydown",handleKeydown);
           moveMen();
         }, 5000);
 

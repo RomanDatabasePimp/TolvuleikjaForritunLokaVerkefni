@@ -21,8 +21,11 @@ function Player(descr,player) {
 
 Player.prototype = new Entity(); // A player is an entity nuff said ...
 
+
+/* Usage : p.resetToDefaultPlayer()
+     For : p is a Player
+    After: resets the player to default state */
 Player.prototype.resetToDefaultPlayer = function(){
-  
   this.mademove = false;
   this.movement = [];
   if(this.character ==="monster") {
@@ -35,6 +38,18 @@ Player.prototype.resetToDefaultPlayer = function(){
     this.stamina = 4;
   }
   
+}
+
+/* Usage : p.activatePowerUp()
+     For : p is a Player
+    After: if players powerup is true then the type powerup is called */
+Player.prototype.activatePowerUp = function(){
+  if(this.powerup){
+    // as of now we only have one power up we might have more later
+    if(this.powerup === "redbull") {
+      this.stamina +=5;
+    }
+  }
 }
 
 /* Usage : p.staminaBuff(stamina)
