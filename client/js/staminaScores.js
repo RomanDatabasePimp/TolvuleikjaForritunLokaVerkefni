@@ -1,9 +1,7 @@
 function setStamina(player){
-    //let playername = player.character;
-    //const playerStamina = player.stamina;
-    playername = "bob";
+    let playername = player.character;
+    const playerStamina = player.stamina;
     let rightPlayerName = "";
-    rightPlayerName = "bob";
     // Put the head image on the right spot
     switch(playername) {
         case playername = "bob":
@@ -21,6 +19,6 @@ function setStamina(player){
         default: 
     }
     console.log(playername);
-    const headerString = 10;//playerStamina;
+    const headerString = playerStamina;
     document.getElementById("headTitle").innerHTML = headerString;
 }

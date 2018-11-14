@@ -1,34 +1,32 @@
-player = getPlayer();
-let i =0;
-let pos =0;
-let id;
-var carImg = new Image();
-let count = 0;
-let oldX =0;
-let oldY=0;
-let path = "stay"
-let noDraw = false;
-let img1;
-let img2;
-
-
-function moveMen(){
+function playerAnimation (){
+    this.pos = 0,
+    this.id = null,
+    this.count =0,
+    this.oldX = 0,
+    this.oldY =0,
+    this.path = "stay",
+    this.noDraw = false,
+    this.img1 = null,
+    this.img1 = null,
+    this.howManyTime = 0
+};
+playerAnimation.prototype.moveMen = function(){
     document.getElementById("winnerNoteID").style.display = 'none';
-    id = setInterval(frame, 10);
-  }
-function frame() {
-    if (pos == 100) {
-        try{
-            clearInterval(id);           
-            pos = 0;
+    
+};
+playerAnimation.prototype.frame =function(du) {
+    if (this.howManyTime >= 166) {
+        try{       
+            this.howManyTime = 0;
             count =0;
-            console.log(player.movement);
             path="";
             noDraw = false;      
             player.movement = player.movement.slice(1);
         }catch{
+            console.log("catch villa í animation js");
         }
     } else {
+        this.howManyTime+= du;
         // hér þarf að gera animation frá punkt a til punkt b
         
             if(player.movement[0] && player.movement[1]){
@@ -40,7 +38,7 @@ function frame() {
             }   
         try{
             // Hér þarf að determa í hvaða átt
-            count += 0.64;
+            count += 16.666;
             switch (path) {
                 case path = "left":
                     playerX = player.movement[0].step.x*64-count;
@@ -85,8 +83,9 @@ function frame() {
         }
     pos++; 
     }
-}
-function checkWichDirection(newx,newy){
+};
+
+playerAnimation.prototype.checkWichDirection = function(){
     if(oldX < newx){
         path = "right";
         return;
@@ -107,4 +106,4 @@ function checkWichDirection(newx,newy){
         path="stay;"
         return;
     }
-}
+};
