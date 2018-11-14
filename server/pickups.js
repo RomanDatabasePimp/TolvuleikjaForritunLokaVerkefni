@@ -1,4 +1,7 @@
-/* all 4 keys have to be collected inorder for suviors to win */
+/* if we want to make a new power up we just declare its type
+   tosomething else for now we have 2 - key,redbull. if we would want to
+   add more we would just make a pickup with the new type and add the support
+   for sed pickup in the FTL */
 
 const Entity = require('./entity').Entity; // fetch the tile
 
