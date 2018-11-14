@@ -33,6 +33,9 @@ function update(dt) {
   // call the character update logic for helgis walking 
 
   // call the animation for the cloud shit
+  for(let cloud in g_clouds) {
+    g_clouds[cloud].update(du);
+  }
 
   g_prevUpdateDt = original_dt;
   g_prevUpdateDu = du;

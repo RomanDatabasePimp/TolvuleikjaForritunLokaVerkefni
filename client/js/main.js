@@ -46,7 +46,8 @@ function requestPreloads() {
     bobDown1: './client/img/Player/player_06.png',
     bobDown2:'./client/img/Player/player_07.png',
     bobUp1:'./client/img/Player/player_08.png',
-    bobUp2:'./client/img/Player/player_09.png'
+    bobUp2:'./client/img/Player/player_09.png',
+    cloud : './client/img/gay_ass_cloud.png'
   };
 
   imagesPreload(requiredImages, g_images, preloadDone);
@@ -93,7 +94,7 @@ function preloadDone() {
   g_sprites.bobDown2 = new Sprite(g_images.bobDown2);
   g_sprites.bobUp1 = new Sprite(g_images.bobUp1);
   g_sprites.bobUp2 = new Sprite(g_images.bobUp2);
-
+  g_sprites.cloud = new Sprite(g_images.cloud);
 }
 
 // Kick it off
@@ -105,14 +106,11 @@ requestPreloads();
  * @param {Socket.id} id 
  */
 function drawMapViaTiles(tile, id) {
-  clearCanvas(g_ctx);
   if (!(tile.hasOwnProperty("__tiles"))) return null;
   for (let i = 0; i < tile.__tiles.length; i++) {
     for (let j = 0; j < tile.__tiles[i].length; j++) {
       drawTile(tile.__tiles, i, j);
       // drawCharacters(tile.__tiles, i, j, id); <-- CHANGE THIS
-      g_ctx.rect(i * 64, j * 64, 64, 64);
-      g_ctx.stroke();
     }
   }
   g_readyForNextRound = true;

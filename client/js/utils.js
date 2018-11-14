@@ -22,6 +22,15 @@ function convertToMatrix(x) {
   return x * 64;
 }
 
+function wrapRange (value, lowBound, highBound) {
+  while (value < lowBound) {
+value += (highBound - lowBound);
+  }
+  while (value > highBound) {
+value -= (highBound - lowBound);
+  }
+  return value;
+}
 
 /* Usage : gameOver(whowon)
      For : who won is a string telling who won
