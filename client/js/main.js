@@ -18,12 +18,28 @@ function requestPreloads() {
     house: './client/img/house.png',
     terrain: './client/img/crate_04.png',
     key: './client/img/keys/platformPack_item014.png',
+    //Sara
     saraPlayer: './client/img/Player/sara_player.png',
+    saraSides1: './client/img/Player/sara_20.png',
+    saraSides2: './client/img/Player/sara_21.png',
+    saraDown1: './client/img/Player/sara_06.png',
+    saraDown2: './client/img/Player/sara_07.png',
+    saraUp1: './client/img/Player/sara_08.png',
+    saraUp2: './client/img/Player/sara_09.png',
+    //Monster
     monster: './client/img/Monster/platformChar_idle.png',
+    monsterClimb1: './client/img/Monster/platformChar_climb1.png',
+    monsterClimb2: './client/img/Monster/platformChar_climb2.png',
+    monsterDuck: './client/img/Monster/platformChar_duck.png',
+    monsterHappy: './client/img/Monster/platformChar_happy.png',
+    monsterWalk1: './client/img/Monster/platformChar_walk1.png',
+    monsterWalk2: './client/img/Monster/platformChar_walk2.png',
+    //Bob
     bobRight1: './client/img/Player/player_17.png',
     bobRight2: './client/img/Player/player_18.png',
     bobLeft1:'./client/img/Player/player_20.png',
     bobLeft2: './client/img/Player/player_21.png',
+    //Sama mynd og player
     bobDown1: './client/img/Player/player_06.png',
     bobDown2:'./client/img/Player/player_07.png',
     bobUp1:'./client/img/Player/player_08.png',
@@ -58,6 +74,7 @@ function preloadDone() {
   g_sprites.bobDown2 = new Sprite(g_images.bobDown2);
   g_sprites.bobUp1 = new Sprite(g_images.bobUp1);
   g_sprites.bobUp2 = new Sprite(g_images.bobUp2);
+
 }
 
 // Kick it off
