@@ -25,7 +25,6 @@ function allPlayerWaiting(data, flag){
         }catch{
           document.getElementById('videoContainerinn').style.display = 'none';
           document.getElementById('myVideoBackground').style.display='none';
-          console.log("villur");
         }
     }
 }

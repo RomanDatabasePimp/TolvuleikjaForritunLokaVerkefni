@@ -139,16 +139,19 @@
       });
 
       socket.on('roundstart', ()=> {
+        console.log("set stamina");
         // when the round starts we allow the user to click on the tiles
         window.addEventListener("mousedown", handleMouse);
         window.addEventListener("mousemove", handleMouse);
         window.addEventListener("keydown", handleKeydown);
 
         player = getPlayer();
-        setStamina(player);
+        //setStamina(player);
+        setStamina("bob");
+        console.log("starting progressBaer");
+        startProgressBar();
 
         // start the count down that the user has 5 seconds to make a move
-        startProgressBar();
         // declare that the client is not ready for the next round 
         // (NOT THIS ROUND BUT THE NEXT THAT IS YET TO BE CALCULATED AND RENDERED)
         g_readyForNextRound=false;
@@ -163,7 +166,7 @@
           window.removeEventListener("mousedown",handleMouse);
           window.removeEventListener("mousemove",handleMouse);
           window.removeEventListener("keydown",handleKeydown);
-          moveMen();
+          //moveMen();
         }, 5000);
 
       });
