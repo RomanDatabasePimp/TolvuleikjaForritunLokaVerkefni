@@ -33,8 +33,19 @@ function checkPlayer(player,id){
   function movePlayerTo(posX, posY) {
       // Checks if we are clicking ourselves.
     if(checkValidMoves(posX,posY)){
+        const newStep = {step:{x:roundDown(posX/64), y:roundDown(posY/64)}};
+        if(g_steps.length > 0 ) {
+          const lastStep = g_steps.pop();
+          if(lastStep.step.x === newStep.step.x && lastStep.step.y === newStep.step.y){
+            console.log("here");
+            g_steps.push(lastStep);
+            return;
+          } else {
+            g_steps.push(lastStep);
+          }
+        }
         g_sprites.highLight.drawAt(g_ctx, convertToMatrix(posX), convertToMatrix(posY));
-        g_steps.push({step:{x:roundDown(posX/64), y:roundDown(posY/64)}});
+        g_steps.push(newStep);
     }     
   };
 

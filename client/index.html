@@ -11,6 +11,7 @@
 <body>
   <div class="gameContainer">
     <div class="sideBar">
+      
       <div class="Headerinn" id="headTitle"></div>
       <img class="heads" id="playerHeads">
       <div id="grad1">
@@ -86,7 +87,7 @@
       socket.on('NextGameRound', (data)=> {
         // we check if this is a map and in the proccesses check if the game is over 
         if (data.hasOwnProperty("__gameWon")) {
-          // check if the game is over by players
+                   // check if the game is over by players
           if(data.__gameWon.players){
             gameOver("survivors");
           }

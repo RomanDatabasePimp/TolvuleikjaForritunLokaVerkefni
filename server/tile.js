@@ -5,7 +5,7 @@
 
 /* The tile has the following properties
    - each tile is X * X pixels  
-   - can contain any amount of players (in our case 3 players and 1 monster)
+   - can contain one player in it
    - tile can contain the powerup or the objective pick up
    - terrain (if contains terrain then you cant enter the tile)
    - a tile can belong to some other entitie : f.x House (that can be many tiles) */
