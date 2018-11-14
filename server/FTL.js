@@ -193,8 +193,14 @@ function updatePlayer(sockid,inp) {
   }
   //update the players next steps for drawing out no game logic
   player.setNextMovement(steps);
+
   // add player stamina
-  player.staminaBuff(2);
+  if(player.character === "sara") {
+    player.staminaBuff(3);
+  } else {
+    player.staminaBuff(2);
+  }
+  
 }
 
 

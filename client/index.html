@@ -53,10 +53,28 @@
   <script> 
     const g_canvas = document.getElementById("myCanvas");
     const g_ctx = g_canvas.getContext("2d");
-    const socket = io();// establish our communication
+    // establish our communication
+    const socket = io();
+
+    /* All global variables that are used by more than one class are here for ease of access */
+
+    // the client id used to identify what player he is playing
+    const sockid = socket.id;
+    // tells us if the game is finished i.e game over or won
+    let g_gameover = { over : false, winners:null };
+    // client uses this to ping the serve that he is rdy for the next rounds
     let g_readyForNextRound = false;
+    // client sents this to tell the serve that he has used a power up
     let g_usedPowerUp = false;
+    // this turns players movements are stored here and sent to the server
     let g_steps=[];
+    // the player that this client is playing as
+    let player;
+    // the game state that the user plays (all users get same gamestate)
+    let g_gamestate = [];
+    // if the game hasent started there is a waiting period that current players wait
+    let g_waiting = [];
+
   </script>
   
   <!-- include all client game logic such as drawing the map waiting looby etc -->
@@ -85,19 +103,33 @@
       the data recived */
       drawPlayers();
       socket.on('NextGameRound', (data)=> {
-        // we check if this is a map and in the proccesses check if the game is over 
-        if (data.hasOwnProperty("__gameWon")) {
-                   // check if the game is over by players
+        // we check if the data is a game state or a waiting lobby
+        if (data.hasOwnProperty("__tiles")) {
+          // check if the game is over  and the winners are player i.e suviors
           if(data.__gameWon.players){
-            gameOver("survivors");
+             g_gameover.over = true;
+             g_gameover.winners= "Suvivors";
+             return;
           }
-          // check if the game is over by monaster
+          // check if the game is over and the monster won the game 
           else if(data.__gameWon.monster) {
-            gameOver("Monster");
+            g_gameover.over = true;
+            g_gameover.winners= "Monster";
+            return;
           }
+          // if the game is not over then its clearly 
+          else {
+            // set the new game state so our clients can render it
+            g_gamestate = data;
+            // fetch the player 
+            // player  to do 
+            // set the lobby to empty
+            g_waiting = [];
+          }
+          return;
         }
-          allPlayerReady(data);
-          drawMapViaTiles(data, socket.id);
+        // if we did not recive a game state we know we are in waiting lobby
+        g_waiting = data;
       });
 
       socket.on('roundstart', ()=> {
@@ -129,20 +161,6 @@
         }, 5000);
 
       });
-      
-
-      /* Usage : gameOver(whowon)
-           For : who won is a string telling who won
-          After: calls the nessesary functions to end the game also emits
-                 after 5 seconds a request to reset the game
-      */
-      function gameOver(whowon) {
-        /* Helgi ur functions come here */
-        console.log("GAME IS OVER THE ",whowon," has won the game");
-        victorySound();
-        document.getElementById("winnerNoteID").innerHTML = "Congratz "+whowon+" you are victorioues !!!";
-        setTimeout(() => { socket.emit('resetgamerequest',null); }, 8000);
-      }
 
       /* client will send to the Server every 3 seconds if he is ready to for the next round
          the idea is that different clients take different time to render the game, so we will
