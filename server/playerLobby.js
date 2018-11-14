@@ -41,7 +41,7 @@ function GameLobby() {};
         },
         {
           character:"sara",
-          stamina:4,
+          stamina:3,
           playBy:null,
           mademove: false,
           powerup:null,

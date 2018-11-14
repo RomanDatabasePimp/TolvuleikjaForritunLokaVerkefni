@@ -28,8 +28,7 @@ function update(dt) {
   // giving us a conveniently scaled "du" to work with.
   var du = (dt / NOMINAL_UPDATE_INTERVAL);
   
-  updateSimulation(du);
-
+  /* kalla á föll sem þurfa að uppfærast in terms of rendering not game logic  */
   g_prevUpdateDt = original_dt;
   g_prevUpdateDu = du;
   g_isUpdateOdd = !g_isUpdateOdd;
