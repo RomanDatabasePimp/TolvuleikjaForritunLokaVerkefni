@@ -97,6 +97,7 @@ button{
 .sideBar {
   margin-top: 5%;
 }
+<<<<<<< HEAD
 .winnerNote{
   position: absolute;
   font-size: 2.4rem;
@@ -112,4 +113,26 @@ button{
   color: red;
   font-weight: bold;
   margin-top: -5%;
+=======
+/*Container fyrir winner border*/
+.winnerNote{
+  background: gray;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    color: white;
+    width: 40%;
+    min-height: 10%;
+    margin-top: -20%;
+    margin-left: 31%;
+    position: absolute;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+/*GameRules*/
+.gameRules{
+  font-size: 1.4rem;
+  color: red;
+  font-weight: bolder;
+>>>>>>> b1bfecae4d8b6f9ab641a5281681923400b28a7b
 }

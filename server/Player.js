@@ -5,8 +5,8 @@
 
 const Entity = require('./entity').Entity; // fetch the tile
 
-/* We can have up to 4 players  3 suvivor classes with different traits 
-   and 1 monster with a set of his own trains but they share the same common functions*/
+/* We can have up to 3 players  2 suvivor classes  and 1 monster
+   and this players all share same funcionallity */
 function Player(descr,player) {
   
   // Common inherited setup logic from Entity
@@ -20,7 +20,6 @@ function Player(descr,player) {
 };
 
 Player.prototype = new Entity(); // A player is an entity nuff said ...
-
 
 /* Usage : p.resetToDefaultPlayer()
      For : p is a Player

@@ -28,6 +28,7 @@ function allPlayerReady(data){
   }
 }
 function drawPlayers(){
+  document.getElementById("winnerNoteID").style.display = 'none';
   document.getElementById('fireWorksContainerID').style.display = 'none';
   document.getElementById('myVideoBackground').style.display='none';
   let first = document.getElementById('one');

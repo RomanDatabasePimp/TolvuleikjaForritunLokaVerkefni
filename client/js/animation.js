@@ -13,7 +13,8 @@ let img2;
 
 
 function moveMen(){
-        id = setInterval(frame, 10);
+    document.getElementById("winnerNoteID").style.display = 'none';
+    id = setInterval(frame, 10);
   }
 function frame() {
     if (pos == 100) {

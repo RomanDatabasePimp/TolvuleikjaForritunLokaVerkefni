@@ -28,7 +28,7 @@ function GameLobby() {};
           playBy:null,// socket who is playing bob
           mademove: false,
           powerup:null, // the red bull players can pick up (redbull for now maybe more later)
-          movement:[]
+          movement:[] // for the next round the steps he took (for animation)
         }
       )
     },
@@ -81,7 +81,6 @@ GameLobby.prototype.updateCords = function(cord,sockId) {
   }
 }
 
-
 /* Usage : g.unreadyPlayers()
     For  : g is a GameLobby
     After: sets all client to not rdy for next round  */
@@ -117,7 +116,6 @@ GameLobby.prototype.setPlayerReady = function (sockId) {
   }
 }
   
-
 /* Usage : g.GetPlayer(sockId)
     For  : g is a GameLobby
            sockId is the socket to the player which the client is playing as
@@ -130,7 +128,6 @@ GameLobby.prototype.GetPlayer = function (sockId) {
   }
   return null;
 }
-
 
 /* Usage : g.countAllPLayers()
     For  : g is a GameLobby
@@ -149,7 +146,7 @@ GameLobby.prototype.countAllPLayers = function () {
 
 /* Usage : g.tryJoinGame(sockId)
     FOR  : g is a GameLobby
-           sockId is a string
+           sockId is the socket to the player which the client is playing as
     After: find the first null in _availablePlayers and set its value to the sockId
            and return true */
 GameLobby.prototype.tryJoinGame = function(sockId) {
@@ -178,7 +175,7 @@ GameLobby.prototype.tryJoinGame = function(sockId) {
 
 /* Usage : g.leftGame(sockId)
     FOR  : g is a GameLobby
-           sockId is a string
+           sockId is the socket to the player which the client is playing as
     After: search in the _availablePlayers for the sockId and set its value to null  */
 GameLobby.prototype.leftGame = function(sockId) {
   for(let char in this._availablePlayers){
@@ -212,7 +209,7 @@ GameLobby.prototype.resetLobby = function() {
 
 /* Usage : g.getClient(sockid)
     For  : g is a GameLobby
-           sockid is a string
+           sockId is the socket to the player which the client is playing as
     After: returns the bob,sata or monster if sockId is accosiacted them */
 GameLobby.prototype.getClient = function(sockid){
   for(let char in this._availablePlayers){
@@ -225,7 +222,7 @@ GameLobby.prototype.getClient = function(sockid){
 
 /* Usage: g.handleClientReset(sockid)
      For: g is a GameLobby
-          sockid is a string
+          sockId is the socket to the player which the client is playing as
    After: checks if sockid is assosiated with player if it is
           it sets it resetgame to true and if all players are 
           requesting for reset it will return true else false  */

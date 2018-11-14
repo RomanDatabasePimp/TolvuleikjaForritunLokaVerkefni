@@ -4,7 +4,9 @@
 */
 
 /* This is the holy place which our server logic comes together and forms 
-   our game some functions here might be onliner calling others onelines. */
+   our game some functions here might be onliner calling others onelines.
+   The initial idea was that this class had to be the one that combines all
+   the services we have i.e (PLayer,pickup,tileManeger etc) into a working game  */
 
 // our tile manager the one that keeps the state of the map
 const g_tileManager = require('./tileManager').g_tileManager;
@@ -37,7 +39,8 @@ function leaveGame(sockId) {
 
 /* Usage : allPlayersJoined()
      For : nothing
-   After : returns boolean if all players are occupied by sockets */
+   After : returns a obj with a attribute of true
+           if all players are occupied by sockets */
 function allPlayersJoined() {
   const lobbyState = GameLobby.countAllPLayers(); // fetch array
   for(let i =0; i < lobbyState.length; i++){
@@ -56,7 +59,7 @@ function allPlayersReadyForNextRound(){
 }
 
 /* Usage : setPlayerReadyForNextRound(sockID)
-    For  : sockId is a string
+    For  : sockId is the client socket connected to the server
    After : sets the player with the sockId ready to play next round */
 function setPlayerReadyForNextRound(sockID) {
   GameLobby.setPlayerReady(sockID);
@@ -70,13 +73,14 @@ function setPlayerNotReadyForNextRound() {
 }
 
 /* Usage : updatePlayer(sockid,inp)
-    For  : sockid is a string
+    For  : sockId is the client socket connected to the server
            inp is a obj { nX, nY }
     After: updates the player that has the sockid */
 function updatePlayer(sockid,inp) {
   // fetch the player that is trying to make the move
   let player = GameLobby.GetPlayer(sockid);
-  /* if the player picked up a power up he cant used it on the same round */
+  /* if the player picked up a power up THIS ROUND 
+     he cant used it on the same round */
   let pickedupthisround = false; 
 
   /* if client is monster deadorkilled says that he can killed someone
@@ -84,7 +88,7 @@ function updatePlayer(sockid,inp) {
   let deadorkilled = false; 
   
   // if player dosent exists we dont update duh
-  if(!player) { return;}
+  if(!player) { return; }
 
   // total legal path the player took 
   let steps = [];
@@ -101,9 +105,8 @@ function updatePlayer(sockid,inp) {
     player.staminaBuff(4);
     return; // we dont need to update the since he dint do anything
   }
-  /* TO DO IMPLEMENT POWER UP */
-  
-  // try to go over all the moves but stop when its imposible
+
+  // try to go over all the moves the player made  and stop on the first illegal move
   for(let i= 0; i < inp.steps.length; i++) {
     let nextMove = inp.steps[i].step; // get next step
     
@@ -124,7 +127,7 @@ function updatePlayer(sockid,inp) {
           if(playerExists.character === 'bob' || playerExists.character === 'sara' ){
             break;
           } 
-          // you collided with a monster
+          // you collided with a monster u die
           else {
             deadorkilled = true;
             player.isAlive = false;
@@ -136,13 +139,15 @@ function updatePlayer(sockid,inp) {
           playerExists.isAlive = false; // kill the one who collided with player
         }
       }
+
       /* if player is still alive  */
       if(!deadorkilled) {
-       
+
         // get things that can be picked up in the tile
         const pickups = g_tileManager.__tiles[nextMove.x][nextMove.y].doIContainPickUps();
-        /* At this point the game will contain 2 interactibles 
-           -pill (powerup) : increases stamina by 5 when used */
+        /* At this point the game will contain 2 interactibles
+           - key (objective)  : have to pickup 3 to win the game
+           -redbull (powerup) : increases stamina by 5 when used */
         for(let i = 0; i < pickups.length; i++){
           
           // if its a key the monster cant pick up the key duh would be unfair
@@ -150,6 +155,7 @@ function updatePlayer(sockid,inp) {
             g_tileManager.objPickedUp(); // pick the obj up
             pickups[i].isAlive = false;  // kill the key
           }
+
           // if its redbull we add it to the clients power up
           if(pickups[i].type === 'redbull'){
             pickedupthisround = true;
@@ -162,17 +168,19 @@ function updatePlayer(sockid,inp) {
       // remove the player from the tile 
       g_tileManager.__tiles[player.getEntityTilePos().tileX][player.getEntityTilePos().tileY]
                    .removeEntity(player.getEntityTilePos().spatialPos);
+
       // set the player in the new tile 
       g_tileManager.__tiles[nextMove.x][nextMove.y].addEntity(player);
       
       // add the step into our legal
       steps.push({step :{ x: player.getEntityTilePos().tileX,
-        y: player.getEntityTilePos().tileY}});
+                          y: player.getEntityTilePos().tileY}});
          
       // subtrack one stamina from player
       player.staminaDrain();
 
-      // if killed someone or died then we stop
+      /* if killed someone or died then we stop, if played died then he cant move
+         if monster killed someone he cant continue to move he stops there */
       if(deadorkilled) { break; }                                      
     } else {
       break; // no more legal steps
@@ -214,7 +222,8 @@ function updateStateAndReturn() {
   }
   
   /* this loop just every entity that is dead and is only stored in the tiles
-     if you remove these types of entities they will be collected by the garbage colloector */
+     if you remove these types of entities they will be collected by the garbage colloector
+     there are no other instances of them outside the tilemanager */
   for(let i = 0; i < g_tileManager.__tiles.length; i++) {
     for(let j=0; j < g_tileManager.__tiles.length; j++) {
       g_tileManager.__tiles[i][j].update();
@@ -232,12 +241,13 @@ function updateStateAndReturn() {
   if(deadplayers === 2) {
     g_tileManager.__gameWon.monster = true;
   }
-
+  
+  // return the map to the clients for rendering
   return g_tileManager;
 }
 
 /* Usage : checkforreset(sockid)
-    For  : sockid is a string
+    For  : sockId is the client socket connected to the server
     After: sets the reset request of sockid to true 
            if all clients wish to reset the game then the reset will go through */
 function checkforreset(sockid) {
@@ -250,7 +260,6 @@ function checkforreset(sockid) {
     console.log("Game Reseting!");
   }
 }
-
 
 /* export the game functions  */
 module.exports = {

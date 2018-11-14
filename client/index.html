@@ -11,6 +11,7 @@
 <body>
   <div class="gameContainer">
     <div class="sideBar">
+      
       <div class="Headerinn" id="headTitle"></div>
       <img class="heads" id="playerHeads">
       <div id="grad1">
@@ -21,8 +22,12 @@
     </div>
     <canvas id="myCanvas" width="640" height="640" style="border: 1px solid black;"> Sorry, but your browser does not support the HTML5 canvas tag.</canvas>
   </div>
+<<<<<<< HEAD
   <video id="myVideoBackground" src="/client/videos/frontPic.mp4" autoplay="" muted></video>
   <div class="winnerNote" id="winnerNoteID"></div>
+=======
+  <div class="winnerNote" id="winnerNoteID"> hello worls</div>
+>>>>>>> b1bfecae4d8b6f9ab641a5281681923400b28a7b
   
    
   <div class="firstViewContainer" id="videoContainerinn">
@@ -86,7 +91,7 @@
       socket.on('NextGameRound', (data)=> {
         // we check if this is a map and in the proccesses check if the game is over 
         if (data.hasOwnProperty("__gameWon")) {
-          // check if the game is over by players
+                   // check if the game is over by players
           if(data.__gameWon.players){
             gameOver("survivors");
           }
@@ -139,7 +144,11 @@
         /* Helgi ur functions come here */
         console.log("GAME IS OVER THE ",whowon," has won the game");
         victorySound();
+<<<<<<< HEAD
         document.getElementById("winnerNoteID").innerHTML = "Congratz "+whowon+" you are victorioues !!!";
+=======
+        document.getElementById("winnerNoteID").innerHTML = "Congrates "+whowon+" you are victorioues !!!";
+>>>>>>> b1bfecae4d8b6f9ab641a5281681923400b28a7b
         setTimeout(() => { socket.emit('resetgamerequest',null); }, 8000);
       }
 
