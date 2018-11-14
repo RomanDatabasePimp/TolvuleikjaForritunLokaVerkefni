@@ -42,7 +42,7 @@ function requestPreloads() {
     monsterWalk2: './client/img/Monster/platformChar_walk2.png',
     //Bob
     bobRight1: './client/img/Player/player_17.png',
-    playerHidden: './client/img/Player/bob_hidden.png',
+    bobHidden: './client/img/Player/bob_hidden.png',
     bobRight2: './client/img/Player/player_18.png',
     bobLeft1: './client/img/Player/player_20.png',
     bobLeft2: './client/img/Player/player_21.png',
