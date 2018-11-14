@@ -2,6 +2,7 @@
  * Handles our player movement. called from mouseHandler and main.
  */
 
+
 /**
  * Checks if our player is the one currently playing.
  * Setting it to a local variable if so.
