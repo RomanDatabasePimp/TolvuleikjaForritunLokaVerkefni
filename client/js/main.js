@@ -21,8 +21,10 @@ function requestPreloads() {
     redBull: './client/img/keys/platformPack_item013.png',
     //Sara
     saraPlayer: './client/img/Player/sara_player.png',
-    saraSides1: './client/img/Player/sara_20.png',
-    saraSides2: './client/img/Player/sara_21.png',
+    saraLeft1: './client/img/Player/sara_20.png',
+    saraLeft2: './client/img/Player/sara_21.png',
+    saraRight1: './client/img/Player/sara_17.png',
+    saraRight2: './client/img/Player/sara_18.png',
     saraDown1: './client/img/Player/sara_06.png',
     saraDown2: './client/img/Player/sara_07.png',
     saraUp1: './client/img/Player/sara_08.png',
@@ -70,8 +72,8 @@ function preloadDone() {
   g_sprites.saraPlayer = new Sprite(g_images.saraPlayer);
   g_sprites.saraDown1 = new Sprite(g_images.saraDown1);
   g_sprites.saraDown2 = new Sprite(g_images.saraDown2);
-  g_sprites.saraSides1 = new Sprite(g_images.saraSides1);
-  g_sprites.saraSides2 = new Sprite(g_images.saraSides2);
+  g_sprites.saraLeft1 = new Sprite(g_images.saraLeft1);
+  g_sprites.saraLeft2 = new Sprite(g_images.saraLeft2);
   g_sprites.saraUp1 = new Sprite(g_images.saraUp1);
   g_sprites.saraUp2 = new Sprite(g_images.saraUp2);
   //---------Monster------------//
@@ -107,8 +109,8 @@ function drawMapViaTiles(tile, id) {
   if (!(tile.hasOwnProperty("__tiles"))) return null;
   for (let i = 0; i < tile.__tiles.length; i++) {
     for (let j = 0; j < tile.__tiles[i].length; j++) {
-      drawTile(tile.__tiles, i, j, id);
-      drawCharacters(tile.__tiles, i, j, id);
+      drawTile(tile.__tiles, i, j);
+      // drawCharacters(tile.__tiles, i, j, id); <-- CHANGE THIS
       g_ctx.rect(i * 64, j * 64, 64, 64);
       g_ctx.stroke();
     }
@@ -121,7 +123,7 @@ function drawMapViaTiles(tile, id) {
  * @param {int} i x-axis 
  * @param {int} j y-axis
  */
-function drawTile(tile, i, j, id) {
+function drawTile(tile, i, j) {
   if (tile[i][j]._amITerrain) {
     g_sprites.terrain.drawAt(g_ctx, i * 64, j * 64);
   } else if (tile[i][j]._amIAStructure) {
@@ -155,7 +157,9 @@ function drawCharacters(tile, i, j, id) {
     let entity = playerExistsInTile(tile[i][j]._entities);
     checkPlayer(entity, id);
     player = getPlayer();
+    g_ctx.globalAlpha = 0.5;
     drawCorrectChar(player.character, player.entityPos.tileX, player.entityPos.tileY);
+    g_ctx.globalAlpha = 1;
     return;
   }
   if (playerExistsInTile(tile[i][j]._entities)) {
