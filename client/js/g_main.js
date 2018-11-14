@@ -32,7 +32,6 @@ g_main._updateClocks = function (frameTime) {
 };
 
 g_main._iterCore = function (dt) {
-
   update(dt);
   render(g_ctx);
 };
