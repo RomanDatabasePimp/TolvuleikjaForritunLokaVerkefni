@@ -44,14 +44,14 @@ function requestPreloads() {
     bobRight1: './client/img/Player/player_17.png',
     playerHidden: './client/img/Player/bob_hidden.png',
     bobRight2: './client/img/Player/player_18.png',
-    bobLeft1:'./client/img/Player/player_20.png',
+    bobLeft1: './client/img/Player/player_20.png',
     bobLeft2: './client/img/Player/player_21.png',
     //Sama mynd og player
     bobDown1: './client/img/Player/player_06.png',
-    bobDown2:'./client/img/Player/player_07.png',
-    bobUp1:'./client/img/Player/player_08.png',
-    bobUp2:'./client/img/Player/player_09.png',
-    cloud : './client/img/gay_ass_cloud.png'
+    bobDown2: './client/img/Player/player_07.png',
+    bobUp1: './client/img/Player/player_08.png',
+    bobUp2: './client/img/Player/player_09.png',
+    cloud: './client/img/gay_ass_cloud.png'
   };
 
   imagesPreload(requiredImages, g_images, preloadDone);
@@ -145,76 +145,89 @@ function drawTile(tile, i, j) {
     let treasure = treasureExistsInTile(tile[i][j]._entities);
     switch (treasure) {
       case treasure = "key":
-      g_sprites.key.drawAt(g_ctx, i * 64, j * 64);
+        g_sprites.key.drawAt(g_ctx, i * 64, j * 64);
         break;
       case treasure = "redbull":
-      g_sprites.redBull.drawAt(g_ctx, i * 64, j * 64);
+        g_sprites.redBull.drawAt(g_ctx, i * 64, j * 64);
         break;
       default:
         break;
-  }
-};
+    }
+  };
 
-/**
- * Draws the corresponding character sprite in accordance to our map made server-side
- * @param {Tile} tile 
- * @param {int} i x-axis 
- * @param {int} j y-axis
- * @param {int} id id frá player, notað til að identifya players
- */
-function drawCharacters(tile, i, j, id) {
-  if (tile[i][j]._amIAStructure && playerExistsInTile(tile[i][j]._entities)) {
-    let entity = playerExistsInTile(tile[i][j]._entities);
-    checkPlayer(entity, id);
-    player = getPlayer();
-    g_ctx.globalAlpha = 0.5;
-    drawCorrectChar(player.character, player.entityPos.tileX, player.entityPos.tileY);
-    g_ctx.globalAlpha = 1;
-    return;
+  /**
+   * Draws the corresponding character sprite in accordance to our map made server-side
+   * @param {Tile} tile 
+   * @param {int} i x-axis 
+   * @param {int} j y-axis
+   * @param {int} id id frá player, notað til að identifya players
+   */
+  function drawCharacters(tile, i, j, id) {
+    if (tile[i][j]._amIAStructure && playerExistsInTile(tile[i][j]._entities)) {
+      let entity = playerExistsInTile(tile[i][j]._entities);
+      checkPlayer(entity, id);
+      player = getPlayer();
+      g_ctx.globalAlpha = 0.5;
+      drawCorrectChar(player.character, player.entityPos.tileX, player.entityPos.tileY, true);
+      g_ctx.globalAlpha = 1;
+      return;
+    }
+    if (playerExistsInTile(tile[i][j]._entities)) {
+      let entity = playerExistsInTile(tile[i][j]._entities);
+      drawCorrectChar(entity.character, i, j, false);
+      checkPlayer(entity, id);
+    }
   }
-  if (playerExistsInTile(tile[i][j]._entities)) {
-    let entity = playerExistsInTile(tile[i][j]._entities);
-    drawCorrectChar(entity.character, i, j);
-    checkPlayer(entity, id);
-  }
-}
-/**
- * Draws the correct character at the corresponding location.
- * @param {tile} char 
- * @param {int} i 
- * @param {int} j 
- */
-function drawCorrectChar(char, i, j) {
-  switch (char) {
-    case char = "bob":
-      g_sprites.player.drawAt(g_ctx, i * 64, j * 64);
-      break;
-    case char = "sara":
-      g_sprites.saraPlayer.drawAt(g_ctx, i * 64, j * 64);
-      break;
-    case char = "monster":
-      g_sprites.monster.drawAt(g_ctx, i * 64, j * 64);
-      break;
-    default:
+  /**
+   * Draws the correct character at the corresponding location.
+   * @param {tile} char 
+   * @param {int} i 
+   * @param {int} j 
+   */
+  function drawCorrectChar(char, i, j, isHidden) {
+    // if our character is hidden, draw it that sprite.
+    switch (char) {
+      case char = "bob":
+        if (isHidden) {
+          g_sprites.bobHidden.drawAt(g_ctx, i * 64, j * 64);
+        } else {
+          g_sprites.player.drawAt(g_ctx, i * 64, j * 64);
+        }
+        break;
+      case char = "sara":
+        if (isHidden) {
+          g_sprites.saraHidden.drawAt(g_ctx, i * 64, j * 64);
+        } else {
+          g_sprites.saraPlayer.drawAt(g_ctx, i * 64, j * 64);
+        }
+        break;
+      case char = "monster":
+        if (isHidden) {
+          g_sprites.monsterHidden.drawAt(g_ctx, i * 64, j * 64);
+        } else {
+          g_sprites.monster.drawAt(g_ctx, i * 64, j * 64);
+        }
+        break;
+      default:
+
+    }
 
   }
-
-}
-/**
- * finds the entity at our location.
- * @param {Entity} entity 
- */
-function findEntity(entity) {
-  var foundEnt = entity.find(function (ent) {
-    return ent;
-  });
-  return foundEnt;
-}
-function treasureExistsInTile(tile) {
-  for (let i = 0; i < tile.length; i++) {
-    if (tile[i]) {
-      if (tile[i].hasOwnProperty("type")) {
-        return tile[i];
+  /**
+   * finds the entity at our location.
+   * @param {Entity} entity 
+   */
+  function findEntity(entity) {
+    var foundEnt = entity.find(function (ent) {
+      return ent;
+    });
+    return foundEnt;
+  }
+  function treasureExistsInTile(tile) {
+    for (let i = 0; i < tile.length; i++) {
+      if (tile[i]) {
+        if (tile[i].hasOwnProperty("type")) {
+          return tile[i];
         }
       }
     }
