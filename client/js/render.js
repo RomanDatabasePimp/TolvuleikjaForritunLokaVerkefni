@@ -25,7 +25,7 @@ function render(ctx) {
 
 
     /*  draw the client side cloud to fuck with the clients */
-     
+    for( let cloud in g_clouds) { g_clouds[cloud].render(ctx); }
     return;
   }
   
