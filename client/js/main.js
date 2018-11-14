@@ -31,6 +31,7 @@ function requestPreloads() {
   };
 
   imagesPreload(requiredImages, g_images, preloadDone);
+  mainInit();
 }
 
 var g_sprites = {};
