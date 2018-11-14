@@ -15,14 +15,15 @@ function render(ctx) {
   clearCanvas(ctx);
    
   // if the game state has tiles we know it has game state to render
-  if(g_gamestate.hasOwnProperty("__tiles")) { 
+  if(g_gamestate.hasOwnProperty("__tiles")) {
     /* rafnar draws his map and the map objects keys,redbull etc..  */
+    drawMapViaTiles(g_gamestate, sockid);
 
     /* helgi draws his character animations */
-
-
+    
+    
     /* when animations are done rafnar draws the static images of the characters */
-
+    // drawCharacters(g_gamestate, i, j, id) <-- MAP THIS
 
     /*  draw the client side cloud to fuck with the clients */
     for( let cloud in g_clouds) { g_clouds[cloud].render(ctx); }
@@ -30,7 +31,8 @@ function render(ctx) {
   }
   
   // if we ever reach this part of code that means we are in the waiting lobby
-  // helgis functions come here
+  // helgis functions come here 
+  allPlayerWaiting(g_waiting);
 
 
 }

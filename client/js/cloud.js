@@ -14,11 +14,13 @@ function Cloud(descr) {
   for(let property in descr) {
     this[property] = descr[property];
   }
-  this.sprite = this.sprite || g_sprites.cloud;
 }
 
-Cloud.prototype.halfWidth = 264;
-Cloud.prototype.halfHeight = 89.5;
+/* DONT FUCKING ASK !!!! for some reason if we tried to define 
+   this.sprite = g_sprites.cloud it would always show as undefined,
+    even after countless tries of debuggin for some reason g_sprites is fine
+    and had the img loaded but still when u would assign g_sprites.cloud it would be undef */
+Cloud.prototype.sprite = g_sprites;
 
 Cloud.prototype.wrapPosition = function () {
     this.cx = wrapRange(this.cx, 0, 640);
@@ -39,12 +41,16 @@ Cloud.prototype.update = function (du) {
            ctx is the drawing context
    After : renders the fck cloud */
 Cloud.prototype.render = function (ctx) {
-  this.sprite.drawWrappedCentredAt(ctx, this.cx, this.cy, 0);
+  /* just like sex its better be safe than sorry i have no idea why
+     the sprite behave so wierd just in this case here ....  */
+  if(this.sprite.cloud) {
+    this.sprite.cloud.drawWrappedCentredAt(ctx, this.cx, this.cy, 0);
+  }
 };
 
 /* lets make some clouds */
 const g_clouds = {
-  upper_cloud : new Cloud({cx:0,cy:50,velX: 4}),
-  middle_cloud : new Cloud({cx:50,cy:150,velX: 4}),
-  bottom_cloud : new Cloud({cx:0,cy:200,velX: 4}),
+  upper_cloud : new Cloud({cx:55,cy:50,velX: 1.75}),
+  middle_cloud : new Cloud({cx:200,cy:300,velX: 1.5}),
+  bottom_cloud : new Cloud({cx:0,cy:500,velX: 1.25}),
 }

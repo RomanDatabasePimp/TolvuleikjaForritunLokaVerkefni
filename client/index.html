@@ -71,11 +71,11 @@
     // all the players in the game
     let g_player = [];
     // the players that this client is playing as
-    let player;
+    let player = {};
     // the game state that the user plays (all users get same gamestate)
-    let g_gamestate;
+    let g_gamestate = {};
     // if the game hasent started there is a waiting period that current players wait
-    let g_waiting;
+    let g_waiting = {};
 
   </script>
   
@@ -83,8 +83,10 @@
   <script src="./client/js/utils.js"></script>
   <script src="./client/js/Sprite.js"></script>
   <script src="./client/js/imagesPreload.js"></script>
+  <script src="./client/js/g_main.js"></script>
   <script src="./client/js/main.js"></script>
-  <script src="./client/js/clouds.js"></script>
+  <script src="./client/js/render.js"></script>
+  <script src="./client/js/update.js"></script>
   <script src="./client/js/playerMovement.js"></script>
   <script src="./client/js/handleMouse.js"></script>
   <script src ="./client/js/firstView.js"></script>
@@ -93,10 +95,7 @@
   <script src="./client/js/animation.js"></script>
   <script src="./client/js/audioPlayer.js"></script>
   <script src="./client/js/keys.js"></script>
-  <script src="./client/js/update.js"></script>
-  <script src="./client/js/render.js"></script>
-  <script src="./client/js/g_main.js"></script>
-
+  <script src="./client/js/cloud.js"></script>
  
   <!-- Combine all the game logic into a client side game -->
   <script>
@@ -127,13 +126,14 @@
             // fetch the player 
             // player  to do 
             // set the lobby to empty
-            g_waiting = null;
+            g_waiting = {};
           }
           return;
         }
         // if we did not recive a game state we know we are in waiting lobby
         g_waiting = data;
-        g_gamestate = null;
+        //allPlayerWaiting(g_waiting);
+        g_gamestate= {};
       });
 
       socket.on('roundstart', ()=> {

@@ -30,7 +30,7 @@ value += (highBound - lowBound);
 value -= (highBound - lowBound);
   }
   return value;
-},
+}
 
 /* Usage : gameOver(whowon)
      For : who won is a string telling who won
@@ -42,6 +42,6 @@ function gameOver(whowon) {
   document.getElementById("winnerNoteID").innerHTML = "Congratz " + whowon + " you are victorioues !!!";
   setTimeout(() => { socket.emit('resetgamerequest', null); }, 8000);
 }
-/* -------------------------------------------------------------------------------------
-   ------------------------------UTILS CODE END-----------------------------------------
-   -------------------------------------------------------------------------------------*/
+/* -------------------------------- _________________--------------------------------------
+   ------------------------------- | UTILS CODE END  |------------------------------------
+   --------------------------------|_________________|------------------------------------*/
