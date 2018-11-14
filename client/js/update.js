@@ -29,6 +29,11 @@ function update(dt) {
   var du = (dt / NOMINAL_UPDATE_INTERVAL);
   
   /* kalla á föll sem þurfa að uppfærast in terms of rendering not game logic  */
+  
+  // call the character update logic for helgis walking 
+
+  // call the animation for the cloud shit
+
   g_prevUpdateDt = original_dt;
   g_prevUpdateDu = du;
   g_isUpdateOdd = !g_isUpdateOdd;
