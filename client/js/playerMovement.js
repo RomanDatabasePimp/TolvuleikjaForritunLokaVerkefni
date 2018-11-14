@@ -37,7 +37,6 @@ function checkPlayer(player,id){
         if(g_steps.length > 0 ) {
           const lastStep = g_steps.pop();
           if(lastStep.step.x === newStep.step.x && lastStep.step.y === newStep.step.y){
-            console.log("here");
             g_steps.push(lastStep);
             return;
           } else {
