@@ -25,7 +25,8 @@ function render(ctx) {
     
     
     /* when animations are done rafnar draws the static images of the characters */
-    // drawCharacters(g_gamestate, i, j, id) <-- MAP THIS
+    
+    //drawCharacters(g_gamestate, i, j, id)
 
     /*  draw the client side cloud to fuck with the clients */
     for( let cloud in g_clouds) { g_clouds[cloud].render(ctx); }
