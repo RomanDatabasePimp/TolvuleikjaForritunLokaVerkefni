@@ -20,7 +20,7 @@ function update(dt) {
    
   // Warn about very large dt values -- they may lead to error
   if (dt > 200) {
-    console.log("Big dt =", dt, ": CLAMPING TO NOMINAL");
+    //console.log("Big dt =", dt, ": CLAMPING TO NOMINAL");
     dt = NOMINAL_UPDATE_INTERVAL;
   }
     
@@ -33,6 +33,9 @@ function update(dt) {
   // call the character update logic for helgis walking 
 
   // call the animation for the cloud shit
+  for(let cloud in g_clouds) {
+    g_clouds[cloud].update(du);
+  }
 
   g_prevUpdateDt = original_dt;
   g_prevUpdateDu = du;

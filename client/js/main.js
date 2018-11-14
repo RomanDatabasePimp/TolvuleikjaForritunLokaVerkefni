@@ -46,7 +46,8 @@ function requestPreloads() {
     bobDown1: './client/img/Player/player_06.png',
     bobDown2:'./client/img/Player/player_07.png',
     bobUp1:'./client/img/Player/player_08.png',
-    bobUp2:'./client/img/Player/player_09.png'
+    bobUp2:'./client/img/Player/player_09.png',
+    cloud : './client/img/gay_ass_cloud.png'
   };
 
   imagesPreload(requiredImages, g_images, preloadDone);
@@ -93,7 +94,7 @@ function preloadDone() {
   g_sprites.bobDown2 = new Sprite(g_images.bobDown2);
   g_sprites.bobUp1 = new Sprite(g_images.bobUp1);
   g_sprites.bobUp2 = new Sprite(g_images.bobUp2);
-
+  g_sprites.cloud = new Sprite(g_images.cloud);
 }
 
 // Kick it off
