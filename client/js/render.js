@@ -23,6 +23,7 @@ function render(ctx) {
     gamePlaying();
     
     
+    
     /* when animations are done rafnar draws the static images of the characters */
     
     //drawCharacters(g_gamestate, i, j, id)
