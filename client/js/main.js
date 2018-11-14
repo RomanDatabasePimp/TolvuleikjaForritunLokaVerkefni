@@ -47,7 +47,7 @@ function requestPreloads() {
     bobDown2:'./client/img/Player/player_07.png',
     bobUp1:'./client/img/Player/player_08.png',
     bobUp2:'./client/img/Player/player_09.png',
-    cloud : './client/img/gay_ass_cloud.png'
+    cloud : './client/img/clouds.jpg'
   };
 
   imagesPreload(requiredImages, g_images, preloadDone);
