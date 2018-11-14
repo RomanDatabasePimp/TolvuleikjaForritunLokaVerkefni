@@ -112,11 +112,11 @@ let g_tileManager = {
           this.__tiles[j][i].addEntity(new pickup ({ shouldUpdateMe:false },{ type:"key"}));
         }
         if(mapMatrix[j][i] == 5){
-          this.__tiles[j][i].addEntity(new pickup ({ shouldUpdateMe:false },{ type:"redbull"}));
+          this.__tiles[j][i].addEntity(new pickup ({ shouldUpdateMe:false },{ type:"powerUp"}));
         }
         if(mapMatrix[j][i] == 6){
           this.__tiles[j][i]._amIAStructure = true;
-          this.__tiles[j][i].addEntity(new pickup ({ shouldUpdateMe:false },{ type:"redbull"}));
+          this.__tiles[j][i].addEntity(new pickup ({ shouldUpdateMe:false },{ type:"powerUp"}));
         }
       }
     }

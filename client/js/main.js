@@ -18,7 +18,7 @@ function requestPreloads() {
     house: './client/img/house.png',
     terrain: './client/img/crate_04.png',
     key: './client/img/keys/platformPack_item014.png',
-    redBull: './client/img/keys/platformPack_item013.png',
+    powerUp: './client/img/keys/platformPack_item003.png',
     tallGrass: './client/img/tallGrass_tile.png',
     //Sara
     saraPlayer: './client/img/Player/sara_player.png',
@@ -73,7 +73,7 @@ function preloadDone() {
   g_sprites.house = new Sprite(g_images.house);
   g_sprites.terrain = new Sprite(g_images.terrain);
   g_sprites.key = new Sprite(g_images.key);
-  g_sprites.redBull = new Sprite(g_images.redBull);
+  g_sprites.powerUp = new Sprite(g_images.powerUp);
   //----------Sara--------------//
   g_sprites.saraPlayer = new Sprite(g_images.saraPlayer);
   g_sprites.saraHidden = new Sprite(g_images.saraHidden);
@@ -140,15 +140,11 @@ function drawTile(tile, i, j) {
   }
   if (treasureExistsInTile(tile[i][j]._entities)) {
     let treasure = treasureExistsInTile(tile[i][j]._entities);
-    switch (treasure) {
-      case treasure = "key":
-        g_sprites.key.drawAt(g_ctx, i * 64, j * 64);
-        break;
-      case treasure = "redbull":
-        g_sprites.redBull.drawAt(g_ctx, i * 64, j * 64);
-        break;
-      default:
-        break;
+    if(treasure.type == "key"){
+      g_sprites.key.drawAt(g_ctx, i * 64, j * 64);
+    }
+    if(treasure.type == "powerUp"){
+      g_sprites.powerUp.drawAt(g_ctx, i * 64, j * 64);
     }
   };
 
