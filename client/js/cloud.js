@@ -44,13 +44,16 @@ Cloud.prototype.render = function (ctx) {
   /* just like sex its better be safe than sorry i have no idea why
      the sprite behave so wierd just in this case here ....  */
   if(this.sprite.cloud) {
-    this.sprite.cloud.drawWrappedCentredAt(ctx, this.cx, this.cy, 0);
+    this.sprite.cloud.scale = this.scale;
+    this.sprite.cloud.drawWrappedCentredAt(
+        ctx, this.cx, this.cy, this.rotation
+    );
   }
 };
 
 /* lets make some clouds */
 const g_clouds = {
-  upper_cloud : new Cloud({cx:55,cy:50,velX: 1.75}),
-  middle_cloud : new Cloud({cx:200,cy:300,velX: 1.5}),
-  bottom_cloud : new Cloud({cx:0,cy:500,velX: 1.25}),
+  upper_cloud : new Cloud({cx:55,cy:50,velX: 0.6,scale:0.7}),
+  middle_cloud : new Cloud({cx:200,cy:300,velX: 0.8,scale:0.8}),
+  bottom_cloud : new Cloud({cx:550,cy:500,velX: 0.4,scale:0.6}),
 }
