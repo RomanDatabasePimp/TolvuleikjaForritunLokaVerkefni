@@ -20,8 +20,10 @@
       </div>
     </div>
     <canvas id="myCanvas" width="640" height="640" style="border: 1px solid black;"> Sorry, but your browser does not support the HTML5 canvas tag.</canvas>
-</div>
-        
+  </div>
+  <video id="myVideoBackground" src="/client/videos/frontPic.mp4" autoplay="" muted></video>
+  <div class="winnerNote" id="winnerNoteID"></div>
+  
    
   <div class="firstViewContainer" id="videoContainerinn">
       <video class="myVideo" src="/client/videos/frontPic.mp4" autoplay="" muted></video>
@@ -29,9 +31,12 @@
         <h2 id ="one"></h2>
         <h2 id ="two"></h2>
         <h2 id ="three"></h2>
+        <div class="gameRules">
+        <p>When the time start players click on tiles to move there character</p>
+        <p>Button X enables your powerup and button R if all agree resets the game</p>
+        <p>The objective is to get all the keys before the monster eats you</p>
       </div>
     </div>
-    <video id="myVideoBackground" src="/client/videos/frontPic.mp4" autoplay="" muted></video>
       
     </div>
     <div class="fireWorksContainer" id = "fireWorksContainerID">
@@ -83,7 +88,7 @@
         if (data.hasOwnProperty("__gameWon")) {
           // check if the game is over by players
           if(data.__gameWon.players){
-            gameOver("Players");
+            gameOver("survivors");
           }
           // check if the game is over by monaster
           else if(data.__gameWon.monster) {
@@ -134,6 +139,7 @@
         /* Helgi ur functions come here */
         console.log("GAME IS OVER THE ",whowon," has won the game");
         victorySound();
+        document.getElementById("winnerNoteID").innerHTML = "Congratz "+whowon+" you are victorioues !!!";
         setTimeout(() => { socket.emit('resetgamerequest',null); }, 8000);
       }
 
