@@ -106,14 +106,11 @@ requestPreloads();
  * @param {Socket.id} id 
  */
 function drawMapViaTiles(tile, id) {
-  clearCanvas(g_ctx);
   if (!(tile.hasOwnProperty("__tiles"))) return null;
   for (let i = 0; i < tile.__tiles.length; i++) {
     for (let j = 0; j < tile.__tiles[i].length; j++) {
       drawTile(tile.__tiles, i, j);
       // drawCharacters(tile.__tiles, i, j, id); <-- CHANGE THIS
-      g_ctx.rect(i * 64, j * 64, 64, 64);
-      g_ctx.stroke();
     }
   }
   g_readyForNextRound = true;
