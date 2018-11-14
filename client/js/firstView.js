@@ -14,9 +14,7 @@ function allPlayerWaiting(data){
   player2 = "Waiting for Sara";
   monster = "Waiting for monster";
    
-    console.log(data);
-    if(data != []){
-      console.log("data")
+    if(data != []){  
         document.getElementById('videoContainerinn').style.display = '';
         document.getElementById('fireWorksContainerID').style.display = 'none';
       /*  if(data.hasnotgamestarted[0] == true){player1 = "Bob is ready to roll";}

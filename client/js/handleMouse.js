@@ -15,8 +15,9 @@ function handleMouse(evt) {
         //
         return;
     }
+    // Checks if we are inside the 0 - 640 pixel range in which our canvas is drawn
     if(insidePlayArea(g_mouseX,g_mouseY)){
-        movePlayerTo(g_mouseX,g_mouseY);
+        movePlayerTo(roundDown(g_mouseX/64),roundDown(g_mouseY/64));
     };
 }
 
