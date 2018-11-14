@@ -18,6 +18,7 @@ function requestPreloads() {
     house: './client/img/house.png',
     terrain: './client/img/crate_04.png',
     key: './client/img/keys/platformPack_item014.png',
+    redBull: './client/img/keys/platformPack_item013.png',
     //Sara
     saraPlayer: './client/img/Player/sara_player.png',
     saraSides1: './client/img/Player/sara_20.png',
@@ -64,8 +65,24 @@ function preloadDone() {
   g_sprites.house = new Sprite(g_images.house);
   g_sprites.terrain = new Sprite(g_images.terrain);
   g_sprites.key = new Sprite(g_images.key);
+  g_sprites.redBull = new Sprite(g_images.redBull);
+  //----------Sara--------------//
   g_sprites.saraPlayer = new Sprite(g_images.saraPlayer);
+  g_sprites.saraDown1 = new Sprite(g_images.saraDown1);
+  g_sprites.saraDown2 = new Sprite(g_images.saraDown2);
+  g_sprites.saraSides1 = new Sprite(g_images.saraSides1);
+  g_sprites.saraSides2 = new Sprite(g_images.saraSides2);
+  g_sprites.saraUp1 = new Sprite(g_images.saraUp1);
+  g_sprites.saraUp2 = new Sprite(g_images.saraUp2);
+  //---------Monster------------//
   g_sprites.monster = new Sprite(g_images.monster);
+  g_sprites.monsterClimb1 = new Sprite(g_images.monsterClimb1);
+  g_sprites.monsterClimb2 = new Sprite(g_images.monsterClimb2);
+  g_sprites.monsterDuck = new Sprite(g_images.monsterDuck);
+  g_sprites.monsterHappy = new Sprite(g_images.monsterHappy);
+  g_sprites.monsterWalk1 = new Sprite(g_images.monsterWalk1);
+  g_sprites.monsterWalk2 = new Sprite(g_images.monsterWalk2);
+  //---------Bob----------------//
   g_sprites.bobRight1 = new Sprite(g_images.bobRight1);
   g_sprites.bobRight2 = new Sprite(g_images.bobRight2);
   g_sprites.bobLeft1 = new Sprite(g_images.bobLeft1);
@@ -112,6 +129,18 @@ function drawTile(tile, i, j, id) {
   } else {
     g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
   }
+  if (treasureExistsInTile(tile[i][j]._entities)) {
+    let treasure = treasureExistsInTile(tile[i][j]._entities);
+    switch (treasure) {
+      case treasure = "key":
+      g_sprites.key.drawAt(g_ctx, i * 64, j * 64);
+        break;
+      case treasure = "redbull":
+      g_sprites.redBull.drawAt(g_ctx, i * 64, j * 64);
+        break;
+      default:
+        break;
+  }
 };
 
 /**
@@ -119,6 +148,7 @@ function drawTile(tile, i, j, id) {
  * @param {Tile} tile 
  * @param {int} i x-axis 
  * @param {int} j y-axis
+ * @param {int} id id frá player, notað til að identifya players
  */
 function drawCharacters(tile, i, j, id) {
   if (tile[i][j]._amIAStructure && playerExistsInTile(tile[i][j]._entities)) {
@@ -133,11 +163,6 @@ function drawCharacters(tile, i, j, id) {
     drawCorrectChar(entity.character, i, j);
     checkPlayer(entity, id);
   }
-  if (treasureExistsInTile(tile[i][j]._entities)) {
-    g_sprites.key.drawAt(g_ctx, i * 64, j * 64);
-  }
-
-
 }
 /**
  * Draws the correct character at the corresponding location.
@@ -171,11 +196,12 @@ function findEntity(entity) {
   });
   return foundEnt;
 }
-function treasureExistsInTile(tile){
+function treasureExistsInTile(tile) {
   for (let i = 0; i < tile.length; i++) {
     if (tile[i]) {
       if (tile[i].hasOwnProperty("type")) {
         return tile[i];
+        }
       }
     }
   }
