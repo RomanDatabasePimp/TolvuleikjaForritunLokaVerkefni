@@ -92,6 +92,9 @@
   <script src="./client/js/animation.js"></script>
   <script src="./client/js/audioPlayer.js"></script>
   <script src="./client/js/keys.js"></script>
+  <script src="./client/js/update.js"></script>
+  <script src="./client/js/render.js"></script>
+  <script src="./client/js/g_main.js"></script>
 
  
   <!-- Combine all the game logic into a client side game -->
@@ -100,10 +103,7 @@
     socket.on('connect', function() {
       // in here we can pass our socket.id to the functions that need it
       
-      /* Next game round is send to us every x-seconds here we recive the map
-      and call the necessary functions needed to draw the map based off 
-      the data recived */
-      drawPlayers();
+      /* we recive the new game state every time a round is over */
       socket.on('NextGameRound', (data)=> {
         // we check if the data is a game state or a waiting lobby
         if (data.hasOwnProperty("__tiles")) {
