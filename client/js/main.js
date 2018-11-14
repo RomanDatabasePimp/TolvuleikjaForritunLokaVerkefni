@@ -19,8 +19,10 @@ function requestPreloads() {
     terrain: './client/img/crate_04.png',
     key: './client/img/keys/platformPack_item014.png',
     redBull: './client/img/keys/platformPack_item013.png',
+    tallGrass: './client/img/tallGrass_tile.png',
     //Sara
     saraPlayer: './client/img/Player/sara_player.png',
+    saraHidden: './client/img/Player/sara_hidden.png',
     saraLeft1: './client/img/Player/sara_20.png',
     saraLeft2: './client/img/Player/sara_21.png',
     saraRight1: './client/img/Player/sara_17.png',
@@ -31,6 +33,7 @@ function requestPreloads() {
     saraUp2: './client/img/Player/sara_09.png',
     //Monster
     monster: './client/img/Monster/platformChar_idle.png',
+    monsterHidden: './client/img/Monster/monster_hidden.png',
     monsterClimb1: './client/img/Monster/platformChar_climb1.png',
     monsterClimb2: './client/img/Monster/platformChar_climb2.png',
     monsterDuck: './client/img/Monster/platformChar_duck.png',
@@ -39,6 +42,7 @@ function requestPreloads() {
     monsterWalk2: './client/img/Monster/platformChar_walk2.png',
     //Bob
     bobRight1: './client/img/Player/player_17.png',
+    playerHidden: './client/img/Player/bob_hidden.png',
     bobRight2: './client/img/Player/player_18.png',
     bobLeft1:'./client/img/Player/player_20.png',
     bobLeft2: './client/img/Player/player_21.png',
@@ -63,6 +67,7 @@ var g_sprites = {};
 function preloadDone() {
 
   g_sprites.grassTile = new Sprite(g_images.grassTile);
+  g_sprites.tallGrass = new Sprite(g_images.tallGrass);
   g_sprites.player = new Sprite(g_images.player);
   g_sprites.highLight = new Sprite(g_images.highLight);
   g_sprites.house = new Sprite(g_images.house);
@@ -71,6 +76,7 @@ function preloadDone() {
   g_sprites.redBull = new Sprite(g_images.redBull);
   //----------Sara--------------//
   g_sprites.saraPlayer = new Sprite(g_images.saraPlayer);
+  g_sprites.saraHidden = new Sprite(g_images.saraHidden);
   g_sprites.saraDown1 = new Sprite(g_images.saraDown1);
   g_sprites.saraDown2 = new Sprite(g_images.saraDown2);
   g_sprites.saraLeft1 = new Sprite(g_images.saraLeft1);
@@ -79,6 +85,7 @@ function preloadDone() {
   g_sprites.saraUp2 = new Sprite(g_images.saraUp2);
   //---------Monster------------//
   g_sprites.monster = new Sprite(g_images.monster);
+  g_sprites.monsterHidden = new Sprite(g_images.monsterHidden);
   g_sprites.monsterClimb1 = new Sprite(g_images.monsterClimb1);
   g_sprites.monsterClimb2 = new Sprite(g_images.monsterClimb2);
   g_sprites.monsterDuck = new Sprite(g_images.monsterDuck);
@@ -87,6 +94,7 @@ function preloadDone() {
   g_sprites.monsterWalk2 = new Sprite(g_images.monsterWalk2);
   //---------Bob----------------//
   g_sprites.bobRight1 = new Sprite(g_images.bobRight1);
+  g_sprites.bobHidden = new Sprite(g_images.bobHidden);
   g_sprites.bobRight2 = new Sprite(g_images.bobRight2);
   g_sprites.bobLeft1 = new Sprite(g_images.bobLeft1);
   g_sprites.bobLeft2 = new Sprite(g_images.bobLeft2);
@@ -128,7 +136,8 @@ function drawTile(tile, i, j) {
   if (tile[i][j]._amITerrain) {
     g_sprites.terrain.drawAt(g_ctx, i * 64, j * 64);
   } else if (tile[i][j]._amIAStructure) {
-    g_sprites.house.drawAt(g_ctx, i * 64, j * 64);
+    g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
+    g_sprites.tallGrass.drawAt(g_ctx, i * 64, j * 64);
   } else {
     g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
   }
