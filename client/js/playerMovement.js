@@ -32,7 +32,7 @@ function checkPlayer(player,id){
   function movePlayerTo(posX, posY) {
       // Checks if we are clicking ourselves.
     if(checkValidMoves(posX,posY)){
-        const newStep = {step:{x:roundDown(posX/64), y:roundDown(posY/64)}};
+        const newStep = {step:{x:posX, y:posY}};
         if(g_steps.length > 0 ) {
           const lastStep = g_steps.pop();
           if(lastStep.step.x === newStep.step.x && lastStep.step.y === newStep.step.y){
@@ -59,8 +59,8 @@ function checkPlayer(player,id){
   function checkValidMoves(posX, posY){
       let myPlayer = getPlayer();
       let gridPosition = {
-        x : roundDown(posX/64),
-        y : roundDown(posY/64)
+        x : posX,
+        y : posY
     };
     // Distance between two points.
     let distX = gridPosition.x - myPlayer.entityPos.tileX;

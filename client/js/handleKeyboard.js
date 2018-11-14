@@ -10,6 +10,7 @@ let KEY_RIGHT  = 'D'.charCodeAt(0);
 
 function handleKeydown(evt) {
     keys[evt.keyCode] = true;
+    // if(eatKey(KEY_UP)){}
     //TODO þegar keyrsla kemur, sjá hvort við erum á x/y ásnum.
 }
 

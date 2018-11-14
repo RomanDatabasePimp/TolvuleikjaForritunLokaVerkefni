@@ -16,7 +16,7 @@ function handleMouse(evt) {
         return;
     }
     if(insidePlayArea(g_mouseX,g_mouseY)){
-        movePlayerTo(g_mouseX,g_mouseY);
+        movePlayerTo(roundDown(g_mouseX/64),roundDown(g_mouseY/64));
     };
 }
 
