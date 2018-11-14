@@ -157,7 +157,9 @@ function drawCharacters(tile, i, j, id) {
     let entity = playerExistsInTile(tile[i][j]._entities);
     checkPlayer(entity, id);
     player = getPlayer();
+    g_ctx.globalAlpha = 0.5;
     drawCorrectChar(player.character, player.entityPos.tileX, player.entityPos.tileY);
+    g_ctx.globalAlpha = 1;
     return;
   }
   if (playerExistsInTile(tile[i][j]._entities)) {
