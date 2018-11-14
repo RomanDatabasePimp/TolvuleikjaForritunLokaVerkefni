@@ -22,7 +22,12 @@
     </div>
     <canvas id="myCanvas" width="640" height="640" style="border: 1px solid black;"> Sorry, but your browser does not support the HTML5 canvas tag.</canvas>
   </div>
+<<<<<<< HEAD
+  <video id="myVideoBackground" src="/client/videos/frontPic.mp4" autoplay="" muted></video>
+  <div class="winnerNote" id="winnerNoteID"></div>
+=======
   <div class="winnerNote" id="winnerNoteID"> hello worls</div>
+>>>>>>> b1bfecae4d8b6f9ab641a5281681923400b28a7b
   
    
   <div class="firstViewContainer" id="videoContainerinn">
@@ -37,7 +42,6 @@
         <p>The objective is to get all the keys before the monster eats you</p>
       </div>
     </div>
-    <video id="myVideoBackground" src="/client/videos/frontPic.mp4" autoplay="" muted></video>
       
     </div>
     <div class="fireWorksContainer" id = "fireWorksContainerID">
@@ -140,7 +144,11 @@
         /* Helgi ur functions come here */
         console.log("GAME IS OVER THE ",whowon," has won the game");
         victorySound();
+<<<<<<< HEAD
+        document.getElementById("winnerNoteID").innerHTML = "Congratz "+whowon+" you are victorioues !!!";
+=======
         document.getElementById("winnerNoteID").innerHTML = "Congrates "+whowon+" you are victorioues !!!";
+>>>>>>> b1bfecae4d8b6f9ab641a5281681923400b28a7b
         setTimeout(() => { socket.emit('resetgamerequest',null); }, 8000);
       }
 

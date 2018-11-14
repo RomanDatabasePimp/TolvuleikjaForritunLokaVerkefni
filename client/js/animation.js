@@ -17,7 +17,7 @@ function moveMen(){
     id = setInterval(frame, 10);
   }
 function frame() {
-    if (pos == 200) {
+    if (pos == 100) {
         try{
             clearInterval(id);           
             pos = 0;
@@ -40,7 +40,7 @@ function frame() {
             }   
         try{
             // Hér þarf að determa í hvaða átt
-            count += 0.32;
+            count += 0.64;
             switch (path) {
                 case path = "left":
                     playerX = player.movement[0].step.x*64-count;
@@ -73,9 +73,9 @@ function frame() {
                 default:
             }
             if(noDraw == false){
-                if(pos%2 == 0 || pos %3 == 0 || pos%4 == 0 || pos %5 ==0){
+                if(pos%2 == 0 ){
                     img1.drawAt(g_ctx, playerX,playerY);
-                }else{
+                }if(pos %3 == 0){
                     img2.drawAt(g_ctx, playerX,playerY);
                 }
                 
