@@ -16,8 +16,6 @@ g_main.iter = function (frameTime) {
   this._updateClocks(frameTime);
   // Perform the iteration core to do all the "real" work
   this._iterCore(this._frameTimeDelta_ms);
-  // Diagnostics, such as showing current timer values etc.
-  this._debugRender(g_ctx);  
   // Request the next iteration if needed
   this._requestNextIteration();
 };
@@ -62,5 +60,3 @@ g_main.init = function () {
 function mainInit() {
     g_main.init();
 }
-
-preloadStuff_thenCall(mainInit);
