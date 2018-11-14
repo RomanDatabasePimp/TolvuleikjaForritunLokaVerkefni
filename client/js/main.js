@@ -48,10 +48,10 @@ function requestPreloads() {
     bobLeft2: './client/img/Player/player_21.png',
     //Sama mynd og player
     bobDown1: './client/img/Player/player_06.png',
-    bobDown2: './client/img/Player/player_07.png',
-    bobUp1: './client/img/Player/player_08.png',
-    bobUp2: './client/img/Player/player_09.png',
-    cloud: './client/img/gay_ass_cloud.png'
+    bobDown2:'./client/img/Player/player_07.png',
+    bobUp1:'./client/img/Player/player_08.png',
+    bobUp2:'./client/img/Player/player_09.png',
+    cloud : './client/img/clouds.png'
   };
 
   imagesPreload(requiredImages, g_images, preloadDone);
@@ -143,7 +143,7 @@ function drawTile(tile, i, j) {
     if(treasure.type == "key"){
       g_sprites.key.drawAt(g_ctx, i * 64, j * 64);
     }
-    if(treasure.type == "powerUp"){
+    if(treasure.type == "powerup"){
       g_sprites.powerUp.drawAt(g_ctx, i * 64, j * 64);
     }
   };
