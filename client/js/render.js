@@ -20,6 +20,7 @@ function render(ctx) {
     drawMapViaTiles(g_gamestate, sockid);
 
     /* helgi draws his character animations */
+    gamePlaying();
     
     
     /* when animations are done rafnar draws the static images of the characters */
@@ -32,7 +33,7 @@ function render(ctx) {
   
   // if we ever reach this part of code that means we are in the waiting lobby
   // helgis functions come here 
-  allPlayerWaiting(g_waiting);
+  allPlayerWaiting(g_waiting,true);
 
 
 }

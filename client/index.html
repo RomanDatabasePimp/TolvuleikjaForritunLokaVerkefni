@@ -76,6 +76,7 @@
     let g_gamestate = {};
     // if the game hasent started there is a waiting period that current players wait
     let g_waiting = {};
+    
 
   </script>
   
@@ -133,7 +134,7 @@
         }
         // if we did not recive a game state we know we are in waiting lobby
         g_waiting = data;
-        //allPlayerWaiting(g_waiting);
+        allPlayerWaiting(g_waiting, false);
         g_gamestate= {};
       });
 
