@@ -146,6 +146,25 @@ function drawTile(tile, i, j) {
     if(treasure.type == "powerup"){
       g_sprites.powerUp.drawAt(g_ctx, i * 64, j * 64);
     }
+  }
+};
+
+  /**
+   * itterate the tiles and find those tiles that contain players 
+   * @param {Array[][]} tiles 
+   * returns a objects of a form {tile,i,j} 
+   */
+  function fetchPlayerTiles(tiles){
+    let playersInTiles = [];
+    for(let i = 0; i < tiles.length; i++){     // for each of our tile set
+      for(let j = 0; j < tiles[i].length; j++){ // for each tile in our tile set
+        let player = playerExistsInTile(tiles[i][j]._entities);
+        if(player){ // check if the player exists in the tile
+          playersInTiles.push( {tile:tiles[i][j], i:i, j:j});
+        }
+      }
+    }
+    return playersInTiles;
   };
 
   /**
@@ -170,7 +189,7 @@ function drawTile(tile, i, j) {
       drawCorrectChar(entity.character, i, j, false);
       checkPlayer(entity, id);
     }
-  }
+  };
   /**
    * Draws the correct character at the corresponding location.
    * @param {tile} char 
@@ -205,7 +224,7 @@ function drawTile(tile, i, j) {
 
     }
 
-  }
+  };
   /**
    * finds the entity at our location.
    * @param {Entity} entity 
@@ -215,7 +234,7 @@ function drawTile(tile, i, j) {
       return ent;
     });
     return foundEnt;
-  }
+  };
   function treasureExistsInTile(tile) {
     for (let i = 0; i < tile.length; i++) {
       if (tile[i]) {
@@ -224,9 +243,8 @@ function drawTile(tile, i, j) {
         }
       }
     }
-  }
-  return null;
-}
+    return null;
+  };
 function playerExistsInTile(tile) {
   for (let i = 0; i < tile.length; i++) {
     if (tile[i]) {
@@ -236,4 +254,4 @@ function playerExistsInTile(tile) {
     }
   }
   return null;
-}
+};
