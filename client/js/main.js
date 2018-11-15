@@ -11,11 +11,16 @@ requestPreloads();
  * @param {Tile} tile 
  * @param {Socket.id} id 
  */
-function drawMapViaTiles(tile, id) {
+function drawMapViaTiles(tile) {
   if (!(tile.hasOwnProperty("__tiles"))) return null;
   for (let i = 0; i < tile.__tiles.length; i++) {
     for (let j = 0; j < tile.__tiles[i].length; j++) {
       drawTile(tile.__tiles, i, j);
+      try{
+        if(g_steps[i].step.x == i && g_steps[i].step.y == j){
+          console.log("Hack worked!");
+        }
+      } catch(e){}
     }
   }
 };
