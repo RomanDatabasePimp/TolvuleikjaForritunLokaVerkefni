@@ -118,7 +118,7 @@ function drawMapViaTiles(tile, id) {
   for (let i = 0; i < tile.__tiles.length; i++) {
     for (let j = 0; j < tile.__tiles[i].length; j++) {
       drawTile(tile.__tiles, i, j);
-      // drawCharacters(tile.__tiles, i, j, id); <-- CHANGE THIS
+      //drawCharacters(tile.__tiles, i, j, id);
     }
   }
   g_readyForNextRound = true;
@@ -146,8 +146,8 @@ function drawTile(tile, i, j) {
     if(treasure.type == "powerup"){
       g_sprites.powerUp.drawAt(g_ctx, i * 64, j * 64);
     }
-  };
-
+  }
+};
   /**
    * Draws the corresponding character sprite in accordance to our map made server-side
    * @param {Tile} tile 
@@ -170,7 +170,7 @@ function drawTile(tile, i, j) {
       drawCorrectChar(entity.character, i, j, false);
       checkPlayer(entity, id);
     }
-  }
+  };
   /**
    * Draws the correct character at the corresponding location.
    * @param {tile} char 
@@ -205,7 +205,7 @@ function drawTile(tile, i, j) {
 
     }
 
-  }
+  };
   /**
    * finds the entity at our location.
    * @param {Entity} entity 
@@ -215,7 +215,7 @@ function drawTile(tile, i, j) {
       return ent;
     });
     return foundEnt;
-  }
+  };
   function treasureExistsInTile(tile) {
     for (let i = 0; i < tile.length; i++) {
       if (tile[i]) {
@@ -224,9 +224,9 @@ function drawTile(tile, i, j) {
         }
       }
     }
-  }
-  return null;
-}
+    return null;
+  };
+
 function playerExistsInTile(tile) {
   for (let i = 0; i < tile.length; i++) {
     if (tile[i]) {
@@ -236,4 +236,4 @@ function playerExistsInTile(tile) {
     }
   }
   return null;
-}
+};  
