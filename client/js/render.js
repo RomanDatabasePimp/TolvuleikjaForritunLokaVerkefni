@@ -21,11 +21,7 @@ function render(ctx) {
     drawMapViaTiles(g_gamestate, sockid);
 
     /* helgi draws his character animations */
-<<<<<<< HEAD
-   // moveMen();
-=======
     // moveMen();
->>>>>>> ed8b76bbf89b8c00e2953d24d6fd65af38de2291
     
     
     /* when animations are done rafnar draws the static images of the characters */
