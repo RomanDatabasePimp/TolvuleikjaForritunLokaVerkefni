@@ -21,15 +21,16 @@ function render(ctx) {
     drawMapViaTiles(g_gamestate, sockid);
 
     /* helgi draws his character animations */
-    if(!g_readyForNextRound){
-      
+    if(!g_readyForNextRound){ 
       g_animations["bob"].frame(16.666);
+      g_animations["sara"].frame(16.666);
+      g_animations["monster"].frame(16.666);
     }
     
     /* when animations are done rafnar draws the static images of the characters */
-    if(g_walkinganimfinish) {
+    if(allCharactersRendered(g_walkinganimfinish)) {
       g_tilesContainingPlayers.map(char => { drawCharacters(char.tile,char.i,char.j,sockid);  });
-      //g_readyForNextRound = true;
+      g_readyForNextRound = true;
     }
     //drawCharacters(g_gamestate, i, j, id)
 
