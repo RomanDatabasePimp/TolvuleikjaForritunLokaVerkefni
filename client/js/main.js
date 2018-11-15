@@ -118,10 +118,8 @@ function drawMapViaTiles(tile, id) {
   for (let i = 0; i < tile.__tiles.length; i++) {
     for (let j = 0; j < tile.__tiles[i].length; j++) {
       drawTile(tile.__tiles, i, j);
-      //drawCharacters(tile.__tiles, i, j, id);
     }
   }
-  g_readyForNextRound = true;
 };
 /**
  * Draws the corresponding map sprite in accordance to our map made server-side
@@ -177,7 +175,6 @@ function fetchPlayerTiles(tiles) {
 function drawCharacters(tile, i, j, id) {
   if (tile._amIAStructure && playerExistsInTile(tile._entities)) {
     let entity = playerExistsInTile(tile._entities);
-    checkPlayer(entity, id);
     player = getPlayer();
     g_ctx.globalAlpha = 0.5;
     drawCorrectChar(player.character, player.entityPos.tileX, player.entityPos.tileY, true);
@@ -187,7 +184,6 @@ function drawCharacters(tile, i, j, id) {
   if (playerExistsInTile(tile._entities)) {
     let entity = playerExistsInTile(tile._entities);
     drawCorrectChar(entity.character, i, j, false);
-    checkPlayer(entity, id);
   }
 };
 /**

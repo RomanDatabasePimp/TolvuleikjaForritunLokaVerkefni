@@ -27,7 +27,7 @@ function render(ctx) {
     /* when animations are done rafnar draws the static images of the characters */
     if(g_walkinganimfinish) {
       g_tilesContainingPlayers.map(char => { drawCharacters(char.tile,char.i,char.j,sockid);  });
-      g_readyForNextRound = true;
+      //g_readyForNextRound = true;
     }
     //drawCharacters(g_gamestate, i, j, id)
 
