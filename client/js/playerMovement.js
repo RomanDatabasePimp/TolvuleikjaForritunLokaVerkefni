@@ -22,13 +22,13 @@ function checkPlayer(player,id){
     return player;
   };
   
-  /**
-   * gets the player that we are using
-   * highlights the position where we click
-   * and attempts to move the player to that location
-   * @param {int} posX 
-   * @param {int} posY 
-   */
+/**
+ * Accepts a rounded down posX&posY from 0-9.
+ * CHecks if step has been made before in g_steps.
+ * Returns a highlight at the grid position multiplied for canvas
+ * @param {int} posX 
+ * @param {int} posY 
+ */
   function movePlayerTo(posX, posY) {
       // Checks if we are clicking ourselves.
     if(checkValidMoves(posX,posY)){
@@ -42,7 +42,10 @@ function checkPlayer(player,id){
             g_steps.push(lastStep);
           }
         }
-        g_sprites.highLight.drawAt(g_ctx, convertToMatrix(posX), convertToMatrix(posY));
+        /**
+         * multiplies for our canvas.
+         */
+        g_sprites.highLight.drawAt(g_ctx,posX*64, posY*64);
         g_steps.push(newStep);
     }     
   };
