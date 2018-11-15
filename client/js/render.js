@@ -21,11 +21,18 @@ function render(ctx) {
     drawMapViaTiles(g_gamestate, sockid);
 
     /* helgi draws his character animations */
+<<<<<<< HEAD
    // moveMen();
+=======
+    // moveMen();
+>>>>>>> ed8b76bbf89b8c00e2953d24d6fd65af38de2291
     
     
     /* when animations are done rafnar draws the static images of the characters */
     
+    g_tilesContainingPlayers.map(char => {
+      drawCharacters(char.tile,char.i,char.j,sockid);
+    });
     //drawCharacters(g_gamestate, i, j, id)
 
     /*  draw the client side cloud to fuck with the clients */

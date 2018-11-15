@@ -77,6 +77,9 @@
     let g_gamestate = {};
     // if the game hasent started there is a waiting period that current players wait
     let g_waiting = {};
+    /* to avoid unnecessary computation we store all the clients and the tiles they are in
+       in a seperate obj to be further used more efficiently */
+    let g_tilesContainingPlayers = {};
     
 
   </script>
@@ -128,6 +131,7 @@
             // fetch the player 
             // player  to do 
             // set the lobby to empty
+            g_tilesContainingPlayers = fetchPlayerTiles(g_gamestate.__tiles);
             g_waiting = {};
           }
           return;
@@ -136,6 +140,7 @@
         g_waiting = data;
         allPlayerWaiting(g_waiting, false);
         g_gamestate= {};
+        g_tilesContainingPlayers = {};
       });
 
       socket.on('roundstart', ()=> {
