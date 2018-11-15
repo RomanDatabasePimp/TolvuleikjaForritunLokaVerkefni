@@ -2,6 +2,14 @@
    ------------------------------UTILS CODE START---------------------------------------
    -------------------------------------------------------------------------------------*/
 
+
+function allCharactersRendered(chars) {
+  if(!chars.bob) { return false;}
+  else if(!chars.sara) { return false;}
+  else if(!chars.monster) { return false;}
+  else { return true;}
+}   
+
 /* utilityFunctions for drawings  */
 
 function clearCanvas(ctx) {

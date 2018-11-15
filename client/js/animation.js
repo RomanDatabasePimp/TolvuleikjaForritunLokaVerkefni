@@ -1,4 +1,8 @@
-function playerAnimation (){
+function playerAnimation (descr){
+    for(let property in descr) {
+        this[property] = descr[property];
+      }
+      
     this.pos = 0,
     this.id = null,
     this.count =0,
@@ -8,60 +12,75 @@ function playerAnimation (){
     this.noDraw = false,
     this.img1 = null,
     this.img1 = null,
-    this.howManyTime = 0
+    this.howManyTime = 0,
+    this.movement = []
 };
+playerAnimation.prototype.setmovement = function(moves){
+  this.movement = moves;
+};
+
 playerAnimation.prototype.moveMen = function(){
     document.getElementById("winnerNoteID").style.display = 'none';
     
 };
-playerAnimation.prototype.frame =function(du) {
-    if (this.howManyTime >= 166) {
-        try{       
+playerAnimation.prototype.frame = function(du) {
+    if (this.howManyTime >= 166 || this.movement.length >= 0) {
+        try{
             this.howManyTime = 0;
+            pos =0;
             count =0;
             path="";
-            noDraw = false;      
-            player.movement = player.movement.slice(1);
+            noDraw = false;
+            this.movement.slice(0,1);
+            this.moveMen[0].step.x;
         }catch{
+            if(this.name === "bob") {
+                g_walkinganimfinish.bob = true;
+            }
+            if(this.name === "sara") {
+                g_walkinganimfinish.sara = true;
+            }
+            if(this.name === "monster") {
+                g_walkinganimfinish.monster = true;
+            }
             console.log("catch villa í animation js");
+            return;
         }
     } else {
         this.howManyTime+= du;
         // hér þarf að gera animation frá punkt a til punkt b
-        
-            if(player.movement[0] && player.movement[1]){
-                oldX =  player.movement[0].step.x;
-                oldY =  player.movement[0].step.y;
-                checkWichDirection(player.movement[1].step.x, player.movement[1].step.y);
-            }else{
-                return;
-            }   
+            this.oldX = this.movement[0].step.x;
+            this.oldy = this.movement[0].step.y
+            checkWichDirection(this.movement[1].step.x, this.movement[1].step.y);
+
+     
+            
         try{
             // Hér þarf að determa í hvaða átt
             count += 16.666;
             switch (path) {
                 case path = "left":
-                    playerX = player.movement[0].step.x*64-count;
-                    playerY = player.movement[0].step.y*64;
+                    playerX = this.movement[0].step.x*64-count;
+                    playerY = this.movement[0].step.y*64;
                     img1 =  g_sprites.bobLeft1;
                     img2 =  g_sprites.bobLeft2;
                   break;
                 case path = "right":
-                    playerX = player.movement[0].step.x*64+count;
-                    playerY = player.movement[0].step.y*64;
+                    playerX = this.movement[0].step.x*64+count;
+                    playerY = this.movement[0].step.y*64;
                     img1 =  g_sprites.bobRight1;
                     img2 =  g_sprites.bobRight2;
             
                   break;
                 case path = "down":
-                    playerX = player.movement[0].step.x*64;
-                    playerY = player.movement[0].step.y*64+count;
+                    playerX = this.movement[0].step.x*64;
+                    playerY = this.movement[0].step.y*64+count;
                     img1 =  g_sprites.bobDown1;
                     img2 =  g_sprites.bobDown2;
                   break;
                 case path = "up":
-                    playerX = player.movement[0].step.x*64;
-                    playerY = player.movement[0].step.y*64-count;
+                    playerX = this.movement[0].step.x*64;
+                    playerY = this.movement[0].step.y*64-count;
                     img1 =  g_sprites.bobUp1;
                     img2 =  g_sprites.bobUp2;
                 break;
@@ -107,3 +126,8 @@ playerAnimation.prototype.checkWichDirection = function(){
         return;
     }
 };
+let g_animations = { 
+  bob : new playerAnimation({name :"bob"}),
+  sara : new playerAnimation({name :"sara"}),
+  monster : new playerAnimation({name :"monster"})
+}
