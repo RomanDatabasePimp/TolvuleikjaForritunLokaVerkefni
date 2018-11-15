@@ -66,7 +66,7 @@
     // client uses this to ping the serve that he is rdy for the next rounds
     let g_readyForNextRound = false;
     
-    let g_walkinganimfinish = {bob:false, sara:false, monster:false};
+    let g_walkinganimfinish = { bob: false, sara: false, monster: false };
     // client sents this to tell the serve that he has used a power up
     let g_usedPowerUp = false;
     // this turns players movements are stored here and sent to the server
@@ -132,6 +132,8 @@
             g_gamestate = data;
             // fetch the player
             // set the lobby to empty
+            
+            window.addEventListener("keydown", handleKeydown);
             g_tilesContainingPlayers = fetchPlayerTiles(g_gamestate.__tiles);
             g_tilesContainingPlayers.map(char => {
               let nplayer = playerExistsInTile(char.tile._entities);
@@ -154,7 +156,6 @@
         // when the round starts we allow the user to click on the tiles
         window.addEventListener("mousedown", handleMouse);
         window.addEventListener("mousemove", handleMouse);
-        window.addEventListener("keydown", handleKeydown);
         player = getPlayer();
         setStamina(player);
         startProgressBar();
@@ -183,7 +184,8 @@
       /* client will send to the Server every 3 seconds if he is ready to for the next round
          the idea is that different clients take different time to render the game, so we will
          wait for all clients to render the map and the animations and then play next round */
-      setInterval(() => { socket.emit('clientreadyfornextround',g_readyForNextRound)},3000);
+
+      // setInterval(() => { socket.emit('clientreadyfornextround',g_readyForNextRound)},3000);
     });
   </script>
 
