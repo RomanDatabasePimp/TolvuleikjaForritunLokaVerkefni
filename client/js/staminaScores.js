@@ -1,6 +1,6 @@
 function setStamina(player){
-    let playername = "bob";//player.character;
-    const playerStamina = 10;//player.stamina;
+    let playername = player.character;
+    const playerStamina = player.stamina;
     let rightPlayerName = "";
     // Put the head image on the right spot
     switch(playername) {
