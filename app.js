@@ -126,7 +126,8 @@ app.get('/', (req, res) => {
 
     // if clients are not ready for the next class we wait
     if(!FTL.allPlayersReadyForNextRound()) {
-      //console.log("Waiting for all clients to start next round (trying in 3 sec)");
+
+      console.log("Waiting for all clients to start next round (trying in 3 sec)");
       setTimeout(startRound,3000);
       return;
     }

@@ -83,8 +83,8 @@
     let g_gameover = { over : false, winners:null };
     // client uses this to ping the serve that he is rdy for the next rounds
     let g_readyForNextRound = false;
-    // 
-    let g_walkinganimfinish = false;
+    
+    let g_walkinganimfinish = {bob:false, sara:false, monster:false};
     // client sents this to tell the serve that he has used a power up
     let g_usedPowerUp = false;
     // this turns players movements are stored here and sent to the server
@@ -101,7 +101,6 @@
        in a seperate obj to be further used more efficiently */
     let g_tilesContainingPlayers = {};
     // for debbugs
-    setTimeout(() => {g_readyForNextRound = true;g_walkinganimfinish=true;},10000);
   </script>
   
   <!-- include all client game logic such as drawing the map waiting looby etc -->
@@ -154,15 +153,6 @@
             g_tilesContainingPlayers = fetchPlayerTiles(g_gamestate.__tiles);
             g_tilesContainingPlayers.map(char => {
               let nplayer = playerExistsInTile(char.tile._entities);
-              if(nplayer.character === "bob"){
-                g_animations["bob"].setmovement(nplayer.movement);
-              }
-              if(nplayer.character === "sara"){
-                g_animations["sara"].setmovement(nplayer.movement);
-              }
-              if(nplayer.character === "monster"){
-                g_animations["monster"].setmovement(nplayer.movement);
-              }
               checkPlayer(nplayer,socket.id);
               g_players.push(nplayer);
             });
@@ -199,7 +189,8 @@
           socket.emit('clientinput',{ steps:g_steps, powerUp:g_usedPowerUp});
           g_steps = [];
           g_usedPowerUp = false;
-          g_walkinganimfinish = false;
+          g_walkinganimfinish = {bob:false, sara:false, monster:false};
+          g_readyForNextRound = false;
           window.removeEventListener("mousedown",handleMouse);
           window.removeEventListener("mousemove",handleMouse);
           window.removeEventListener("keydown",handleKeydown);
