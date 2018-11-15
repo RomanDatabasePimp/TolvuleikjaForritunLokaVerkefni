@@ -19,7 +19,7 @@ function Cloud(descr) {
 /* DONT FUCKING ASK !!!! for some reason if we tried to define 
    this.sprite = g_sprites.cloud it would always show as undefined,
     even after countless tries of debuggin for some reason g_sprites is fine
-    and had the img loaded but still when u would assign g_sprites.cloud it would be undef */
+    and had the img loaded but still when u would assign g_sprites.cloud it would be undefine */
 Cloud.prototype.sprite = g_sprites;
 
 Cloud.prototype.wrapPosition = function () {

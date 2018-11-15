@@ -21,8 +21,10 @@ function render(ctx) {
     drawMapViaTiles(g_gamestate, sockid);
 
     /* helgi draws his character animations */
-    // moveMen();
-    
+    if(!g_readyForNextRound){
+      
+      g_animations["bob"].frame(16.666);
+    }
     
     /* when animations are done rafnar draws the static images of the characters */
     if(g_walkinganimfinish) {
