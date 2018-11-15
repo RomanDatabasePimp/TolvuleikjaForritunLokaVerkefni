@@ -22,6 +22,10 @@ function convertToMatrix(x) {
   return x * 64;
 }
 
+function randRange(min, max) {
+  return (min + Math.random() * (max - min));
+}
+
 function wrapRange (value, lowBound, highBound) {
   while (value < lowBound) {
 value += (highBound - lowBound);
