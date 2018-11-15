@@ -70,7 +70,7 @@
     // this turns players movements are stored here and sent to the server
     let g_steps=[];
     // all the players in the game
-    let g_player = [];
+    let g_players = [];
     // the players that this client is playing as
     let player = {};
     // the game state that the user plays (all users get same gamestate)
@@ -128,10 +128,12 @@
           else {
             // set the new game state so our clients can render it
             g_gamestate = data;
-            // fetch the player 
-            // player  to do 
+            // fetch the player
             // set the lobby to empty
             g_tilesContainingPlayers = fetchPlayerTiles(g_gamestate.__tiles);
+            g_tilesContainingPlayers.map(char => {
+              g_players.push(playerExistsInTile(char.tile._entities));
+            });
             g_waiting = {};
           }
           return;
@@ -141,6 +143,7 @@
         allPlayerWaiting(g_waiting, false);
         g_gamestate= {};
         g_tilesContainingPlayers = {};
+        g_players= [];
       });
 
       socket.on('roundstart', ()=> {
