@@ -65,6 +65,8 @@
     let g_gameover = { over : false, winners:null };
     // client uses this to ping the serve that he is rdy for the next rounds
     let g_readyForNextRound = false;
+    // 
+    let g_walkinganimfinish = false;
     // client sents this to tell the serve that he has used a power up
     let g_usedPowerUp = false;
     // this turns players movements are stored here and sent to the server
@@ -168,6 +170,7 @@
           socket.emit('clientinput',{ steps:g_steps, powerUp:g_usedPowerUp});
           g_steps = [];
           g_usedPowerUp = false;
+          g_walkinganimfinish = false;
           window.removeEventListener("mousedown",handleMouse);
           window.removeEventListener("mousemove",handleMouse);
           window.removeEventListener("keydown",handleKeydown);
