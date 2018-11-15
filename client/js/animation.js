@@ -24,17 +24,25 @@ playerAnimation.prototype.moveMen = function(){
     
 };
 playerAnimation.prototype.frame = function(du) {
-    console.log(g_players.movement);
-    if (this.howManyTime >= 166 || g_players.movement == undefined) {
-        try{       
+    if (this.howManyTime >= 166 || this.movement.length >= 0) {
+        try{
             this.howManyTime = 0;
             pos =0;
             count =0;
             path="";
             noDraw = false;
             this.movement.slice(0,1);
+            this.moveMen[0].step.x;
         }catch{
-            g_walkinganimfinish = true;
+            if(this.name === "bob") {
+                g_walkinganimfinish.bob = true;
+            }
+            if(this.name === "sara") {
+                g_walkinganimfinish.sara = true;
+            }
+            if(this.name === "monster") {
+                g_walkinganimfinish.monster = true;
+            }
             console.log("catch villa í animation js");
             return;
         }
