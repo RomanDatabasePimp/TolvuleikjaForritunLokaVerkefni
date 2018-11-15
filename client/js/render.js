@@ -26,6 +26,9 @@ function render(ctx) {
     
     /* when animations are done rafnar draws the static images of the characters */
     
+    g_tilesContainingPlayers.map(char => {
+      drawCharacters(char.tile,char.i,char.j,sockid);
+    });
     //drawCharacters(g_gamestate, i, j, id)
 
     /*  draw the client side cloud to fuck with the clients */
