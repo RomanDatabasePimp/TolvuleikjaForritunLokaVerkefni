@@ -60,11 +60,13 @@
     /* All global variables that are used by more than one class are here for ease of access */
 
     // the client id used to identify what player he is playing
-    const sockid = socket.id;
+    let sockid = socket.id;
     // tells us if the game is finished i.e game over or won
     let g_gameover = { over : false, winners:null };
     // client uses this to ping the serve that he is rdy for the next rounds
     let g_readyForNextRound = false;
+    // 
+    let g_walkinganimfinish = false;
     // client sents this to tell the serve that he has used a power up
     let g_usedPowerUp = false;
     // this turns players movements are stored here and sent to the server
@@ -80,8 +82,8 @@
     /* to avoid unnecessary computation we store all the clients and the tiles they are in
        in a seperate obj to be further used more efficiently */
     let g_tilesContainingPlayers = {};
-    
-
+    // for debbugs
+    setTimeout(() => {g_readyForNextRound = true;g_walkinganimfinish=true;},10000);
   </script>
   
   <!-- include all client game logic such as drawing the map waiting looby etc -->
@@ -110,6 +112,7 @@
       
       /* we recive the new game state every time a round is over */
       socket.on('NextGameRound', (data)=> {
+        sockid = socket.id;
         // we check if the data is a game state or a waiting lobby
         if (data.hasOwnProperty("__tiles")) {
           // check if the game is over  and the winners are player i.e suviors
@@ -132,7 +135,9 @@
             // set the lobby to empty
             g_tilesContainingPlayers = fetchPlayerTiles(g_gamestate.__tiles);
             g_tilesContainingPlayers.map(char => {
-              g_players.push(playerExistsInTile(char.tile._entities));
+              let nplayer = playerExistsInTile(char.tile._entities);
+              checkPlayer(nplayer,socket.id);
+              g_players.push(nplayer);
             });
             g_waiting = {};
           }
@@ -168,6 +173,7 @@
           socket.emit('clientinput',{ steps:g_steps, powerUp:g_usedPowerUp});
           g_steps = [];
           g_usedPowerUp = false;
+          g_walkinganimfinish = false;
           window.removeEventListener("mousedown",handleMouse);
           window.removeEventListener("mousemove",handleMouse);
           window.removeEventListener("keydown",handleKeydown);
