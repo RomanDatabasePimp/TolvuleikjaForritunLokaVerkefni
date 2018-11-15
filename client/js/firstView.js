@@ -13,7 +13,7 @@ function allPlayerWaiting(data, flag){
   player1 = "Waiting for Bob";
   player2 = "Waiting for Sara";
   monster = "Waiting for monster";
-   
+  document.getElementById("gameRules").style.display = "none";
     if(data != {}){
         try{
             document.getElementById('videoContainerinn').style.display = '';
@@ -31,6 +31,7 @@ function allPlayerWaiting(data, flag){
     function gamePlaying(){
       document.getElementById('videoContainerinn').style.display = 'none';
       document.getElementById('myVideoBackground').style.display='';
+      document.getElementById("gameRules").style.display = "";
     }
     
     
