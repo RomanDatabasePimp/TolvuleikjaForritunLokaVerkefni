@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 
   // Fetch the game 
   const FTL = require('./server/FTL');
-
+  let lock = false; /* a lock used to prevent race conditions  */
   FTL.createGameMap(); // need create the initial map before launching the server
 
   // our socket
@@ -41,10 +41,11 @@ app.get('/', (req, res) => {
 
     /* if a socket manages to get into our game then we need to keep track of it and 
        poll its input else we dont care what it does maybe later we can add a spectate feature ? */
-    if(FTL.tryToJoinGame(socket.id)){
-      
+    if(FTL.tryToJoinGame(socket.id)){      
       console.log("new player joined !");
+
       
+
       /* its good to define rightaway what should happen if the socket disconects
          so we dont forgget about it, if the player leaves we set its char to null allowing
          a new socket to take over */
@@ -56,9 +57,11 @@ app.get('/', (req, res) => {
       /* We listen to the player if he is ready for the next round in ourcase
          we have 3 players all of them have to be ready for the next round to begin  */
       socket.on('clientreadyfornextround',(data)=>{
-        if(data) {
-          console.log("A player is rdy for the next round");
+        console.log("Client rdy for next round");
+        if(data && !lock) {
+          lock = true;
           FTL.setPlayerReadyForNextRound(socket.id);
+          lock = false;
         }
       });
     
@@ -126,7 +129,6 @@ app.get('/', (req, res) => {
 
     // if clients are not ready for the next class we wait
     if(!FTL.allPlayersReadyForNextRound()) {
-
       console.log("Waiting for all clients to start next round (trying in 3 sec)");
       setTimeout(startRound,3000);
       return;
