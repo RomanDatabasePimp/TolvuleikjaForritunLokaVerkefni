@@ -171,6 +171,9 @@
             g_tilesContainingPlayers = fetchPlayerTiles(g_gamestate.__tiles);
             g_tilesContainingPlayers.map(char => {
               let nplayer = playerExistsInTile(char.tile._entities);
+              if(g_animations[nplayer.character]) {
+                g_animations[nplayer.character].setMovement(nplayer.movement);
+              }
               checkPlayer(nplayer,socket.id);
               g_players.push(nplayer);
             });
