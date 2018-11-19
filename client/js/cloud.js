@@ -54,6 +54,7 @@ Cloud.prototype.render = function (ctx) {
 /* lets make some clouds */
 const g_clouds = {
   upper_cloud : new Cloud({cx:55,cy:50,velX: 0.6,scale:0.9}),
-  middle_cloud : new Cloud({cx:200,cy:300,velX: 0.8,scale:1.2}),
+  middle_above_text_cloud : new Cloud({cx:400,cy:220,velX: 0.8,scale:1.2}),
+  middle_below_text_cloud : new Cloud({cx:120,cy:360,velX: 0.8,scale:1.2}),
   bottom_cloud : new Cloud({cx:550,cy:500,velX: 0.4,scale:0.6}),
 }
