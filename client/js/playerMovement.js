@@ -24,7 +24,7 @@ function checkPlayer(player,id){
   
 /**
  * Accepts a rounded down posX&posY from 0-9.
- * CHecks if step has been made before in g_steps.
+ * Checks if step has been made before in g_steps.
  * Returns a highlight at the grid position multiplied for canvas
  * @param {int} posX 
  * @param {int} posY 
