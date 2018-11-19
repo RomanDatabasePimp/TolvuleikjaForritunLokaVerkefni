@@ -2,51 +2,47 @@
    ------------------------------KEY STUFF CODE START-----------------------------------
    -------------------------------------------------------------------------------------*/
 
-   var keys = [];
+var keys = [];
 // Togglable Pause Mode
 const RESET_KEY = 'R'.charCodeAt(0);
-const POWERUP_KEY  = 'X'.charCodeAt(0);
+const POWERUP_KEY = 'X'.charCodeAt(0);
 const RDY_KEY = 32;
 
 // Movement
 let KEY_UP = 'W'.charCodeAt(0);
-let KEY_DOWN  = 'S'.charCodeAt(0);
-let KEY_LEFT   = 'A'.charCodeAt(0);
-let KEY_RIGHT  = 'D'.charCodeAt(0);
+let KEY_DOWN = 'S'.charCodeAt(0);
+let KEY_LEFT = 'A'.charCodeAt(0);
+let KEY_RIGHT = 'D'.charCodeAt(0);
+function startGame(evt){
+  keys[evt.keyCode] = true;
+  if (evt.keyCode === POWERUP_KEY) { g_usedPowerUp = true; }
+  if (evt.keyCode === RESET_KEY) { socket.emit('resetgamerequest', null); }
+  if (evt.keyCode === RDY_KEY) {
+    evt.preventDefault();
+    //g_readyForNextRound = true;
+    g_FadeOutTexts.waitingText.giveMeLife();
+    //socket.emit('clientreadyfornextround', g_readyForNextRound);
+  }
+}
+
 
 function handleKeydown(evt) {
   keys[evt.keyCode] = true;
-  let player = getPlayer();
-  if(evt.keyCode === POWERUP_KEY) { g_usedPowerUp = true; }
-  if(evt.keyCode === RESET_KEY) { socket.emit('resetgamerequest',null); }
-  if(evt.keyCode === RDY_KEY) {
-    evt.preventDefault();
-    g_readyForNextRound = true;
-    socket.emit('clientreadyfornextround',g_readyForNextRound);
-  }
-  if(eatKey(KEY_UP)){
-    if(player.stamina > 0){
-      movePlayerTo(player.entityPos.tileX,player.entityPos.tileY - 1);
+  if (eatKey(KEY_UP)) {
+      movePlayerTo(player.entityPos.tileX, player.entityPos.tileY - 1);
       player.entityPos.tileY -= 1;
-    }
   }
-  if(eatKey(KEY_DOWN)){
-    if(player.stamina > 0){
-    movePlayerTo(player.entityPos.tileX,player.entityPos.tileY + 1);
-    player.entityPos.tileY += 1;
-    }
+  if (eatKey(KEY_DOWN)) {
+      movePlayerTo(player.entityPos.tileX, player.entityPos.tileY + 1);
+      player.entityPos.tileY += 1;
   }
-  if(eatKey(KEY_LEFT)){
-    if(player.stamina > 0){
-    movePlayerTo(player.entityPos.tileX - 1 ,player.entityPos.tileY);
-    player.entityPos.tileX -= 1;
-    }
+  if (eatKey(KEY_LEFT)) {
+      movePlayerTo(player.entityPos.tileX - 1, player.entityPos.tileY);
+      player.entityPos.tileX -= 1;
   }
-  if(eatKey(KEY_RIGHT)){
-    if(player.stamina > 0){
-    movePlayerTo(player.entityPos.tileX + 1,player.entityPos.tileY);
-    player.entityPos.tileX += 1;
-    }
+  if (eatKey(KEY_RIGHT)) {
+      movePlayerTo(player.entityPos.tileX + 1, player.entityPos.tileY);
+      player.entityPos.tileX += 1;
   }//player.entityPos.tileX
 
 }

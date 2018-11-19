@@ -154,7 +154,7 @@
             // fetch the player
             // set the lobby to empty
             
-          //  window.addEventListener("keydown", handleKeydown);
+            window.addEventListener("keydown", startGame);
             g_tilesContainingPlayers = fetchPlayerTiles(g_gamestate.__tiles);
             g_tilesContainingPlayers.map(char => {
               let nplayer = playerExistsInTile(char.tile._entities);
@@ -174,7 +174,7 @@
       });
 
       socket.on("youareready",(data)=> {
-        console.log("hello");
+        console.log("Returned",data.read);
       })
 
       socket.on('roundstart', ()=> {
@@ -204,6 +204,7 @@
           window.removeEventListener("mousedown",handleMouse);
           window.removeEventListener("mousemove",handleMouse);
           window.removeEventListener("keydown",handleKeydown);
+          window.removeEventListener("keyup", handleKeyup);
         }, 5000);
 
       });
@@ -212,7 +213,7 @@
          the idea is that different clients take different time to render the game, so we will
          wait for all clients to render the map and the animations and then play next round */
 
-      // setInterval(() => { socket.emit('clientreadyfornextround',g_readyForNextRound)},3000);
+      setInterval(() => { socket.emit('clientreadyfornextround',g_readyForNextRound)},3000);
     });
   </script>
 

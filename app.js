@@ -58,7 +58,7 @@ app.get('/', (req, res) => {
         if(data && !lock) {
           lock = true;
           FTL.setPlayerReadyForNextRound(socket.id);
-          socket.to(`${socket.id}`).emit('youareready', {read:true});
+          io.sockets.to(socket.id).emit('youareready', {read:true});
           lock = false;
         }
       });
