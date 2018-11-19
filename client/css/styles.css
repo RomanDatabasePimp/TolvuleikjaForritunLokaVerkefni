@@ -123,3 +123,8 @@ button{
   position: absolute;
   right: 5%;
 }
+.unordedListGameRules{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

@@ -24,11 +24,16 @@ playerAnimation.prototype.moveMen = function(){
     
 };
 playerAnimation.prototype.frame = function(du) {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     if (this.howManyTime >= 166 || this.movement.length >= 0) {
 =======
     if (this.howManyTime >= 166 || this.movement.length == 0) {
 >>>>>>> Stashed changes
+=======
+    console.log(this.howManyTime, this.movement.length);
+    if (this.howManyTime >= 166 || this.movement.length == 0) {
+>>>>>>> 8dcb263f6829ee144b07fd44912554562c4fe2d9
         try{
             this.howManyTime = 0;
             pos =0;
@@ -47,18 +52,16 @@ playerAnimation.prototype.frame = function(du) {
             if(this.name === "monster") {
                 g_walkinganimfinish.monster = true;
             }
-            console.log("catch villa í animation js");
+            //console.log("catch villa í animation js");
             return;
         }
     } else {
+        console.log(this.howManyTime);
         this.howManyTime+= du;
         // hér þarf að gera animation frá punkt a til punkt b
             this.oldX = this.movement[0].step.x;
             this.oldy = this.movement[0].step.y
-            checkWichDirection(this.movement[1].step.x, this.movement[1].step.y);
-
-     
-            
+            checkWichDirection(this.movement[1].step.x, this.movement[1].step.y);            
         try{
             // Hér þarf að determa í hvaða átt
             count += 16.666;
