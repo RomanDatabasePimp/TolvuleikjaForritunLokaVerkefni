@@ -39,6 +39,7 @@ playerAnimation.prototype.update= function(du) {
             this.tempMove = [];
         }
         else {
+        g_animation_finished = true;
         g_walkinganimfinish[this.name] = true;
         this.leftstep = null;
         return;
@@ -76,6 +77,7 @@ try{
         this.rendersteps.leftstep = null;
         return;
     }
+    g_animation_finished = false;
     this.rendersteps.steppingl = !this.rendersteps.steppingl;
 
 }catch{

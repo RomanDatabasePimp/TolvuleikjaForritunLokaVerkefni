@@ -97,6 +97,7 @@
     // client uses this to ping the serve that he is rdy for the next rounds
     let g_readyForNextRound = false;
     
+    let g_animation_finished = false;
     let g_walkinganimfinish = { bob: false, sara: false, monster: false };
     // client sents this to tell the serve that he has used a power up
     let g_usedPowerUp = false;
@@ -117,32 +118,31 @@
   </script>
   
   <!-- include all client game logic such as drawing the map waiting looby etc -->
-  <script src="./client/js/audioPlayer.js"></script>
-  <script src="./client/js/handleMouse.js"></script>
-  <script src="./client/js/utils.js"></script>
-  <script src="./client/js/Sprite.js"></script>
-  <script src="./client/js/imagesPreload.js"></script>
-  <script src="./client/js/keys.js"></script>
-  <script src="./client/js/cloud.js"></script>
-  <script src="./client/js/FadeOutText.js"></script>
-  <script src="./client/js/playerMovement.js"></script>
-  <script src="./client/js/progressBar.js"></script>
-  <script src="./client/js/staminaScores.js"></script>
-  <script src="./client/js/animation.js"></script>
-  <script src ="./client/js/firstView.js"></script>
+  <script type="text/javascript" src="./client/js/audioPlayer.js" defer></script>
+  <script type="text/javascript" src="./client/js/handleMouse.js" defer></script>
+  <script type="text/javascript" src="./client/js/utils.js" defer></script>
+  <script type="text/javascript" src="./client/js/Sprite.js" defer></script>
+  <script type="text/javascript" src="./client/js/imagesPreload.js" defer></script>
+  <script type="text/javascript" src="./client/js/keys.js" defer></script>
+  <script type="text/javascript" src="./client/js/cloud.js" defer></script>
+  <script type="text/javascript" src="./client/js/FadeOutText.js" defer></script>
+  <script type="text/javascript" src="./client/js/playerMovement.js" defer></script>
+  <script type="text/javascript" src="./client/js/progressBar.js" defer></script>
+  <script type="text/javascript" src="./client/js/staminaScores.js" defer></script>
+  <script type="text/javascript" src="./client/js/animation.js" defer></script>
+  <script type="text/javascript" src ="./client/js/firstView.js" defer></script>
   
-  <script src="./client/js/render.js"></script>
-  <script src="./client/js/update.js"></script>
+  <script type="text/javascript" src="./client/js/render.js" defer></script>
+  <script type="text/javascript" src="./client/js/update.js" defer></script>
 
-  <script src="./client/js/g_main.js"></script>
-  <script src="./client/js/main.js"></script>
+  <script type="text/javascript" src="./client/js/g_main.js" defer></script>
+  <script type="text/javascript" src="./client/js/main.js" defer></script>
  
   <!-- Combine all the game logic into a client side game -->
   <script>
     /* Define what happens when a socket manages to connect to our server */
     socket.on('connect', function() {
       // in here we can pass our socket.id to the functions that need it
-      
       /* we recive the new game state every time a round is over */
       socket.on('NextGameRound', (data)=> {
         sockid = socket.id;
@@ -225,7 +225,7 @@
          wait for all clients to render the map and the animations and then play next round */
       // setInterval(() => { socket.emit('clientreadyfornextround',g_readyForNextRound)},3000);
     });
-  </script>
+    </script>
 
 </body>
 </html>
