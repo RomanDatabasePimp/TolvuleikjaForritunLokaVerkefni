@@ -23,27 +23,20 @@ function render(ctx) {
     g_FadeOutTexts.waitingText.render(g_readyForNextRound);
 
     /* helgi draws his character animations */
-
-    
+   // g_animations["bob"].render(ctx);
+   // g_animations["sara"].render(ctx);
+   // g_animations["monster"].render(ctx);
 
     /* when animations are done rafnar draws the static images of the characters */
-    if(allCharactersRendered(g_walkinganimfinish)) {
-      g_tilesContainingPlayers.map(char => { drawCharacters(char.tile,char.i,char.j,sockid);  });
-      
-    }
-      g_animations["bob"].render(ctx);
-      g_animations["sara"].render(ctx);
-      g_animations["monster"].render(ctx);
-    
-    
-    //drawCharacters(g_gamestate, i, j, id)
-        
-    
-    g_steps.map(step => {
-      g_sprites.highLight.drawAt(g_ctx,step.step.x*64, step.step.y*64);
-    });
+    // if(allCharactersRendered(g_walkinganimfinish)) {
+    //  g_tilesContainingPlayers.map(char => { drawCharacters(char.tile,char.i,char.j,sockid);  });
+    //}
+    g_tilesContainingPlayers.map(char => { drawCharacters(char.tile,char.i,char.j,sockid);  });
+    g_steps.map(step => { g_sprites.highLight.drawAt(g_ctx,step.step.x*64, step.step.y*64); });
+
     /*  draw the client side cloud to fuck with the clients */
     for( let cloud in g_clouds) { g_clouds[cloud].render(ctx); }
+    
     return;
   }
   

@@ -138,9 +138,67 @@ function mapMaker(){
     [2,6,2,0,0,0,0,1,0,0],
     [3,2,2,0,0,1,0,0,0,0]
   ];
-  // 50 50 odds on which map we show.
-  if (Math.random() >= 0.5) {return map1;}
-  else {return map2;}
+  let map3 = [
+    [0,0,2,2,2,2,2,2,0,0],
+    [0,1,2,0,0,0,0,2,1,0],
+    [2,2,1,2,0,0,2,1,2,2],
+    [2,0,2,1,2,2,1,2,4,2],
+    [2,5,0,2,0,5,2,0,0,2],
+    [2,0,0,2,4,0,2,0,5,2],
+    [2,0,2,1,2,2,1,2,0,2],
+    [2,2,1,2,0,0,2,1,2,2],
+    [0,1,2,0,0,0,0,5,1,0],
+    [0,0,2,2,2,2,2,2,4,0]
+  ];
+  // Old buggy map, do not allow players to start in ANY terrain.
+  //let map3 = [
+  //  [2,2,2,2,2,2,2,2,2,2],
+  //  [2,1,0,0,4,0,0,0,1,2],
+  //  [2,0,1,0,0,0,0,1,0,2],
+  //  [2,0,0,1,2,2,1,0,0,2],
+  //  [2,5,0,2,0,5,2,0,0,2],
+  //  [2,0,0,2,4,0,2,0,5,2],
+  //  [2,0,0,1,2,2,1,0,0,2],
+  //  [2,0,1,0,0,0,0,1,0,2],
+  //  [2,1,0,0,0,0,0,4,1,2],
+  //  [2,2,2,2,2,2,2,2,2,2]
+  //];
+  let map4 = [
+    [0,0,1,0,2,2,0,2,1,1],
+    [0,2,5,2,1,1,2,0,2,1],
+    [1,5,2,5,2,2,0,3,0,2],
+    [0,2,5,2,0,0,2,0,2,0],
+    [2,1,2,0,1,1,0,2,1,2],
+    [2,1,2,0,1,1,0,2,1,2],
+    [0,2,0,2,0,0,2,0,2,0],
+    [2,0,2,0,3,2,0,2,0,2],
+    [1,2,0,2,1,1,2,0,2,2],
+    [1,1,2,0,2,2,4,2,2,2]
+  ];
+  // 25% odds on which map we show.
+  let rnd = callRandom();
+  let map;
+  switch (rnd) {
+    case 1:
+      map = map1;
+      break;
+      case 2:
+      map = map2;
+      break;
+      case 3:
+      map = map3;
+      break;
+      case 4:
+      map = map4;
+      break;
+    default:
+      break;
+  }
+  return map;
+}
+// Helper random function since Utils is only client side.
+function callRandom(){
+  return Math.floor(Math.random() * 4) + 1;
 }
 /* export the tile maneger so we can use it */
 module.exports = {

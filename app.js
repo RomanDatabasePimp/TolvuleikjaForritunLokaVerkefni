@@ -55,7 +55,6 @@ app.get('/', (req, res) => {
       /* We listen to the player if he is ready for the next round in ourcase
          we have 3 players all of them have to be ready for the next round to begin  */
       socket.on('clientreadyfornextround',(data)=>{
-        console.log("Client rdy for next round");
         if(data && !lock) {
           lock = true;
           FTL.setPlayerReadyForNextRound(socket.id);
