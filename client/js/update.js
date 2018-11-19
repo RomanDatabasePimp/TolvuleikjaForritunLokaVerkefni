@@ -31,7 +31,12 @@ function update(dt) {
   /* kalla á föll sem þurfa að uppfærast in terms of rendering not game logic  */
 
   // call the character update logic for helgis walking 
-  //moveMen(du);
+    g_animations["bob"].setmovement(g_steps);
+    g_animations["bob"].frame(du);
+    g_animations["sara"].frame(du);
+    g_animations["monster"].frame(du);
+    
+    
   // call the animation for the cloud shit
   for(let cloud in g_clouds) {
     g_clouds[cloud].update(du);
