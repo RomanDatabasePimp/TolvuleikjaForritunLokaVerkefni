@@ -12,26 +12,39 @@ function playerAnimation (descr){
       this.imgLeft1: g_sprites,
       this.imgLeft2 : g_sprites  
 */
-    this.count =0,//delete ater fix
+    this.count = 0,//delete ater fix
     
     this.path = "stay",
     this.noDraw = false,
     this.howManyTime = 0,// to high nr needs to be lowerd but is okay
+
     this.movement = [],// should be passed in the object
     this.rendersteps = { leftstep : null, rightstep: null , cx:null , cy:null , steppingl : true, descordX:null,descordY:null}
+    this.tempMove = [];
 };
 
 playerAnimation.prototype.setMovement = function (moves) {
-  this.movement = moves;
+    if(this.movement.length == 0) {
+        this.movement = moves;
+    } else {
+        this.tempMove = moves;
+    }
+
 };
 
 playerAnimation.prototype.update= function(du) {
-    if(this.movement.length <= 1) {
+    if(this.movement.length == 0) {
+        if(this.tempMove.length > 0) {
+            this.movement = this.tempMove;
+            this.tempMove = [];
+        }
+        else {
         g_walkinganimfinish[this.name] = true;
         this.leftstep = null;
         return;
     }
-
+    }
+try{
     if(!this.rendersteps.leftstep){
        const newStep = this.movement.shift();
        this.rendersteps.descordX = (this.movement[0].step.x * 64);
@@ -39,30 +52,35 @@ playerAnimation.prototype.update= function(du) {
        this.rendersteps.cx = newStep.step.x*64;
        this.rendersteps.cy = newStep.step.y*64;
        this.checkWichDirection(this.rendersteps.descordX, this.rendersteps.descordY,this.rendersteps.cx, this.rendersteps.cy);
+       this.count = 0;
     }
  
     switch (this.path) {
         case this.path = "left":
-            this.rendersteps.cx -= 1*du;
+            this.rendersteps.cx -= 2.5*du;
             break;
         case this.path = "right":
-            this.rendersteps.cx += 1*du;
+            this.rendersteps.cx += 2.5*du;
             break;
         case this.path = "down":
-            this.rendersteps.cy += 1*du;
+            this.rendersteps.cy += 2.5*du;
             break;
         case this.path = "up":
-            this.rendersteps.cy += 1*du;
+            this.rendersteps.cy += 2.5*du;
             break;   
         default:
     }
     let tempX = Math.abs(this.rendersteps.cx - this.rendersteps.descordX);
     let tempY = Math.abs(this.rendersteps.cy - this.rendersteps.descordY);
-    if(tempX <= 5 && tempY <= 5){
+    if(tempX <= 25 && tempY <= 25){
         this.rendersteps.leftstep = null;
         return;
     }
     this.rendersteps.steppingl = !this.rendersteps.steppingl;
+
+}catch{
+    // villa
+}
 };
 
 playerAnimation.prototype.moveMen = function(){
@@ -70,17 +88,22 @@ playerAnimation.prototype.moveMen = function(){
     
 };
 playerAnimation.prototype.render = function(g_ctx) {
-    if(this.movement.length <= 1) { return; }
-    if(this.rendersteps.steppingl) {
-      this.rendersteps.leftstep.drawAt(g_ctx,this.rendersteps.cx,this.rendersteps.cy);  
-    } else{
-        this.rendersteps.rightstep.drawAt(g_ctx,this.rendersteps.cx,this.rendersteps.cy);  
+    if(this.movement.length == 0) { return; }
+    console.log(this.rendersteps.cx+ " skrefing");
+    this.count += 1;
+    try{
+        console.log(this.count);
+            if(this.count %2 == 0 && this.count%3 == 0) {
+              this.rendersteps.leftstep.drawAt(g_ctx,this.rendersteps.cx,this.rendersteps.cy);  
+            } else{
+                this.rendersteps.rightstep.drawAt(g_ctx,this.rendersteps.cx,this.rendersteps.cy);  
+            }
+    }catch{
+
     }
 };
     
     playerAnimation.prototype.checkWichDirection = function(newx,newy,oldX,oldY){
-      //  console.log("hér");
-        //console.log(newx, newy, oldX, oldY);
         if(oldX < newx){
             console.log(this.imgRight1);
             this.rendersteps.leftstep =  g_sprites.bobRight1;
@@ -96,6 +119,7 @@ playerAnimation.prototype.render = function(g_ctx) {
             return;
         }
         if(oldY < newy){
+            console.log("niður", this.rendersteps.leftstep);
             this.rendersteps.leftstep =  g_sprites.bobDown1;
             this.rendersteps.rightstep =g_sprites.bobDown2;
         this.path = "down";
