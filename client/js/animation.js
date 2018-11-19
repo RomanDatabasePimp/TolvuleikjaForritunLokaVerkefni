@@ -24,7 +24,11 @@ playerAnimation.prototype.moveMen = function(){
     
 };
 playerAnimation.prototype.frame = function(du) {
+<<<<<<< Updated upstream
     if (this.howManyTime >= 166 || this.movement.length >= 0) {
+=======
+    if (this.howManyTime >= 166 || this.movement.length == 0) {
+>>>>>>> Stashed changes
         try{
             this.howManyTime = 0;
             pos =0;
