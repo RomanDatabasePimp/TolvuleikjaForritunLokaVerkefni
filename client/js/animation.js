@@ -2,132 +2,125 @@ function playerAnimation (descr){
     for(let property in descr) {
         this[property] = descr[property];
       }
-      
-    this.pos = 0,
-    this.id = null,
-    this.count =0,
-    this.oldX = 0,
-    this.oldY =0,
+    /*   
+      this.imgUp1 :  g_sprites,
+      this.imgUp2 : g_sprites,
+      this.imgDown1 : g_sprites,
+      this.imgDown2 : g_sprites,
+      this.imgRight1: g_sprites,
+      this.imgRight2: g_sprites,
+      this.imgLeft1: g_sprites,
+      this.imgLeft2 : g_sprites  
+*/
+    this.count =0,//delete ater fix
+    
     this.path = "stay",
     this.noDraw = false,
-    this.img1 = null,
-    this.img1 = null,
-    this.howManyTime = 0,
-    this.movement = []
+    this.howManyTime = 0,// to high nr needs to be lowerd but is okay
+    this.movement = [],// should be passed in the object
+    this.rendersteps = { leftstep : null, rightstep: null , cx:null , cy:null , steppingl : true, descordX:null,descordY:null}
 };
-playerAnimation.prototype.setmovement = function(moves){
-    this.movement = moves;
-    //console.log("moves"+this.movement);
+
+playerAnimation.prototype.setMovement = function (moves) {
+  this.movement = moves;
+};
+
+playerAnimation.prototype.update= function(du) {
+    if(this.movement.length <= 1) {
+        g_walkinganimfinish[this.name] = true;
+        this.leftstep = null;
+        return;
+    }
+
+    if(!this.rendersteps.leftstep){
+       const newStep = this.movement.shift();
+       this.rendersteps.descordX = (this.movement[0].step.x * 64);
+       this.rendersteps.descordY = (this.movement[0].step.y * 64);
+       this.rendersteps.cx = newStep.step.x*64;
+       this.rendersteps.cy = newStep.step.y*64;
+       this.checkWichDirection(this.rendersteps.descordX, this.rendersteps.descordY,this.rendersteps.cx, this.rendersteps.cy);
+    }
+ 
+    switch (this.path) {
+        case this.path = "left":
+            this.rendersteps.cx -= 1*du;
+            break;
+        case this.path = "right":
+            this.rendersteps.cx += 1*du;
+            break;
+        case this.path = "down":
+            this.rendersteps.cy += 1*du;
+            break;
+        case this.path = "up":
+            this.rendersteps.cy += 1*du;
+            break;   
+        default:
+    }
+    let tempX = Math.abs(this.rendersteps.cx - this.rendersteps.descordX);
+    let tempY = Math.abs(this.rendersteps.cy - this.rendersteps.descordY);
+    if(tempX <= 5 && tempY <= 5){
+        this.rendersteps.leftstep = null;
+        return;
+    }
+    this.rendersteps.steppingl = !this.rendersteps.steppingl;
 };
 
 playerAnimation.prototype.moveMen = function(){
     document.getElementById("winnerNoteID").style.display = 'none';
     
 };
-playerAnimation.prototype.frame = function(du) {
-    this.howManyTime += du;
-    if (this.howManyTime >= 166 || this.movement.length == 0) {
-        try{
-            this.howManyTime = 0;
-            pos =0;
-            count =0;
-            path="";
-            noDraw = false;
-            this.movement.slice(0,1);
-            this.moveMen[0].step.x;
-        }catch{
-            if(this.name === "bob") {
-                g_walkinganimfinish.bob = true;
-            }
-            if(this.name === "sara") {
-                g_walkinganimfinish.sara = true;
-            }
-            if(this.name === "monster") {
-                g_walkinganimfinish.monster = true;
-            }
+playerAnimation.prototype.render = function(g_ctx) {
+    if(this.movement.length <= 1) { return; }
+    if(this.rendersteps.steppingl) {
+      this.rendersteps.leftstep.drawAt(g_ctx,this.rendersteps.cx,this.rendersteps.cy);  
+    } else{
+        this.rendersteps.rightstep.drawAt(g_ctx,this.rendersteps.cx,this.rendersteps.cy);  
+    }
+};
+    
+    playerAnimation.prototype.checkWichDirection = function(newx,newy,oldX,oldY){
+      //  console.log("hér");
+        //console.log(newx, newy, oldX, oldY);
+        if(oldX < newx){
+            console.log(this.imgRight1);
+            this.rendersteps.leftstep =  g_sprites.bobRight1;
+            this.rendersteps.rightstep = g_sprites.bobRight2;
+            console.log("Hægri",this.rendersteps.leftstep);
+            this.path = "right";
             return;
         }
-    } 
-    /*else {
-        console.log(this.howManyTime+ " lengd"+ this.movement.length);
-        // hér þarf að gera animation frá punkt a til punkt b
-        this.oldX = this.movement[0].step.x;
-        this.oldy = this.movement[0].step.y
-        checkWichDirection(this.movement[1].step.x, this.movement[1].step.y);            
-        try{
-            // Hér þarf að determa í hvaða átt
-            count += 16.666;
-            switch (path) {
-                case path = "left":
-                playerX = this.movement[0].step.x*64-count;
-                playerY = this.movement[0].step.y*64;
-                    img1 =  g_sprites.bobLeft1;
-                    img2 =  g_sprites.bobLeft2;
-                  break;
-                case path = "right":
-                playerX = this.movement[0].step.x*64+count;
-                    playerY = this.movement[0].step.y*64;
-                    img1 =  g_sprites.bobRight1;
-                    img2 =  g_sprites.bobRight2;
-            
-                    break;
-                    case path = "down":
-                    playerX = this.movement[0].step.x*64;
-                    playerY = this.movement[0].step.y*64+count;
-                    img1 =  g_sprites.bobDown1;
-                    img2 =  g_sprites.bobDown2;
-                  break;
-                  case path = "up":
-                    playerX = this.movement[0].step.x*64;
-                    playerY = this.movement[0].step.y*64-count;
-                    img1 =  g_sprites.bobUp1;
-                    img2 =  g_sprites.bobUp2;
-                    break;
-                case path = "stay":
-                noDraw = true;
-                break;
-                default:
-            }
-            if(noDraw == false){
-                if(pos%2 == 0 ){
-                    img1.drawAt(g_ctx, playerX,playerY);
-                }if(pos %3 == 0){
-                    img2.drawAt(g_ctx, playerX,playerY);
-                }
-                
-            }
-        }catch(e){
-            console.log(e);
+        if(oldX > newx){
+            this.rendersteps.leftstep = g_sprites.bobLeft1;
+            this.rendersteps.rightstep =g_sprites.bobLeft2;
+            this.path ="left";
+            return;
         }
-        pos++; 
-    }*/
-    console.log(du);
-};
-
-playerAnimation.prototype.checkWichDirection = function(){
-    if(oldX < newx){
-        path = "right";
-        return;
-    }
-    if(oldX > newx){
-        path = "left";
-        return;
-    }
-    if(oldY < newy){
-        path="down";
+        if(oldY < newy){
+            this.rendersteps.leftstep =  g_sprites.bobDown1;
+            this.rendersteps.rightstep =g_sprites.bobDown2;
+        this.path = "down";
         return;
     }
     if(oldY > newy){
-        path ="up";
+        this.rendersteps.leftstep =  g_sprites.bobUp1;
+        this.rendersteps.rightstep = g_sprites.bobUp2;
+        this.path ="up";
         return;
     }
     else{
-        path="stay;"
+        //console.log("viljum ekki sjá STAY");
+        this.path="stay;"
         return;
     }
 };
 let g_animations = { 
-  bob : new playerAnimation({name :"bob"}),
-  sara : new playerAnimation({name :"sara"}),
-  monster : new playerAnimation({name :"monster"})
+  bob : new playerAnimation({name :"bob"
+                            }),
+                             
+
+
+  sara : new playerAnimation({name :"sara"
+}),
+  monster : new playerAnimation({name :"monster"
+})
 }
