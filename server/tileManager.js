@@ -162,7 +162,7 @@ function mapMaker(){
     [1,2,0,2,1,1,2,0,2,2],
     [1,1,2,0,2,2,4,2,2,2]
   ];
-  // 50 50 odds on which map we show.
+  // 25% odds on which map we show.
   let rnd = callRandom();
   let map;
   switch (rnd) {
@@ -183,10 +183,11 @@ function mapMaker(){
   }
   return map;
 }
-/* export the tile maneger so we can use it */
+// Helper random function since Utils is only client side.
 function callRandom(){
   return Math.floor(Math.random() * 4) + 1;
 }
+/* export the tile maneger so we can use it */
 module.exports = {
   g_tileManager,
 };
