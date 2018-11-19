@@ -33,7 +33,7 @@ FadeOutText.prototype.render = function (gameReady) {
   
   
   ctx.font = "bold 40px Arial";
-  ctx.fillText(this.textToFadeOut,30,320);
+  ctx.fillText(this.textToFadeOut,10,320);
   
   ctx.globalAlpha = 1;
 };
