@@ -35,7 +35,7 @@ function drawTile(tile, i, j) {
     g_sprites.terrain.drawAt(g_ctx, i * 64, j * 64);
   } 
   if (tile[i][j]._amIAStructure) {
-    g_sprites.tallGrass.drawAt(g_ctx, i * 64, j * 64);
+    g_sprites.tallGrassMoved.drawAt(g_ctx, i * 64, j * 64);
   }
   if (treasureExistsInTile(tile[i][j]._entities)) {
     let treasure = treasureExistsInTile(tile[i][j]._entities);

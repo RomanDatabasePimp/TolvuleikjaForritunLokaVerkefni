@@ -184,7 +184,7 @@ var g_sprites = {};
 function preloadDone() {
 
   g_sprites.grassTile = new Sprite(g_images.grassTile);
-  g_sprites.tallGrassMoved = new Sprite(g_images.grassTile);
+  g_sprites.tallGrassMoved = new Sprite(g_images.tallGrassMoved);
   g_sprites.tallGrass = new Sprite(g_images.tallGrass);
   g_sprites.player = new Sprite(g_images.player);
   g_sprites.highLight = new Sprite(g_images.highLight);
