@@ -2,7 +2,7 @@
 
 // The "nominal interval" is the one that all of our time-based units are
 // calibrated to e.g. a velocity unit is "pixels per nominal interval"
-var NOMINAL_UPDATE_INTERVAL = 250;
+var NOMINAL_UPDATE_INTERVAL = 100;
 
 // Dt means "delta time" and is in units of the timer-system (i.e. milliseconds)
 var g_prevUpdateDt = null;
@@ -32,6 +32,9 @@ function update(dt) {
 
   // call the character update logic for helgis walking 
   //moveMen(du);
+
+  g_FadeOutTexts.waitingText.update(du,g_readyForNextRound);
+   
   // call the animation for the cloud shit
   for(let cloud in g_clouds) {
     g_clouds[cloud].update(du);

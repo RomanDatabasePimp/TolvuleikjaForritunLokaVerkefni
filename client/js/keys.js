@@ -22,6 +22,7 @@ function handleKeydown(evt) {
   if(evt.keyCode === RDY_KEY) {
     evt.preventDefault();
     g_readyForNextRound = true;
+    g_FadeOutTexts.waitingText.giveMeLife();
     socket.emit('clientreadyfornextround',g_readyForNextRound);
   }
   if(eatKey(KEY_UP)){

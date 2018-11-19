@@ -19,17 +19,23 @@ function render(ctx) {
     /* rafnar draws his map and the map objects keys,redbull etc..  */
     drawMapViaTiles(g_gamestate, sockid);
 
+    /* if the round hasent started we draw the fade out text */
+    g_FadeOutTexts.waitingText.render(g_readyForNextRound);
+
     /* helgi draws his character animations */
-    
-    g_animations["bob"].frame(16.666);
-    g_animations["sara"].frame(16.666);
-    g_animations["monster"].frame(16.666);
+
     
     /* when animations are done rafnar draws the static images of the characters */
     if(allCharactersRendered(g_walkinganimfinish)) {
       g_tilesContainingPlayers.map(char => { drawCharacters(char.tile,char.i,char.j,sockid);  });
+      
     }
+    
     //drawCharacters(g_gamestate, i, j, id)
+        
+    g_animations["bob"].frame(16.666);
+    g_animations["sara"].frame(16.666);
+    g_animations["monster"].frame(16.666);
     g_steps.map(step => {
       g_sprites.highLight.drawAt(g_ctx,step.step.x*64, step.step.y*64);
     });
