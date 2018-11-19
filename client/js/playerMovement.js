@@ -45,7 +45,6 @@ function checkPlayer(player,id){
         /**
          * multiplies for our canvas.
          */
-        g_sprites.highLight.drawAt(g_ctx,posX*64, posY*64);
         g_steps.push(newStep);
     }     
   };
