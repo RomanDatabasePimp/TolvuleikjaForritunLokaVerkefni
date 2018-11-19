@@ -154,7 +154,7 @@
             // fetch the player
             // set the lobby to empty
             
-            window.addEventListener("keydown", handleKeydown);
+          //  window.addEventListener("keydown", handleKeydown);
             g_tilesContainingPlayers = fetchPlayerTiles(g_gamestate.__tiles);
             g_tilesContainingPlayers.map(char => {
               let nplayer = playerExistsInTile(char.tile._entities);
@@ -173,10 +173,16 @@
         g_players= [];
       });
 
+      socket.on("youareready",(data)=> {
+        console.log("hello");
+      })
+
       socket.on('roundstart', ()=> {
         // when the round starts we allow the user to click on the tiles
         window.addEventListener("mousedown", handleMouse);
         window.addEventListener("mousemove", handleMouse);
+        window.addEventListener("keydown", handleKeydown);
+        window.addEventListener("keyup", handleKeyup);
         player = getPlayer();
         setStamina(player);
         startProgressBar();

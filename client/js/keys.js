@@ -66,8 +66,7 @@ function keyCode(keyChar) {
   return keyChar.charCodeAt(0);
 }
 
-window.addEventListener("keydown", handleKeydown);
-window.addEventListener("keyup", handleKeyup);
+
 // add the listeners to the window so the use can press these guys
 
 /* -------------------------------------------------------------------------------------
