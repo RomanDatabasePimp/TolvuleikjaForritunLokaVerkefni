@@ -11,11 +11,16 @@ requestPreloads();
  * @param {Tile} tile 
  * @param {Socket.id} id 
  */
-function drawMapViaTiles(tile, id) {
+function drawMapViaTiles(tile) {
   if (!(tile.hasOwnProperty("__tiles"))) return null;
   for (let i = 0; i < tile.__tiles.length; i++) {
     for (let j = 0; j < tile.__tiles[i].length; j++) {
       drawTile(tile.__tiles, i, j);
+      try{
+        if(g_steps[i].step.x == i && g_steps[i].step.y == j){
+          console.log("Hack worked!");
+        }
+      } catch(e){}
     }
   }
 };
@@ -69,18 +74,25 @@ function fetchPlayerTiles(tiles) {
  * @param {int} i x-axis 
  * @param {int} j y-axis
  * @param {int} id id frá player, notað til að identifya players
+ * This code is awful and unreadable, I would avoid changing it.
+ * It works however.
+ * @Author Helgi Grétar Gunnarsson, Hgg26.
  */
 function drawCharacters(tile, i, j, id) {
-  if (tile._amIAStructure && playerExistsInTile(tile._entities)) {
-    let entity = playerExistsInTile(tile._entities);
-    player = getPlayer();
-    g_ctx.globalAlpha = 0.5;
+  let tileGrass;
+  let entity = playerExistsInTile(tile._entities);
+  player = getPlayer();
+  if(tile._amIAStructure){
+    tileGrass = tile;
+  if ((tileGrass._TilePosX && player.entityPos.tileX) && (tileGrass._TilePosY && player.entityPos.tileY)) {
+    g_ctx.globalAlpha = 0.8;
     drawCorrectChar(player.character, player.entityPos.tileX, player.entityPos.tileY, true);
     g_ctx.globalAlpha = 1;
     return;
   }
+}
   if (playerExistsInTile(tile._entities)) {
-    let entity = playerExistsInTile(tile._entities);
+    if(tileGrass) return;
     drawCorrectChar(entity.character, i, j, false);
   }
 };

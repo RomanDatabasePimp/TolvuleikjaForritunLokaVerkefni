@@ -13,7 +13,6 @@ After : draws out the currents state of the map */
 function render(ctx) {
   // always start to clear the canvas duh ! we got no pause fetures cuz this be online!
   clearCanvas(ctx);
-  
   // if the game state has tiles we know it has game state to render
   if(g_gamestate.hasOwnProperty("__tiles")) {
     gamePlaying();
@@ -22,7 +21,6 @@ function render(ctx) {
 
     /* helgi draws his character animations */
 
-    
     
     /* when animations are done rafnar draws the static images of the characters */
     if(allCharactersRendered(g_walkinganimfinish)) {
@@ -33,6 +31,9 @@ function render(ctx) {
     g_animations["bob"].frame(16.666);
     g_animations["sara"].frame(16.666);
     g_animations["monster"].frame(16.666);
+    g_steps.map(step => {
+      g_sprites.highLight.drawAt(g_ctx,step.step.x*64, step.step.y*64);
+    });
     /*  draw the client side cloud to fuck with the clients */
     for( let cloud in g_clouds) { g_clouds[cloud].render(ctx); }
     return;

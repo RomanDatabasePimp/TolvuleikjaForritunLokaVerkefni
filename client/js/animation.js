@@ -45,7 +45,6 @@ playerAnimation.prototype.frame = function(du) {
             if(this.name === "monster") {
                 g_walkinganimfinish.monster = true;
             }
-            //console.log("catch villa í animation js");
             return;
         }
     } 
