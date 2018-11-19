@@ -32,6 +32,8 @@ function update(dt) {
 
   // call the character update logic for helgis walking 
   //moveMen(du);
+
+  g_FadeOutTexts.waitingText.update(du,g_readyForNextRound);
   // call the animation for the cloud shit
   for(let cloud in g_clouds) {
     g_clouds[cloud].update(du);
