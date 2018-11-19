@@ -57,16 +57,16 @@ try{
  
     switch (this.path) {
         case this.path = "left":
-            this.rendersteps.cx -= 2.5*du;
+            this.rendersteps.cx -= 3*du;
             break;
         case this.path = "right":
-            this.rendersteps.cx += 2.5*du;
+            this.rendersteps.cx += 3*du;
             break;
         case this.path = "down":
-            this.rendersteps.cy += 2.5*du;
+            this.rendersteps.cy += 3*du;
             break;
         case this.path = "up":
-            this.rendersteps.cy -= 2.5*du;
+            this.rendersteps.cy -= 3*du;
             break;   
         default:
     }

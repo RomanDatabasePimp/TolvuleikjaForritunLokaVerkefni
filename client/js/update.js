@@ -2,7 +2,7 @@
 
 // The "nominal interval" is the one that all of our time-based units are
 // calibrated to e.g. a velocity unit is "pixels per nominal interval"
-var NOMINAL_UPDATE_INTERVAL = 100;
+var NOMINAL_UPDATE_INTERVAL = 55;
 
 // Dt means "delta time" and is in units of the timer-system (i.e. milliseconds)
 var g_prevUpdateDt = null;
