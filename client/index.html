@@ -154,7 +154,7 @@
             // fetch the player
             // set the lobby to empty
             
-            window.addEventListener("keydown", handleKeydown);
+            window.addEventListener("keydown", startGame);
             g_tilesContainingPlayers = fetchPlayerTiles(g_gamestate.__tiles);
             g_tilesContainingPlayers.map(char => {
               let nplayer = playerExistsInTile(char.tile._entities);
@@ -177,6 +177,8 @@
         // when the round starts we allow the user to click on the tiles
         window.addEventListener("mousedown", handleMouse);
         window.addEventListener("mousemove", handleMouse);
+        window.addEventListener("keydown", handleKeydown);
+        window.addEventListener("keyup", handleKeyup);
         player = getPlayer();
         setStamina(player);
         startProgressBar();
@@ -198,6 +200,7 @@
           window.removeEventListener("mousedown",handleMouse);
           window.removeEventListener("mousemove",handleMouse);
           window.removeEventListener("keydown",handleKeydown);
+          window.removeEventListener("keyup", handleKeyup);
         }, 5000);
 
       });
