@@ -22,15 +22,19 @@ function render(ctx) {
     /* helgi draws his character animations */
 
     
+
     /* when animations are done rafnar draws the static images of the characters */
     if(allCharactersRendered(g_walkinganimfinish)) {
       g_tilesContainingPlayers.map(char => { drawCharacters(char.tile,char.i,char.j,sockid);  });
     }
+      g_animations["bob"].render(ctx);
+      g_animations["sara"].render(ctx);
+      g_animations["monster"].render(ctx);
+    
+    
     //drawCharacters(g_gamestate, i, j, id)
         
-    g_animations["bob"].frame(16.666);
-    g_animations["sara"].frame(16.666);
-    g_animations["monster"].frame(16.666);
+    
     g_steps.map(step => {
       g_sprites.highLight.drawAt(g_ctx,step.step.x*64, step.step.y*64);
     });

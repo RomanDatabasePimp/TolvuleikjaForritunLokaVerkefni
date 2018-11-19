@@ -18,7 +18,7 @@ function drawMapViaTiles(tile) {
       drawTile(tile.__tiles, i, j);
       try{
         if(g_steps[i].step.x == i && g_steps[i].step.y == j){
-          console.log("Hack worked!");
+         
         }
       } catch(e){}
     }
