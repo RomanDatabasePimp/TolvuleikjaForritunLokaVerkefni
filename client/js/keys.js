@@ -20,7 +20,7 @@ function startGame(evt){
   if (evt.keyCode === RDY_KEY) {
     evt.preventDefault();
     //g_readyForNextRound = true;
-    g_FadeOutTexts.waitingText.giveMeLife();
+    //g_FadeOutTexts.waitingText.giveMeLife();
     //socket.emit('clientreadyfornextround', g_readyForNextRound);
   }
 }
