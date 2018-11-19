@@ -23,10 +23,7 @@ function render(ctx) {
     g_FadeOutTexts.waitingText.render(g_readyForNextRound);
 
     /* helgi draws his character animations */
-    
-    g_animations["bob"].frame(16.666);
-    g_animations["sara"].frame(16.666);
-    g_animations["monster"].frame(16.666);
+
     
     /* when animations are done rafnar draws the static images of the characters */
     if(allCharactersRendered(g_walkinganimfinish)) {
@@ -35,6 +32,10 @@ function render(ctx) {
     }
     
     //drawCharacters(g_gamestate, i, j, id)
+        
+    g_animations["bob"].frame(16.666);
+    g_animations["sara"].frame(16.666);
+    g_animations["monster"].frame(16.666);
     g_steps.map(step => {
       g_sprites.highLight.drawAt(g_ctx,step.step.x*64, step.step.y*64);
     });

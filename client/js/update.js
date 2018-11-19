@@ -34,6 +34,7 @@ function update(dt) {
   //moveMen(du);
 
   g_FadeOutTexts.waitingText.update(du,g_readyForNextRound);
+   
   // call the animation for the cloud shit
   for(let cloud in g_clouds) {
     g_clouds[cloud].update(du);
