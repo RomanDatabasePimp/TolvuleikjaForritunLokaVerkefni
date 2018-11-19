@@ -39,7 +39,6 @@ playerAnimation.prototype.update= function(du) {
             this.tempMove = [];
         }
         else {
-        g_animation_finished = true;
         g_walkinganimfinish[this.name] = true;
         this.leftstep = null;
         return;
@@ -60,16 +59,16 @@ try{
  
     switch (this.path) {
         case this.path = "left":
-            this.rendersteps.cx -= 2.5*du;
+            this.rendersteps.cx -= 3*du;
             break;
         case this.path = "right":
-            this.rendersteps.cx += 2.5*du;
+            this.rendersteps.cx += 3*du;
             break;
         case this.path = "down":
-            this.rendersteps.cy += 2.5*du;
+            this.rendersteps.cy += 3*du;
             break;
         case this.path = "up":
-            this.rendersteps.cy -= 2.5*du;
+            this.rendersteps.cy -= 3*du;
             break;   
         default:
     }
@@ -79,7 +78,7 @@ try{
         this.rendersteps.leftstep = null;
         return;
     }
-    g_animation_finished = false;
+    g_walkinganimfinish[this.name] = false;
     this.rendersteps.steppingl = !this.rendersteps.steppingl;
 
 }catch{
@@ -106,8 +105,7 @@ playerAnimation.prototype.render = function(g_ctx) {
 };
     
     playerAnimation.prototype.checkWichDirection = function(newx,newy,oldX,oldY){
-        console.log(this.render.tilePosX, this.renderssteps.tilePosY);
-        if(player.character == "bob"){
+        if(this.name == "bob"){
             if(oldX < newx){
                 console.log(this.imgRight1);
                 this.rendersteps.leftstep =  g_sprites.bobRight1;
@@ -140,7 +138,7 @@ playerAnimation.prototype.render = function(g_ctx) {
             return;
         }
         }
-        if(player.character == "sara"){
+        if(this.name == "sara"){
             if(oldX < newx){
                 console.log(this.imgRight1);
                 this.rendersteps.leftstep =  g_sprites.saraRight1;
@@ -173,7 +171,7 @@ playerAnimation.prototype.render = function(g_ctx) {
                 return;
             }
         }
-        if(player.character == "monster"){
+        if(this.name == "monster"){
             if(oldX < newx){
                 this.rendersteps.leftstep =  g_sprites.monsterWalk1;
                 this.rendersteps.rightstep = g_sprites.monsterWalk2;
