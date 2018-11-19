@@ -79,6 +79,7 @@ function fetchPlayerTiles(tiles) {
 function drawCharacters(tile, i, j, id) {
   let tileGrass;
   let entity = playerExistsInTile(tile._entities);
+  if(!g_walkinganimfinish[entity.character]) {  return;  }
   player = getPlayer();
   if (tile._amIAStructure) {
     tileGrass = tile;
