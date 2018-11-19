@@ -44,8 +44,6 @@ app.get('/', (req, res) => {
     if(FTL.tryToJoinGame(socket.id)){      
       console.log("new player joined !");
 
-      
-
       /* its good to define rightaway what should happen if the socket disconects
          so we dont forgget about it, if the player leaves we set its char to null allowing
          a new socket to take over */
