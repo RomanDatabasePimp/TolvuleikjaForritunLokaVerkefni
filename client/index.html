@@ -113,6 +113,7 @@
     /* to avoid unnecessary computation we store all the clients and the tiles they are in
        in a seperate obj to be further used more efficiently */
     let g_tilesContainingPlayers = {};
+    let g_allScriptsLoaded = false;
     // for debbugs
   </script>
   
@@ -139,10 +140,12 @@
  
   <!-- Combine all the game logic into a client side game -->
   <script>
+    function ddd () {
     /* Define what happens when a socket manages to connect to our server */
     socket.on('connect', function() {
       // in here we can pass our socket.id to the functions that need it
-      
+
+
       /* we recive the new game state every time a round is over */
       socket.on('NextGameRound', (data)=> {
         sockid = socket.id;
@@ -225,6 +228,7 @@
          wait for all clients to render the map and the animations and then play next round */
       // setInterval(() => { socket.emit('clientreadyfornextround',g_readyForNextRound)},3000);
     });
+  }
   </script>
 
 </body>
