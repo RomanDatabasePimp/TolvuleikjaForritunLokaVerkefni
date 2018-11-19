@@ -121,7 +121,7 @@ button{
   border-radius: 6px;
   width: 20%;
   position: absolute;
-  right: 5%;
+  float: left;
 }
 .unordedListGameRules{
   display: flex;
