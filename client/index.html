@@ -97,6 +97,7 @@
     // client uses this to ping the serve that he is rdy for the next rounds
     let g_readyForNextRound = false;
     
+    let g_animation_finished = false;
     let g_walkinganimfinish = { bob: false, sara: false, monster: false };
     // client sents this to tell the serve that he has used a power up
     let g_usedPowerUp = false;
@@ -142,7 +143,6 @@
     /* Define what happens when a socket manages to connect to our server */
     socket.on('connect', function() {
       // in here we can pass our socket.id to the functions that need it
-      
       /* we recive the new game state every time a round is over */
       socket.on('NextGameRound', (data)=> {
         sockid = socket.id;
