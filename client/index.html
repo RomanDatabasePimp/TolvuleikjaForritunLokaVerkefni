@@ -166,7 +166,6 @@
             g_gamestate = data;
             // fetch the player
             // set the lobby to empty
-            
             window.addEventListener("keydown", startGame);
             g_tilesContainingPlayers = fetchPlayerTiles(g_gamestate.__tiles);
             g_tilesContainingPlayers.map(char => {
@@ -188,10 +187,6 @@
         g_tilesContainingPlayers = {};
         g_players= [];
       });
-
-      socket.on("youareready",(data)=> {
-        console.log("Returned",data.read);
-      })
 
       socket.on('roundstart', ()=> {
         // when the round starts we allow the user to click on the tiles
@@ -228,8 +223,7 @@
       /* client will send to the Server every 3 seconds if he is ready to for the next round
          the idea is that different clients take different time to render the game, so we will
          wait for all clients to render the map and the animations and then play next round */
-
-      setInterval(() => { socket.emit('clientreadyfornextround',g_readyForNextRound)},3000);
+      // setInterval(() => { socket.emit('clientreadyfornextround',g_readyForNextRound)},3000);
     });
   </script>
 

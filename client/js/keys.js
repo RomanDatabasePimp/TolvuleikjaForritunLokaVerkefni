@@ -19,9 +19,9 @@ function startGame(evt){
   if (evt.keyCode === RESET_KEY) { socket.emit('resetgamerequest', null); }
   if (evt.keyCode === RDY_KEY) {
     evt.preventDefault();
-    //g_readyForNextRound = true;
-    //g_FadeOutTexts.waitingText.giveMeLife();
-    //socket.emit('clientreadyfornextround', g_readyForNextRound);
+    g_readyForNextRound = true;
+    g_FadeOutTexts.waitingText.giveMeLife();
+    socket.emit('clientreadyfornextround', g_readyForNextRound);
   }
 }
 
