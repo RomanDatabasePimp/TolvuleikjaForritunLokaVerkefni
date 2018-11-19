@@ -9,6 +9,38 @@
 </head>
 
 <body>
+  <div class="sideNotes">
+    <ul class="unordedListGameRules" id="gameRules">
+      <h2 class="gameRulesHeader">Gamerules</h2>
+      <li>
+        Collect all of the keys before the monster eats you. This is a 3 player online 
+        turnbased game where 2 players are the good guys and 1 player is the monster.
+      </li>
+      <li>
+        Monster: 
+        Find and eat all the humans before they collect all the keys!
+        
+        <li>
+          Humans:
+          Collect the keys before the monster catches you!
+        </li>
+        
+      </li>
+      <li>
+          The left sidebar shows the timer for your turn to move your character, you only have 5 seconds, so move fast!
+          Note that your stamina is the number above your timer!
+          
+      </li>
+      <li>
+          Press X to use the diamond powerups you pick up along the way!
+          Powerups will increase your stamina will in the next turn.
+          
+      </li>
+      <li>
+          To restart all players must press r.
+      </li>
+    </ul>
+  </div>
   <div class="gameContainer">
     <div class="sideBar">     
       <img class="heads" id ="powerUpHeads"/>
@@ -21,25 +53,6 @@
       </div>
     </div>
     <canvas id="myCanvas" width="640" height="640" style="border: 1px solid black;"> Sorry, but your browser does not support the HTML5 canvas tag.</canvas>
-    <div class="sideNotes">
-      <ul class="unordedListGameRules" id="gameRules">
-        <h2 class="gameRulesHeader">Gamerules</h2>
-        <li>Goal of the game is to collect all of the keys before the monster eats you. This is a 3 player online 
-          turnbased game where 2 players are the good guys and 1 player is the monster.
-        </li>
-        <li>
-            The left sidebar shows the progressbar and when it is moving up that is the time to move your 
-            character. Above the progressbar is your players face and above the face is your players stamina.
-        </li>
-        <li>
-            To use the powerups you must catch a diamond and then you will see a diamond icon on the top 
-            left corner and to use it you must press x and your stamina will increase in the next turn.
-        </li>
-        <li>
-            To restart all players must press r.
-        </li>
-      </ul>
-    </div>
   </div>
   <video id="myVideoBackground" src="/client/videos/frontPic.mp4" autoplay="" muted></video>
   <div class="winnerNote" id="winnerNoteID"></div>
