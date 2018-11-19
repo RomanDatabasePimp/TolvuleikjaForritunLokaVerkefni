@@ -16,7 +16,8 @@ function playerAnimation (descr){
     this.movement = []
 };
 playerAnimation.prototype.setmovement = function(moves){
-  this.movement = moves;
+    this.movement = moves;
+    //console.log("moves"+this.movement);
 };
 
 playerAnimation.prototype.moveMen = function(){
@@ -24,7 +25,7 @@ playerAnimation.prototype.moveMen = function(){
     
 };
 playerAnimation.prototype.frame = function(du) {
-    console.log(this.howManyTime, this.movement.length);
+    this.howManyTime += du;
     if (this.howManyTime >= 166 || this.movement.length == 0) {
         try{
             this.howManyTime = 0;
@@ -47,44 +48,44 @@ playerAnimation.prototype.frame = function(du) {
             //console.log("catch villa í animation js");
             return;
         }
-    } else {
-        console.log(this.howManyTime);
-        this.howManyTime+= du;
+    } 
+    /*else {
+        console.log(this.howManyTime+ " lengd"+ this.movement.length);
         // hér þarf að gera animation frá punkt a til punkt b
-            this.oldX = this.movement[0].step.x;
-            this.oldy = this.movement[0].step.y
-            checkWichDirection(this.movement[1].step.x, this.movement[1].step.y);            
+        this.oldX = this.movement[0].step.x;
+        this.oldy = this.movement[0].step.y
+        checkWichDirection(this.movement[1].step.x, this.movement[1].step.y);            
         try{
             // Hér þarf að determa í hvaða átt
             count += 16.666;
             switch (path) {
                 case path = "left":
-                    playerX = this.movement[0].step.x*64-count;
-                    playerY = this.movement[0].step.y*64;
+                playerX = this.movement[0].step.x*64-count;
+                playerY = this.movement[0].step.y*64;
                     img1 =  g_sprites.bobLeft1;
                     img2 =  g_sprites.bobLeft2;
                   break;
                 case path = "right":
-                    playerX = this.movement[0].step.x*64+count;
+                playerX = this.movement[0].step.x*64+count;
                     playerY = this.movement[0].step.y*64;
                     img1 =  g_sprites.bobRight1;
                     img2 =  g_sprites.bobRight2;
             
-                  break;
-                case path = "down":
+                    break;
+                    case path = "down":
                     playerX = this.movement[0].step.x*64;
                     playerY = this.movement[0].step.y*64+count;
                     img1 =  g_sprites.bobDown1;
                     img2 =  g_sprites.bobDown2;
                   break;
-                case path = "up":
+                  case path = "up":
                     playerX = this.movement[0].step.x*64;
                     playerY = this.movement[0].step.y*64-count;
                     img1 =  g_sprites.bobUp1;
                     img2 =  g_sprites.bobUp2;
-                break;
+                    break;
                 case path = "stay":
-                    noDraw = true;
+                noDraw = true;
                 break;
                 default:
             }
@@ -99,8 +100,9 @@ playerAnimation.prototype.frame = function(du) {
         }catch(e){
             console.log(e);
         }
-    pos++; 
-    }
+        pos++; 
+    }*/
+    console.log(du);
 };
 
 playerAnimation.prototype.checkWichDirection = function(){
