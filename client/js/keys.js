@@ -24,7 +24,6 @@ function handleKeydown(evt) {
     g_readyForNextRound = true;
     socket.emit('clientreadyfornextround',g_readyForNextRound);
   }
-console.log(player.stamina);
   if(eatKey(KEY_UP)){
     if(player.stamina > 0){
       movePlayerTo(player.entityPos.tileX,player.entityPos.tileY - 1);
