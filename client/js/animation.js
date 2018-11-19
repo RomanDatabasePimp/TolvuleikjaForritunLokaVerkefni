@@ -89,10 +89,8 @@ playerAnimation.prototype.moveMen = function(){
 };
 playerAnimation.prototype.render = function(g_ctx) {
     if(this.movement.length == 0) { return; }
-    console.log(this.rendersteps.cx+ " skrefing");
     this.count += 1;
     try{
-        console.log(this.count);
             if(this.count %2 == 0 && this.count%3 == 0) {
               this.rendersteps.leftstep.drawAt(g_ctx,this.rendersteps.cx,this.rendersteps.cy);  
             } else{
