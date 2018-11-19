@@ -16,11 +16,10 @@ function drawMapViaTiles(tile) {
   for (let i = 0; i < tile.__tiles.length; i++) {
     for (let j = 0; j < tile.__tiles[i].length; j++) {
       drawTile(tile.__tiles, i, j);
-      try{
-        if(g_steps[i].step.x == i && g_steps[i].step.y == j){
-          console.log("Hack worked!");
+      try {
+        if (g_steps[i].step.x == i && g_steps[i].step.y == j) {
         }
-      } catch(e){}
+      } catch (e) { }
     }
   }
 };
@@ -31,13 +30,12 @@ function drawMapViaTiles(tile) {
  * @param {int} j y-axis
  */
 function drawTile(tile, i, j) {
+  g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
   if (tile[i][j]._amITerrain) {
     g_sprites.terrain.drawAt(g_ctx, i * 64, j * 64);
-  } else if (tile[i][j]._amIAStructure) {
-    g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
+  } 
+  if (tile[i][j]._amIAStructure) {
     g_sprites.tallGrass.drawAt(g_ctx, i * 64, j * 64);
-  } else {
-    g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
   }
   if (treasureExistsInTile(tile[i][j]._entities)) {
     let treasure = treasureExistsInTile(tile[i][j]._entities);
@@ -82,17 +80,17 @@ function drawCharacters(tile, i, j, id) {
   let tileGrass;
   let entity = playerExistsInTile(tile._entities);
   player = getPlayer();
-  if(tile._amIAStructure){
+  if (tile._amIAStructure) {
     tileGrass = tile;
-  if ((tileGrass._TilePosX && player.entityPos.tileX) && (tileGrass._TilePosY && player.entityPos.tileY)) {
-    g_ctx.globalAlpha = 0.8;
-    drawCorrectChar(player.character, player.entityPos.tileX, player.entityPos.tileY, true);
-    g_ctx.globalAlpha = 1;
-    return;
+    if ((tileGrass._TilePosX && player.entityPos.tileX) && (tileGrass._TilePosY && player.entityPos.tileY)) {
+      g_ctx.globalAlpha = 0.8;
+      drawCorrectChar(player.character, player.entityPos.tileX, player.entityPos.tileY, true);
+      g_ctx.globalAlpha = 1;
+      return;
+    }
   }
-}
   if (playerExistsInTile(tile._entities)) {
-    if(tileGrass) return;
+    if (tileGrass) return;
     drawCorrectChar(entity.character, i, j, false);
   }
 };

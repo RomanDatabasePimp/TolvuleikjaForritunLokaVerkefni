@@ -136,6 +136,7 @@ function requestPreloads() {
     key: './client/img/keys/platformPack_item014.png',
     powerUp: './client/img/keys/platformPack_item003.png',
     tallGrass: './client/img/tallGrass_tile.png',
+    tallGrassMoved: './client/img/tallGrassMoved_tile.png',
     //Sara
     saraPlayer: './client/img/Player/sara_player.png',
     saraHidden: './client/img/Player/sara_hidden.png',
@@ -183,6 +184,7 @@ var g_sprites = {};
 function preloadDone() {
 
   g_sprites.grassTile = new Sprite(g_images.grassTile);
+  g_sprites.tallGrassMoved = new Sprite(g_images.grassTile);
   g_sprites.tallGrass = new Sprite(g_images.tallGrass);
   g_sprites.player = new Sprite(g_images.player);
   g_sprites.highLight = new Sprite(g_images.highLight);
