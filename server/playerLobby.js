@@ -98,7 +98,6 @@ GameLobby.prototype.unreadyPlayers = function() {
 GameLobby.prototype.AllReadyForNextRound = function() {
   for(let char in this._availablePlayers){
     if(!this._availablePlayers[char].readyForNextRound){
-      console.log(this._availablePlayers[char].player.character, "not ready");
       return false;
     }
   }
@@ -111,9 +110,7 @@ GameLobby.prototype.AllReadyForNextRound = function() {
     After: sets player to ready for next game round */
 GameLobby.prototype.setPlayerReady = function (sockId) {
   for(let char in this._availablePlayers){
-    console.log("chekcking",sockId);
     if(this._availablePlayers[char].player.playBy === sockId){
-      console.log("setting to true",sockId);
       this._availablePlayers[char].readyForNextRound = true;
     }
   }

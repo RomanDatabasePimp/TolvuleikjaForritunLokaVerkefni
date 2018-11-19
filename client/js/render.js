@@ -29,7 +29,7 @@ function render(ctx) {
     /* when animations are done rafnar draws the static images of the characters */
     if(allCharactersRendered(g_walkinganimfinish)) {
       g_tilesContainingPlayers.map(char => { drawCharacters(char.tile,char.i,char.j,sockid);  });
-      
+      g_readyForNextRound = true;
     }
       g_animations["bob"].render(ctx);
       g_animations["sara"].render(ctx);
