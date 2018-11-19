@@ -18,20 +18,19 @@ FadeOutText.prototype.update = function (du,gameReady) {
 
   // if the game is not ready we return
   if(!gameReady){ return; }
-
-  this.lifeSpan -= du;
-  // if the life span of the text is done we are done
   if (this.lifeSpan < 0) return;
+  this.lifeSpan -= du;
 };
 
 FadeOutText.prototype.render = function (gameReady) {
 
   if (this.lifeSpan < 0) return;
   
-  if(gameReady){
-   let fadeThresh = FadeOutText.prototype.lifeSpan / 3;
-   if (this.lifeSpan < fadeThresh) { ctx.globalAlpha = this.lifeSpan / fadeThresh; }
-  }
+  if(gameReady){ return;}
+
+  // let fadeThresh = FadeOutText.prototype.lifeSpan / 3;
+  // if (this.lifeSpan < fadeThresh) { ctx.globalAlpha = this.lifeSpan / fadeThresh; }
+  
   
   ctx.font = "bold 40px Arial";
   ctx.fillText(this.textToFadeOut,30,320);
@@ -40,5 +39,5 @@ FadeOutText.prototype.render = function (gameReady) {
 };
 
 const g_FadeOutTexts = {
-  waitingText : new FadeOutText({textToFadeOut:"Press Space to start the game"})
+  waitingText : new FadeOutText({textToFadeOut:"Press Space to start next Round"})
 };
