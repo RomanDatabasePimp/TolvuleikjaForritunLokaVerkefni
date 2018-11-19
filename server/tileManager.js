@@ -150,6 +150,7 @@ function mapMaker(){
     [0,1,2,0,0,0,0,5,1,0],
     [0,0,2,2,2,2,2,2,4,0]
   ];
+  // Old buggy map, do not allow players to start in ANY terrain.
   //let map3 = [
   //  [2,2,2,2,2,2,2,2,2,2],
   //  [2,1,0,0,4,0,0,0,1,2],
@@ -175,7 +176,6 @@ function mapMaker(){
     [1,1,2,0,2,2,4,2,2,2]
   ];
   // 25% odds on which map we show.
-  return map3;
   let rnd = callRandom();
   let map;
   switch (rnd) {
