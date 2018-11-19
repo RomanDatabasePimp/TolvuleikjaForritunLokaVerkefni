@@ -23,12 +23,12 @@ function render(ctx) {
     g_FadeOutTexts.waitingText.render(g_readyForNextRound);
 
     /* helgi draws his character animations */
-   // g_animations["bob"].render(ctx);
-   // g_animations["sara"].render(ctx);
-   // g_animations["monster"].render(ctx);
+    g_animations["bob"].render(ctx);
+    g_animations["sara"].render(ctx);
+    g_animations["monster"].render(ctx);
 
     /* when animations are done rafnar draws the static images of the characters */
-    if(allCharactersRendered(g_walkinganimfinish)) {
+    if(g_animation_finished) {
       g_tilesContainingPlayers.map(char => { drawCharacters(char.tile,char.i,char.j,sockid);  });
     }
 
