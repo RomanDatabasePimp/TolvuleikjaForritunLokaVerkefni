@@ -66,7 +66,7 @@ try{
             this.rendersteps.cy += 2.5*du;
             break;
         case this.path = "up":
-            this.rendersteps.cy += 2.5*du;
+            this.rendersteps.cy -= 2.5*du;
             break;   
         default:
     }
@@ -102,39 +102,104 @@ playerAnimation.prototype.render = function(g_ctx) {
 };
     
     playerAnimation.prototype.checkWichDirection = function(newx,newy,oldX,oldY){
-        if(oldX < newx){
-            console.log(this.imgRight1);
-            this.rendersteps.leftstep =  g_sprites.bobRight1;
-            this.rendersteps.rightstep = g_sprites.bobRight2;
-            console.log("Hægri",this.rendersteps.leftstep);
-            this.path = "right";
+        if(player.character == "bob"){
+            if(oldX < newx){
+                console.log(this.imgRight1);
+                this.rendersteps.leftstep =  g_sprites.bobRight1;
+                this.rendersteps.rightstep = g_sprites.bobRight2;
+                this.path = "right";
+                return;
+            }
+            if(oldX > newx){
+                this.rendersteps.leftstep = g_sprites.bobLeft1;
+                this.rendersteps.rightstep =g_sprites.bobLeft2;
+                this.path ="left";
+                return;
+            }
+            if(oldY < newy){
+                console.log("niður", this.rendersteps.leftstep);
+                this.rendersteps.leftstep =  g_sprites.bobDown1;
+                this.rendersteps.rightstep =g_sprites.bobDown2;
+            this.path = "down";
             return;
         }
-        if(oldX > newx){
-            this.rendersteps.leftstep = g_sprites.bobLeft1;
-            this.rendersteps.rightstep =g_sprites.bobLeft2;
-            this.path ="left";
+        if(oldY > newy){
+            this.rendersteps.leftstep =  g_sprites.bobUp1;
+            this.rendersteps.rightstep = g_sprites.bobUp2;
+            this.path ="up";
             return;
         }
-        if(oldY < newy){
-            console.log("niður", this.rendersteps.leftstep);
-            this.rendersteps.leftstep =  g_sprites.bobDown1;
-            this.rendersteps.rightstep =g_sprites.bobDown2;
-        this.path = "down";
-        return;
-    }
-    if(oldY > newy){
-        this.rendersteps.leftstep =  g_sprites.bobUp1;
-        this.rendersteps.rightstep = g_sprites.bobUp2;
-        this.path ="up";
-        return;
-    }
-    else{
-        //console.log("viljum ekki sjá STAY");
-        this.path="stay;"
-        return;
-    }
-};
+        else{
+            //console.log("viljum ekki sjá STAY");
+            this.path="stay;"
+            return;
+        }
+        }
+        if(player.character == "sara"){
+            if(oldX < newx){
+                console.log(this.imgRight1);
+                this.rendersteps.leftstep =  g_sprites.saraRight1;
+                this.rendersteps.rightstep = g_sprites.saraRight2;
+                this.path = "right";
+                return;
+            }
+            if(oldX > newx){
+                this.rendersteps.leftstep = g_sprites.saraLeft1;
+                this.rendersteps.rightstep =g_sprites.saraLeft2;
+                this.path ="left";
+                return;
+            }
+            if(oldY < newy){
+                console.log("niður", this.rendersteps.leftstep);
+                this.rendersteps.leftstep =  g_sprites.saraDown1;
+                this.rendersteps.rightstep =g_sprites.saraDown2;
+            this.path = "down";
+            return;
+            }
+            if(oldY > newy){
+                this.rendersteps.leftstep =  g_sprites.saraUp1;
+                this.rendersteps.rightstep = g_sprites.saraUp2;
+                this.path ="up";
+                return;
+            }
+            else{
+                //console.log("viljum ekki sjá STAY");
+                this.path="stay;"
+                return;
+            }
+        }
+        if(player.character == "monster"){
+            if(oldX < newx){
+                this.rendersteps.leftstep =  g_sprites.monsterWalk1;
+                this.rendersteps.rightstep = g_sprites.monsterWalk2;
+                this.path = "right";
+                return;
+            }
+            if(oldX > newx){
+                this.rendersteps.leftstep = g_sprites.monsterWalk1;
+                this.rendersteps.rightstep =g_sprites.monsterWalk2;
+                this.path ="left";
+                return;
+            }
+            if(oldY < newy){
+                this.rendersteps.leftstep =  g_sprites.monsterClimb1;
+                this.rendersteps.rightstep =g_sprites.monsterClimb2;
+            this.path = "down";
+            return;
+            }
+            if(oldY > newy){
+                this.rendersteps.leftstep =  g_sprites.monsterClimb1;
+                this.rendersteps.rightstep = g_sprites.monsterClimb2;
+                this.path ="up";
+                return;
+            }
+            else{
+                //console.log("viljum ekki sjá STAY");
+                this.path="stay;"
+                return;
+            }
+        }       
+    };
 let g_animations = { 
   bob : new playerAnimation({name :"bob"
                             }),
