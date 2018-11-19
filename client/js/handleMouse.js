@@ -17,6 +17,7 @@ function handleMouse(evt) {
     }
     // Checks if we are inside the 0 - 640 pixel range in which our canvas is drawn
     if(insidePlayArea(g_mouseX,g_mouseY)){
+        console.log("clicked", roundDown(g_mouseX /64));
         movePlayerTo(roundDown(g_mouseX /64),roundDown(g_mouseY/64));
     };
 }
