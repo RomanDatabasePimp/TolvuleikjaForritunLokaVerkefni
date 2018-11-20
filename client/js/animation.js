@@ -92,7 +92,7 @@ playerAnimation.prototype.render = function(g_ctx,map) {
     if(map){
       let xp = roundDown(this.rendersteps.cx/64);
       let yp = roundDown(this.rendersteps.cy/64);
-      if(map.__tiles[xp][yp]._amIAStructure && player.character === this.name){  
+      if(map.__tiles[xp][yp]._amIAStructure && !(player.character === this.name)){  
         return;
       }
     }
