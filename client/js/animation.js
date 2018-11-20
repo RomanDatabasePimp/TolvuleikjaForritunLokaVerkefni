@@ -72,7 +72,7 @@ try{
     }
     let tempX = Math.abs(this.rendersteps.cx - this.rendersteps.descordX);
     let tempY = Math.abs(this.rendersteps.cy - this.rendersteps.descordY);
-    if(tempX <= 25 && tempY <= 25){
+    if(tempX <= 5 && tempY <= 5){
         this.rendersteps.leftstep = null;
         return;
     }
@@ -105,7 +105,7 @@ playerAnimation.prototype.render = function(g_ctx) {
     playerAnimation.prototype.checkWichDirection = function(newx,newy,oldX,oldY){
         if(this.name == "bob"){
             if(oldX < newx){
-                console.log(this.imgRight1);
+                //console.log(this.imgRight1);
                 this.rendersteps.leftstep =  g_sprites.bobRight1;
                 this.rendersteps.rightstep = g_sprites.bobRight2;
                 this.path = "right";
@@ -118,7 +118,7 @@ playerAnimation.prototype.render = function(g_ctx) {
                 return;
             }
             if(oldY < newy){
-                console.log("niður", this.rendersteps.leftstep);
+                //console.log("niður", this.rendersteps.leftstep);
                 this.rendersteps.leftstep =  g_sprites.bobDown1;
                 this.rendersteps.rightstep =g_sprites.bobDown2;
             this.path = "down";
@@ -138,7 +138,7 @@ playerAnimation.prototype.render = function(g_ctx) {
         }
         if(this.name == "sara"){
             if(oldX < newx){
-                console.log(this.imgRight1);
+                //console.log(this.imgRight1);
                 this.rendersteps.leftstep =  g_sprites.saraRight1;
                 this.rendersteps.rightstep = g_sprites.saraRight2;
                 this.path = "right";
@@ -151,7 +151,7 @@ playerAnimation.prototype.render = function(g_ctx) {
                 return;
             }
             if(oldY < newy){
-                console.log("niður", this.rendersteps.leftstep);
+                //console.log("niður", this.rendersteps.leftstep);
                 this.rendersteps.leftstep =  g_sprites.saraDown1;
                 this.rendersteps.rightstep =g_sprites.saraDown2;
             this.path = "down";
