@@ -15,7 +15,10 @@ let KEY_LEFT = 'A'.charCodeAt(0);
 let KEY_RIGHT = 'D'.charCodeAt(0);
 function startGame(evt){
   keys[evt.keyCode] = true;
-  if (evt.keyCode === POWERUP_KEY) { g_usedPowerUp = true; }
+  if (evt.keyCode === POWERUP_KEY) { 
+    g_usedPowerUp = true;
+    console.log("heelo");
+  }
   if (evt.keyCode === RESET_KEY) { socket.emit('resetgamerequest', null); }
   if (evt.keyCode === RDY_KEY) {
     evt.preventDefault();

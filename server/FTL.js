@@ -159,7 +159,7 @@ function updatePlayer(sockid,inp) {
           // if its powerup we add it to the clients power up
           if(pickups[i].type === 'powerup'){
             pickedupthisround = true;
-            player.powerup = "powerup";
+            player.powerup = "redbull";
             pickups[i].isAlive = false;  // kill the key
           }
         }
