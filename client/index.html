@@ -150,17 +150,14 @@
           if(data.__gameWon.players){
              g_gameover.over = true;
              g_gameover.winners= "Suvivors";
-             return;
           }
           // check if the game is over and the monster won the game 
           else if(data.__gameWon.monster) {
             g_gameover.over = true;
             g_gameover.winners= "Monster";
-            return;
           }
           // if the game is not over then its clearly 
           else {
-            console.log(data);
             // set the new game state so our clients can render it
             g_gamestate = data;
             // fetch the player
@@ -206,7 +203,6 @@
            has the user done, clearing the client side on what has he done and removing
            the listeners so he cant select the tiles*/
         setTimeout(() => {
-          console.log("used power up",g_usedPowerUp);
           socket.emit('clientinput',{ steps:g_steps, powerUp:g_usedPowerUp});
           g_steps = [];
           g_usedPowerUp = false;

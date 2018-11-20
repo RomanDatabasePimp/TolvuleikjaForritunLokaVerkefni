@@ -88,7 +88,14 @@ playerAnimation.prototype.moveMen = function(){
     document.getElementById("winnerNoteID").style.display = 'none';
     
 };
-playerAnimation.prototype.render = function(g_ctx) {
+playerAnimation.prototype.render = function(g_ctx,map) { 
+    if(map){
+      let xp = roundDown(this.rendersteps.cx/64);
+      let yp = roundDown(this.rendersteps.cy/64);
+      if(map.__tiles[xp][yp]._amIAStructure && player.character === this.name){  
+        return;
+      }
+    }
     if(this.movement.length == 0) { return; }
     this.count += 1;
     try{
@@ -202,13 +209,7 @@ playerAnimation.prototype.render = function(g_ctx) {
         }       
     };
 let g_animations = { 
-  bob : new playerAnimation({name :"bob"
-                            }),
-                             
-
-
-  sara : new playerAnimation({name :"sara"
-}),
-  monster : new playerAnimation({name :"monster"
-})
+  bob : new playerAnimation({name :"bob"}),
+  sara : new playerAnimation({name :"sara"}),
+  monster : new playerAnimation({name :"monster"})
 }
