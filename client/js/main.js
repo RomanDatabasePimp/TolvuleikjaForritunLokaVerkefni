@@ -80,10 +80,9 @@ function drawCharacters(tile, i, j, id) {
   let tileGrass;
   let entity = playerExistsInTile(tile._entities);
   if(!g_walkinganimfinish[entity.character]) {  return;  }
-  player = getPlayer();
   if (tile._amIAStructure) {
     tileGrass = tile;
-    if ((tileGrass._TilePosX && player.entityPos.tileX) && (tileGrass._TilePosY && player.entityPos.tileY)) {
+    if ((tileGrass._TilePosX === player.entityPos.tileX) && (tileGrass._TilePosY === player.entityPos.tileY)) {
       g_ctx.globalAlpha = 0.8;
       drawCorrectChar(player.character, player.entityPos.tileX, player.entityPos.tileY, true);
       g_ctx.globalAlpha = 1;
