@@ -35,7 +35,7 @@ function drawTile(tile, i, j) {
     g_sprites.terrain.drawAt(g_ctx, i * 64, j * 64);
   } 
   if (tile[i][j]._amIAStructure) {
-    g_sprites.tallGrassMoved.drawAt(g_ctx, i * 64, j * 64);
+    g_sprites.tallGrass.drawAt(g_ctx, i * 64, j * 64);
   }
   if (treasureExistsInTile(tile[i][j]._entities)) {
     let treasure = treasureExistsInTile(tile[i][j]._entities);
@@ -80,10 +80,9 @@ function drawCharacters(tile, i, j, id) {
   let tileGrass;
   let entity = playerExistsInTile(tile._entities);
   if(!g_walkinganimfinish[entity.character]) {  return;  }
-  player = getPlayer();
   if (tile._amIAStructure) {
     tileGrass = tile;
-    if ((tileGrass._TilePosX && player.entityPos.tileX) && (tileGrass._TilePosY && player.entityPos.tileY)) {
+    if ((tileGrass._TilePosX === player.entityPos.tileX) && (tileGrass._TilePosY === player.entityPos.tileY)) {
       g_ctx.globalAlpha = 0.8;
       drawCorrectChar(player.character, player.entityPos.tileX, player.entityPos.tileY, true);
       g_ctx.globalAlpha = 1;
