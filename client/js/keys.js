@@ -13,10 +13,21 @@ let KEY_UP = 'W'.charCodeAt(0);
 let KEY_DOWN = 'S'.charCodeAt(0);
 let KEY_LEFT = 'A'.charCodeAt(0);
 let KEY_RIGHT = 'D'.charCodeAt(0);
+let KEY_MUSIC = 'M'.charCodeAt(0);
+// GlobalVarable
+let musicPlay = false;
 function startGame(evt){
   keys[evt.keyCode] = true;
   if (evt.keyCode === POWERUP_KEY) { 
     g_usedPowerUp = true;
+  }
+  if(eatKey(KEY_MUSIC)){
+    musicPlay = !musicPlay;
+    if(musicPlay){
+      backgroundMusic.play();
+    }else{
+      backgroundMusic.pause();
+    }
   }
   if (evt.keyCode === RESET_KEY) { socket.emit('resetgamerequest', null); }
   if (evt.keyCode === RDY_KEY ) {
@@ -54,6 +65,7 @@ function handleKeydown(evt) {
       movePlayerTo(player.entityPos.tileX + 1, player.entityPos.tileY);
       player.entityPos.tileX += 1;
   }//player.entityPos.tileX
+  
 
 }
 
