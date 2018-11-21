@@ -146,18 +146,6 @@
         sockid = socket.id;
         // we check if the data is a game state or a waiting lobby
         if (data.hasOwnProperty("__tiles")) {
-          // check if the game is over  and the winners are player i.e suviors
-          if(data.__gameWon.players){
-             g_gameover.over = true;
-             g_gameover.winners= "Suvivors";
-          }
-          // check if the game is over and the monster won the game 
-          else if(data.__gameWon.monster) {
-            g_gameover.over = true;
-            g_gameover.winners= "Monster";
-          }
-          // if the game is not over then its clearly 
-          else {
             // set the new game state so our clients can render it
             g_gamestate = data;
             // fetch the player
@@ -173,7 +161,25 @@
               g_players.push(nplayer);
             });
             g_waiting = {};
+
+          /* the reason we check for the game win last is cuz we want the last animantion to 
+             be played or else it just ends the game once u made a winning move and u dont even 
+             know what happened */ 
+          // check if the game is over  and the winners are player i.e suviors
+          if(data.__gameWon.players){
+             /* helegis function come here */
+             console.log("suvivors have won!");
+             g_gameover.over = true;
+             g_gameover.winners= "Suvivors";
           }
+          // check if the game is over and the monster won the game 
+          if(data.__gameWon.monster) {
+            /* helegis function come here */
+            console.log("MONSTER has won!");
+            g_gameover.over = true;
+            g_gameover.winners= "Monster";
+          }
+          
           return;
         }
         // if we did not recive a game state we know we are in waiting lobby
