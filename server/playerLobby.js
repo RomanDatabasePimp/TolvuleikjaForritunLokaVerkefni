@@ -27,7 +27,8 @@ function GameLobby() {};
           stamina:6,// init stamina of bob i.e how many tiles he can move in the start
           playBy:null,// socket who is playing bob
           mademove: false,
-          powerup:null, // the red bull players can pick up (redbull for now maybe more later)
+          powerup:null, // the red bull players can pick up 
+                        // (redbull for now maybe more later)
           movement:[] // for the next round the steps he took (for animation)
         }
       )
@@ -61,7 +62,7 @@ function GameLobby() {};
           stamina:10,
           playBy:null,
           mademove: false,
-          powerup:"redbull", // since its 2v1 monster gets his red bull
+          powerup:null,
           movement:[]
         }
       )
@@ -76,7 +77,8 @@ function GameLobby() {};
 GameLobby.prototype.updateCords = function(cord,sockId) {
   const player = this.GetPlayer(sockId);
   // if player hasent m
-  if(player.getEntityTilePos().tileX === cord.nX && player.getEntityTilePos().tileY === cord.nY){
+  if(player.getEntityTilePos().tileX === cord.nX 
+     && player.getEntityTilePos().tileY === cord.nY){
     return;
   }
 }
