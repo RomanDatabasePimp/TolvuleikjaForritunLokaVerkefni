@@ -89,7 +89,11 @@ function updatePlayer(sockid,inp) {
   
   // if player dosent exists we dont update duh
   if(!player) { return; }
-
+  // if player is dead we return
+  if(!player.isAlive){ 
+    console.log("player not alive");
+    return;}
+  console.log("player alive - updating");
   // total legal path the player took 
   let steps = [];
   
