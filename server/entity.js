@@ -51,6 +51,7 @@ Entity.prototype.updateEntityTilePos = function(nTileX,nTileY,nspatialPos) {
     spatialPos:nspatialPos
   }
 };
+
 Entity.prototype.kill = function(){
   this.isAlive = false;
 }

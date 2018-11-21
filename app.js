@@ -55,6 +55,7 @@ app.get('/', (req, res) => {
       /* We listen to the player if he is ready for the next round in ourcase
          we have 3 players all of them have to be ready for the next round to begin  */
       socket.on('clientreadyfornextround',(data)=>{
+        // try to prevent race-conditions using a simple lock based solution
         if(data && !lock) {
           lock = true;
           FTL.setPlayerReadyForNextRound(socket.id);
@@ -79,10 +80,7 @@ app.get('/', (req, res) => {
       
     }
   });
-  
-  
 
-  
   /* Okay basicly this looks abit wierd but stay with me, when the game starts we need to check
      - if all the players have joined the lobby
      - if all joined then we send the game state to  all the clients
@@ -126,7 +124,7 @@ app.get('/', (req, res) => {
 
     // if clients are not ready for the next class we wait
     if(!FTL.allPlayersReadyForNextRound()) {
-      console.log("Waiting for all clients to start next round (trying in 3 sec)");
+      //console.log("Waiting for all clients to start next round (trying in 3 sec)");
       setTimeout(startRound,3000);
       return;
     }
@@ -138,7 +136,7 @@ app.get('/', (req, res) => {
     FTL.setPlayerNotReadyForNextRound();
 
     // wait 6 seconds before updateting the map state and sending it back
-    console.log("Players making move trying updating state in 6 sec");
+    // console.log("Players making move trying updating state in 6 sec");
     setTimeout(gameinit,6000);
   }
 

@@ -90,10 +90,8 @@ function updatePlayer(sockid,inp) {
   // if player dosent exists we dont update duh
   if(!player) { return; }
   // if player is dead we return
-  if(!player.isAlive){ 
-    console.log("player not alive");
-    return;}
-  console.log("player alive - updating");
+  if(!player.isAlive){ return; }
+
   // total legal path the player took 
   let steps = [];
   
@@ -115,9 +113,10 @@ function updatePlayer(sockid,inp) {
     let nextMove = inp.steps[i].step; // get next step
     
     /* check if player has enough stamina to move and if the movement is legal */
-    if(player.stamina > 0 && g_tileManager.tyToMoveToNextTile({x: player.getEntityTilePos().tileX,
-                                                               y: player.getEntityTilePos().tileY},
-                                                               nextMove)){
+    if(player.stamina > 0 && g_tileManager
+      .tyToMoveToNextTile({x: player.getEntityTilePos().tileX,
+                           y: player.getEntityTilePos().tileY},
+                           nextMove)){
       /* since we have enough stamina and can move in tile we need to check if this tile 
          contains objective pick up entities or colliles with monster/player */
     
@@ -229,6 +228,8 @@ function updateStateAndReturn() {
       const pos = GameLobby._availablePlayers[player].player.getEntityTilePos();
       // if the players died this round
       if(pos.tileX) {
+        g_tileManager.__Deadplayers.push(player);//add the player to the died players
+        // remove the player from the container
         g_tileManager.__tiles[pos.tileX][pos.tileY].removeEntity(pos.spatialPos);
         GameLobby._availablePlayers[player].player.updateEntityTilePos(null,null,null);
       }
@@ -269,6 +270,7 @@ function checkforreset(sockid) {
     g_tileManager.__gameWon.players = false;
     g_tileManager.__gameWon.monster = false;
     g_tileManager.__objPickedUp = 0;
+    g_tileManager.__Deadplayers = [];
     this.createGameMap();
     GameLobby.resetLobby();
     console.log("Game Reseting!");
