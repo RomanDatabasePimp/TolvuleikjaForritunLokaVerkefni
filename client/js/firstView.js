@@ -13,7 +13,11 @@ var backgroundMusic = new Audio('./client/audios/background.mp3');
 let video;// child and it is the video
 let main;// parent and it is the body
 function allPlayerWaiting(data, flag){
-  backgroundMusic.play();
+  try{
+    backgroundMusic.play();
+  }catch{
+    
+  }
   player1 = "Waiting for Bob";
   player2 = "Waiting for Sara";
   monster = "Waiting for monster";
