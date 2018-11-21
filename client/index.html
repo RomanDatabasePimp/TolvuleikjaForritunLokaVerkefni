@@ -13,76 +13,77 @@
     <ul class="unordedListGameRules" id="gameRules">
       <h2 class="gameRulesHeader">Gamerules</h2>
       <li>
-        Collect all of the keys before the monster eats you. This is a 3 player online 
+        Collect all of the keys before the monster eats you. This is a 3 player online
         turnbased game where 2 players are the good guys and 1 player is the monster.
       </li>
       <li>
-        Monster: 
+        Monster:
         Find and eat all the humans before they collect all the keys!
-        
-        <li>
-          Humans:
-          Collect the keys before the monster catches you!
-        </li>
-        
+
+      <li>
+        Humans:
+        Collect the keys before the monster catches you!
+      </li>
+
       </li>
       <li>
-          The left sidebar shows the timer for your turn to move your character, you only have 5 seconds, so move fast!
-          Note that your stamina is the number above your timer!
-          
+        The left sidebar shows the timer for your turn to move your character, you only have 5 seconds, so move fast!
+        Note that your stamina is the number above your timer!
+
       </li>
       <li>
-          Press X to use the diamond powerups you pick up along the way!
-          Powerups will increase your stamina will in the next turn.
-          
+        Press X to use the diamond powerups you pick up along the way!
+        Powerups will increase your stamina will in the next turn.
+
       </li>
       <li>
-          To restart all players must press r.
+        To restart all players must press r.
       </li>
     </ul>
   </div>
   <div class="gameContainer">
-    <div class="sideBar">     
-      <img class="heads" id ="powerUpHeads"/>
+    <div class="sideBar">
+      <img class="heads" id="powerUpHeads" />
       <div class="Headerinn" id="headTitle"></div>
-      <img class="heads" id="playerHeads"/>
+      <img class="heads" id="playerHeads" />
       <div id="grad1">
         <div id="bar">
-          <div id ="status"></div>
+          <div id="status"></div>
         </div>
       </div>
     </div>
-    <canvas id="myCanvas" width="640" height="640" style="border: 1px solid black;"> Sorry, but your browser does not support the HTML5 canvas tag.</canvas>
+    <canvas id="myCanvas" width="640" height="640" style="border: 1px solid black;"> Sorry, but your browser does not
+      support the HTML5 canvas tag.</canvas>
   </div>
   <video id="myVideoBackground" src="/client/videos/frontPic.mp4" autoplay="" muted></video>
   <div class="winnerNote" id="winnerNoteID"></div>
-  
-   
+
+
   <div class="firstViewContainer" id="videoContainerinn">
-      <video class="myVideo" src="/client/videos/frontPic.mp4" autoplay="" muted></video>
-      <div class="players">
-        <h2 id ="one"></h2>
-        <h2 id ="two"></h2>
-        <h2 id ="three"></h2>
-        <div class="gameRules">
+    <video class="myVideo" src="/client/videos/frontPic.mp4" autoplay="" muted></video>
+    <div class="players">
+      <h2 id="one"></h2>
+      <h2 id="two"></h2>
+      <h2 id="three"></h2>
+      <div class="gameRules">
         <p>When the time start players click on tiles to move there character</p>
         <p>Button X enables your powerup and button R if all agree resets the game</p>
         <p>The objective is to get all the keys before the monster eats you</p>
       </div>
     </div>
-      
+
+  </div>
+  <div class="fireWorksContainer" id="fireWorksContainerID">
+    <div class="pyro">
+      <div class="before"></div>
+      <div class="after"></div>
     </div>
-    <div class="fireWorksContainer" id = "fireWorksContainerID">
-      <div class="pyro">
-        <div class="before"></div>
-        <div class="after"></div>
-      </div>
-    </div>
+  </div>
   <!-- ------------------HTML END SCRIPTS START --------------------------------------->
 
   <!-- We need this to communicate using socket.io from client side -->
   <script src="/socket.io/socket.io.js"></script>
-  <script> 
+  <script>
     const g_canvas = document.getElementById("myCanvas");
     const g_ctx = g_canvas.getContext("2d");
     // establish our communication
@@ -93,14 +94,14 @@
     // the client id used to identify what player he is playing
     let sockid = socket.id;
     // tells us if the game is finished i.e game over or won
-    let g_gameover = { over : false, winners:null };
+    let g_gameover = { over: false, winners: null };
     // client uses this to ping the serve that he is rdy for the next rounds
     let g_readyForNextRound = false;
     let g_walkinganimfinish = { bob: false, sara: false, monster: false };
     // client sents this to tell the serve that he has used a power up
     let g_usedPowerUp = false;
     // this turns players movements are stored here and sent to the server
-    let g_steps=[];
+    let g_steps = [];
     // all the players in the game
     let g_players = [];
     // the players that this client is playing as
@@ -118,7 +119,7 @@
     // Background sound 
     var backgroundMusic = new Audio('./client/audios/background.mp3');
   </script>
-  
+
   <!-- include all client game logic such as drawing the map waiting looby etc -->
   <script type="text/javascript" src="./client/js/audioPlayer.js" defer></script>
   <script type="text/javascript" src="./client/js/handleMouse.js" defer></script>
@@ -132,8 +133,8 @@
   <script type="text/javascript" src="./client/js/progressBar.js" defer></script>
   <script type="text/javascript" src="./client/js/staminaScores.js" defer></script>
   <script type="text/javascript" src="./client/js/animation.js" defer></script>
-  <script type="text/javascript" src ="./client/js/firstView.js" defer></script>
-  
+  <script type="text/javascript" src="./client/js/firstView.js" defer></script>
+
   <script type="text/javascript" src="./client/js/render.js" defer></script>
   <script type="text/javascript" src="./client/js/update.js" defer></script>
 
@@ -143,73 +144,78 @@
   <!-- Combine all the game logic into a client side game -->
   <script>
     /* Define what happens when a socket manages to connect to our server */
-    socket.on('connect', function() {
+    socket.on('connect', function () {
       // in here we can pass our socket.id to the functions that need it
       /* we recive the new game state every time a round is over */
-      socket.on('NextGameRound', (data)=> {
+      socket.on('NextGameRound', (data) => {
 
         window.addEventListener("keydown", startGame);
         sockid = socket.id;
         // we check if the data is a game state or a waiting lobby
         if (data.hasOwnProperty("__tiles")) {
-            g_tilesContainingPlayers = fetchPlayerTiles(data.__tiles);
-            g_tilesContainingPlayers.map(char => {
-              let nplayer = playerExistsInTile(char.tile._entities);
-              //Checks and sets the player as the global variable player if sockId matches.
-              checkPlayer(nplayer, sockid);
-
-              if(g_animations[nplayer.character]) {
-                g_animations[nplayer.character].setMovement(nplayer.movement);
-              }
-              //if(data__Deadplayers.includes(nplayer.character)){
-              //  console.log(nplayer.character, " is dead now");
-              //}
-              g_players.push(nplayer);
-            });
+          g_tilesContainingPlayers = fetchPlayerTiles(data.__tiles);
+          g_tilesContainingPlayers.map(char => {
+            let nplayer = playerExistsInTile(char.tile._entities);
+            //Checks and sets the player as the global variable player if sockId matches.
+            checkPlayer(nplayer, sockid);
 
             
-            // set the new game state so our clients can render it
-            g_gamestate = data;
-            g_waiting = {};
+            if (g_animations[nplayer.character]) {
+              g_animations[nplayer.character].setMovement(nplayer.movement);
+            }
+            g_players.push(nplayer);
+          });
+
+          if(data.__Deadplayers.length > 0) {
+            data.__Deadplayers.map((i) => {
+              if(i.sockid === socket.id) { amIalive = false; }
+              
+            });
+          }
+          console.log(amIalive);
+          // set the new game state so our clients can render it
+          g_gamestate = data;
+
+          g_waiting = {};
 
           /* the reason we check for the game win last is cuz we want the last animantion to 
              be played or else it just ends the game once u made a winning move and u dont even 
-             know what happened */ 
+             know what happened */
           // check if the game is over  and the winners are player i.e suviors
-          if(data.__gameWon.players){
-             /* helegis function come here */
-             document.getElementById("winnerNoteID").innerHTML = "congratulations Survivors you have beaten the monster !!!";
-             victorySound();
-             g_gameover.over = true;
-             g_gameover.winners= "Suvivors";
+          if (data.__gameWon.players) {
+            /* helegis function come here */
+            document.getElementById("winnerNoteID").innerHTML = "congratulations Survivors you have beaten the monster !!!";
+            victorySound();
+            g_gameover.over = true;
+            g_gameover.winners = "Suvivors";
           }
           // check if the game is over and the monster won the game 
-          if(data.__gameWon.monster) {
+          if (data.__gameWon.monster) {
             /* helegis function come here */
             document.getElementById("winnerNoteID").innerHTML = "congratulations Monster you have eaten those bastards !!!";
             victorySound();
             g_gameover.over = true;
-            g_gameover.winners= "Monster";
+            g_gameover.winners = "Monster";
           }
-          
+
           return;
         }
         // if we did not recive a game state we know we are in waiting lobby
         g_waiting = data;
         allPlayerWaiting(g_waiting, false);
-        g_gamestate= {};
+        g_gamestate = {};
         g_tilesContainingPlayers = {};
-        g_players= [];
+        g_players = [];
       });
 
-      socket.on('roundstart', ()=> {
+      socket.on('roundstart', () => {
         // when the round starts we allow the user to click on the tiles
-  
-          window.addEventListener("mousedown", handleMouse);
-          window.addEventListener("mousemove", handleMouse);
-          window.addEventListener("keydown", handleKeydown);
-          window.addEventListener("keyup", handleKeyup);
-  
+
+        window.addEventListener("mousedown", handleMouse);
+        window.addEventListener("mousemove", handleMouse);
+        window.addEventListener("keydown", handleKeydown);
+        window.addEventListener("keyup", handleKeyup);
+
         setStamina(player);
         startProgressBar();
 
@@ -217,19 +223,19 @@
         // declare that the client is not ready for the next round 
         // (NOT THIS ROUND BUT THE NEXT THAT IS YET TO BE CALCULATED AND RENDERED)
         //Animation breytan, þegar animation er búið g_readyForNextRound=false;
-        
+
         /* Set a lambda function to go off in 5 seconds that will emit to the server what 
            has the user done, clearing the client side on what has he done and removing
            the listeners so he cant select the tiles*/
         setTimeout(() => {
-          socket.emit('clientinput',{ steps:g_steps, powerUp:g_usedPowerUp});
+          socket.emit('clientinput', { steps: g_steps, powerUp: g_usedPowerUp });
           g_steps = [];
           g_usedPowerUp = false;
-          g_walkinganimfinish = {bob:false, sara:false, monster:false};
+          g_walkinganimfinish = { bob: false, sara: false, monster: false };
           g_readyForNextRound = false;
-          window.removeEventListener("mousedown",handleMouse);
-          window.removeEventListener("mousemove",handleMouse);
-          window.removeEventListener("keydown",handleKeydown);
+          window.removeEventListener("mousedown", handleMouse);
+          window.removeEventListener("mousemove", handleMouse);
+          window.removeEventListener("keydown", handleKeydown);
           window.removeEventListener("keyup", handleKeyup);
         }, 5000);
 
@@ -240,7 +246,8 @@
          wait for all clients to render the map and the animations and then play next round */
       // setInterval(() => { socket.emit('clientreadyfornextround',g_readyForNextRound)},3000);
     });
-    </script>
+  </script>
 
 </body>
+
 </html>

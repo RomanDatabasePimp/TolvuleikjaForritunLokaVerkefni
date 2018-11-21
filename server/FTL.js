@@ -228,7 +228,16 @@ function updateStateAndReturn() {
       const pos = GameLobby._availablePlayers[player].player.getEntityTilePos();
       // if the players died this round
       if(pos.tileX) {
-        g_tileManager.__Deadplayers.push(player);//add the player to the died players
+        /* Create a dead player for dead players */
+        const deadplayer = {
+          sockid:GameLobby._availablePlayers[player].player.playBy,
+          name : player,
+          // only need x and y pos of the tiles
+          posX : pos.tileX,
+          posY : pos.tileY
+        }
+        //add the player to the died players
+        g_tileManager.__Deadplayers.push(deadplayer);
         // remove the player from the container
         g_tileManager.__tiles[pos.tileX][pos.tileY].removeEntity(pos.spatialPos);
         GameLobby._availablePlayers[player].player.updateEntityTilePos(null,null,null);
