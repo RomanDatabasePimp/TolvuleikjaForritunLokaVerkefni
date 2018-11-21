@@ -169,7 +169,6 @@
           if(data.__Deadplayers.length > 0) {
             data.__Deadplayers.map((i) => {
               if(i.sockid === socket.id) { amIalive = false; }
-              
             });
           }
           if(!amIalive){ socket.emit('clientreadyfornextround', true); }
