@@ -154,6 +154,11 @@
             g_tilesContainingPlayers = fetchPlayerTiles(g_gamestate.__tiles);
             g_tilesContainingPlayers.map(char => {
               let nplayer = playerExistsInTile(char.tile._entities);
+              
+              console.log("player obj",nplayer);
+              console.log(nplayer.playBy,"<- player sock  my sock ->",sockid);
+              console.log(nplayer.playBy === sockid);
+              
               if(g_animations[nplayer.character]) {
                 g_animations[nplayer.character].setMovement(nplayer.movement);
               }
@@ -196,7 +201,7 @@
         window.addEventListener("mousemove", handleMouse);
         window.addEventListener("keydown", handleKeydown);
         window.addEventListener("keyup", handleKeyup);
-        player = getPlayer();
+
         setStamina(player);
         startProgressBar();
 
