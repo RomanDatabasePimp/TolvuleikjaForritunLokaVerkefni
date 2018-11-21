@@ -143,28 +143,32 @@
       // in here we can pass our socket.id to the functions that need it
       /* we recive the new game state every time a round is over */
       socket.on('NextGameRound', (data)=> {
+
+        window.addEventListener("keydown", startGame);
         sockid = socket.id;
         // we check if the data is a game state or a waiting lobby
         if (data.hasOwnProperty("__tiles")) {
-            // set the new game state so our clients can render it
-            g_gamestate = data;
-            // fetch the player
-            // set the lobby to empty
-            window.addEventListener("keydown", startGame);
-            g_tilesContainingPlayers = fetchPlayerTiles(g_gamestate.__tiles);
+            
+            g_tilesContainingPlayers = fetchPlayerTiles(data.__tiles);
             g_tilesContainingPlayers.map(char => {
               let nplayer = playerExistsInTile(char.tile._entities);
               
-              if(nplayer.playBy === sockid){
+              if(nplayer.playBy === sockid) {
                 player =  nplayer;
-              }
+               
+              } 
 
               if(g_animations[nplayer.character]) {
                 g_animations[nplayer.character].setMovement(nplayer.movement);
               }
+
               checkPlayer(nplayer,socket.id);
               g_players.push(nplayer);
             });
+
+            
+            // set the new game state so our clients can render it
+            g_gamestate = data;
             g_waiting = {};
 
           /* the reason we check for the game win last is cuz we want the last animantion to 
@@ -199,11 +203,12 @@
 
       socket.on('roundstart', ()=> {
         // when the round starts we allow the user to click on the tiles
-        window.addEventListener("mousedown", handleMouse);
-        window.addEventListener("mousemove", handleMouse);
-        window.addEventListener("keydown", handleKeydown);
-        window.addEventListener("keyup", handleKeyup);
-
+  
+          window.addEventListener("mousedown", handleMouse);
+          window.addEventListener("mousemove", handleMouse);
+          window.addEventListener("keydown", handleKeydown);
+          window.addEventListener("keyup", handleKeyup);
+  
         setStamina(player);
         startProgressBar();
 

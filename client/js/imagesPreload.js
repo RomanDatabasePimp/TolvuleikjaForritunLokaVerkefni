@@ -148,6 +148,7 @@ function requestPreloads() {
     saraDown2: './client/img/Player/sara_07.png',
     saraUp1: './client/img/Player/sara_08.png',
     saraUp2: './client/img/Player/sara_09.png',
+    saraDead: './client/img/Player/TombStoneSARA',
     //Monster
     monster: './client/img/Monster/platformChar_idle.png',
     monsterHidden: './client/img/Monster/monster_hidden.png',
@@ -163,6 +164,7 @@ function requestPreloads() {
     bobRight2: './client/img/Player/player_18.png',
     bobLeft1: './client/img/Player/player_20.png',
     bobLeft2: './client/img/Player/player_21.png',
+    bobDead: './client/img/Player/TombStoneBOB',
     //Sama mynd og player
     bobDown1: './client/img/Player/player_06.png',
     bobDown2: './client/img/Player/player_07.png',
@@ -192,6 +194,7 @@ function preloadDone() {
   g_sprites.terrain = new Sprite(g_images.terrain);
   g_sprites.key = new Sprite(g_images.key);
   g_sprites.powerUp = new Sprite(g_images.powerUp);
+  g_sprites.cloud = new Sprite(g_images.cloud);
   //----------Sara--------------//
   g_sprites.saraPlayer = new Sprite(g_images.saraPlayer);
   g_sprites.saraHidden = new Sprite(g_images.saraHidden);
@@ -201,6 +204,7 @@ function preloadDone() {
   g_sprites.saraLeft2 = new Sprite(g_images.saraLeft2);
   g_sprites.saraUp1 = new Sprite(g_images.saraUp1);
   g_sprites.saraUp2 = new Sprite(g_images.saraUp2);
+  g_sprites.saraDead = new Sprite(g_images.saraDead);
   //---------Monster------------//
   g_sprites.monster = new Sprite(g_images.monster);
   g_sprites.monsterHidden = new Sprite(g_images.monsterHidden);
@@ -220,5 +224,6 @@ function preloadDone() {
   g_sprites.bobDown2 = new Sprite(g_images.bobDown2);
   g_sprites.bobUp1 = new Sprite(g_images.bobUp1);
   g_sprites.bobUp2 = new Sprite(g_images.bobUp2);
-  g_sprites.cloud = new Sprite(g_images.cloud);
+  g_sprites(bobDead) = new Sprite(g_sprites.bobDead);
+  
 }
