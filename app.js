@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
         /* expect that data will come in a form of 
            { steps : [ step: {x,y}, step:{x,y}, step:{x,y} ] ,
              powerUp: true } */
-        console.log("input",data);
+        //console.log("input",data);
         FTL.updatePlayer(socket.id,data);
       });
 
