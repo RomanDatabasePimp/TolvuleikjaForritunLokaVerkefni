@@ -12,11 +12,6 @@ let Container;
 let video;// child and it is the video
 let main;// parent and it is the body
 function allPlayerWaiting(data, flag){
-  try{
-    backgroundMusic.play();
-  }catch{
-
-  }
   player1 = "Waiting for Bob";
   player2 = "Waiting for Sara";
   monster = "Waiting for monster";
