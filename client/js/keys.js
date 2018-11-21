@@ -17,7 +17,6 @@ function startGame(evt){
   keys[evt.keyCode] = true;
   if (evt.keyCode === POWERUP_KEY) { 
     g_usedPowerUp = true;
-    console.log("heelo");
   }
   if (evt.keyCode === RESET_KEY) { socket.emit('resetgamerequest', null); }
   if (evt.keyCode === RDY_KEY) {
