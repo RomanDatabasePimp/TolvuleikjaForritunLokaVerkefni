@@ -201,7 +201,11 @@ function updatePlayer(sockid,inp) {
   // add player stamina
   if(player.character === "sara") {
     player.staminaBuff(3);
-  } else {
+  }
+  else if(player.character === "monster") {
+    player.staminaBuff(4);
+  }
+  else {
     player.staminaBuff(2);
   }
   

@@ -29,7 +29,6 @@ function GameLobby() {};
           mademove: false,
           powerup:null, // the red bull players can pick up (redbull for now maybe more later)
           movement:[] // for the next round the steps he took (for animation)
-          
         }
       )
     },
