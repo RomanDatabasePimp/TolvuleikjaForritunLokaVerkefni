@@ -23,6 +23,10 @@ function startGame(evt){
     evt.preventDefault();
     g_readyForNextRound = true;
     //g_FadeOutTexts.waitingText.giveMeLife();
+    // koma í veg fyrir að gaming animation mun gitcha 
+    g_animations["bob"].clearTemp();
+    g_animations["sara"].clearTemp();
+    g_animations["monster"].clearTemp();
     socket.emit('clientreadyfornextround', g_readyForNextRound);
   }
 }

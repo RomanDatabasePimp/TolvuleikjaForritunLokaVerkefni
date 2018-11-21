@@ -1,3 +1,4 @@
+// Js files that controls the UI for the player. It display the stamina score and yours player head.
 function setStamina(player){
     let playername = player.character;
     const playerStamina = player.stamina;
@@ -6,7 +7,7 @@ function setStamina(player){
     switch(playername) {
         case playername = "bob":
         rightPlayerName = "Bob"
-        document.getElementById("playerHeads").src = './client/img/Player/Heads/playerFace.png';
+        document.getElementById("playerHeads").src = test;
         if(player.powerup == "redbull"){
           document.getElementById("powerUpHeads").src = './client/img/keys/platformPack_item003.png';
         } else {
