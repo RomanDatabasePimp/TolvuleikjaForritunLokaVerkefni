@@ -134,13 +134,13 @@ function updatePlayer(sockid,inp) {
           // you collided with a monster u die
           else {
             deadorkilled = true;
-            player.isAlive = false;
+            player.kill();
           }
         }
         // this client is  a monster
         else {
           deadorkilled = true;
-          playerExists.isAlive = false; // kill the one who collided with player
+          playerExists.kill(); // kill the one who collided with player
         }
       }
 
@@ -225,8 +225,8 @@ function updateStateAndReturn() {
       const pos = GameLobby._availablePlayers[player].player.getEntityTilePos();
       // if the players died this round
       if(pos.tileX) {
-        g_tileManager.__tiles[pos.tileX][pos.tileY].removeEntity(pos.spatialPos);
-        GameLobby._availablePlayers[player].player.updateEntityTilePos(null,null,null);
+        //g_tileManager.__tiles[pos.tileX][pos.tileY].removeEntity(pos.spatialPos);
+        //GameLobby._availablePlayers[player].player.updateEntityTilePos(null,null,null);
       }
     }
   }

@@ -30,6 +30,8 @@ function checkPlayer(player,id){
  * @param {int} posY 
  */
   function movePlayerTo(posX, posY) {
+    //If we aren't alive, we certainly can't move.
+    console.log(player.isAlive);
       // Checks if we are clicking ourselves.
     if(checkValidMoves(posX,posY)){
         const newStep = {step:{x:posX, y:posY}};

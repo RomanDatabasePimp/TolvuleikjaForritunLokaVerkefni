@@ -152,11 +152,9 @@
             g_tilesContainingPlayers = fetchPlayerTiles(data.__tiles);
             g_tilesContainingPlayers.map(char => {
               let nplayer = playerExistsInTile(char.tile._entities);
-              
-              if(nplayer.playBy === sockid) {
-                player =  nplayer;
-               
-              } 
+              console.log(nplayer);
+              //Checks and sets the player as the global variable player if sockId matches.
+              checkPlayer(nplayer, sockid);
 
               if(g_animations[nplayer.character]) {
                 g_animations[nplayer.character].setMovement(nplayer.movement);
