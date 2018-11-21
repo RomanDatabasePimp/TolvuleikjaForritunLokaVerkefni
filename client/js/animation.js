@@ -19,7 +19,7 @@ function playerAnimation (descr){
     this.howManyTime = 0,// to high nr needs to be lowerd but is okay
 
     this.movement = [],// should be passed in the object
-    this.rendersteps = { leftstep : null, rightstep: null , cx:null , cy:null , steppingl : true, descordX:null,descordY:null,tilePosX,tilePosY}
+    this.rendersteps = { leftstep : null, rightstep: null , cx:null , cy:null , steppingl : true, descordX:null,descordY:null}
     this.tempMove = [];
 };
 
@@ -42,7 +42,7 @@ playerAnimation.prototype.update= function(du) {
         g_walkinganimfinish[this.name] = true;
         this.leftstep = null;
         return;
-        }
+    }
     }
 try{
     if(!this.rendersteps.leftstep){
@@ -51,8 +51,6 @@ try{
        this.rendersteps.descordY = (this.movement[0].step.y * 64);
        this.rendersteps.cx = newStep.step.x*64;
        this.rendersteps.cy = newStep.step.y*64;
-       this.rendersteps.tilePosX = newStep.x;
-       this.rendersteps.tilePosY = newStep.y;
        this.checkWichDirection(this.rendersteps.descordX, this.rendersteps.descordY,this.rendersteps.cx, this.rendersteps.cy);
        this.count = 0;
     }
