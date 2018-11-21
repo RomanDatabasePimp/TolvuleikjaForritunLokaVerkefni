@@ -173,14 +173,16 @@
           // check if the game is over  and the winners are player i.e suviors
           if(data.__gameWon.players){
              /* helegis function come here */
-             console.log("suvivors have won!");
+             document.getElementById("winnerNoteID").innerHTML = "congratulations Survivors you have beaten the monster !!!";
+             victorySound();
              g_gameover.over = true;
              g_gameover.winners= "Suvivors";
           }
           // check if the game is over and the monster won the game 
           if(data.__gameWon.monster) {
             /* helegis function come here */
-            console.log("MONSTER has won!");
+            document.getElementById("winnerNoteID").innerHTML = "congratulations Monster you have eaten those bastards !!!";
+            victorySound();
             g_gameover.over = true;
             g_gameover.winners= "Monster";
           }

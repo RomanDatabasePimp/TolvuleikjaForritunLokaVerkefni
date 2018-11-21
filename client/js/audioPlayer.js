@@ -10,4 +10,5 @@ function victorySound(){
 function endWinner(){
     document.getElementById('fireWorksContainerID').style.display = 'none';
     document.getElementById("winnerNoteID").style.display = 'none';
+    socket.emit("resetgamerequest",null);
 }
