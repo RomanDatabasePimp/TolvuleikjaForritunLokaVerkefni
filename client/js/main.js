@@ -127,17 +127,6 @@ function drawCorrectChar(char, i, j, isHidden) {
     default:
   }
 };
-function drawDeadChar(char, i, j) {
-  switch (char.character) {
-    case char = "bob":
-      g_sprites.bobDead.drawAt(g_ctx, i * 64, j * 64);
-      break;
-    case char = "sara":
-      g_sprites.saraDead.drawAt(g_ctx, i * 64, j * 64);
-      break;
-    default:
-  }
-}
 /**
  * finds the entity at our location.
  * @param {Entity} entity 

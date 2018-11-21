@@ -15,7 +15,10 @@ function allCharactersRendered(chars) {
 function clearCanvas(ctx) {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
-
+/**
+ * rounds down an integer for easier use in our grid. 
+ * @param {int} x 
+ */
 function roundDown(x) {
   return Math.floor(x);
 }
@@ -23,13 +26,18 @@ function roundDown(x) {
  * takes an x or y coord and converts it into a 0-10 double digit
  * Sends that to rounddown to math.floor it, to a 0-10 int digit.
  * Multiplies by 64 for x-y coords for our grid.
- * @param {*} x 
+ * Useful mostly for mouse inputs in our game.
+ * @param {int} x 
  */
 function convertToMatrix(x) {
   x = roundDown(x / 64);
   return x * 64;
 }
-
+/**
+ * Random number from min to max.
+ * @param {int} min 
+ * @param {int} max 
+ */
 function randRange(min, max) {
   return (min + Math.random() * (max - min));
 }
