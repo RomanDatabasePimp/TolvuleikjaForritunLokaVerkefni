@@ -95,6 +95,23 @@ function drawCharacters(tile, i, j, id) {
   }
 };
 /**
+ *  This function will only draw the non-monster characters
+ * if they have been set as dead
+ * @param {String} char name of our character
+ * @param {int} i x-axis of our character 
+ * @param {int} j y-axis of our character
+ */
+function drawDeadCharacters(char, i, j){
+  switch (char) {
+    case char = "bob":
+        g_sprites.bobDead.drawAt(g_ctx, i * 64, j * 64);
+      break;
+    case char = "sara":
+        g_sprites.saraDead.drawAt(g_ctx, i * 64, j * 64);
+      break;
+      default:
+};
+/**
  * Draws the correct character at the corresponding location.
  * @param {tile} char 
  * @param {int} i 
