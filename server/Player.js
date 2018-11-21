@@ -47,6 +47,7 @@ Player.prototype.activatePowerUp = function(){
     // as of now we only have one power up we might have more later
     if(this.powerup === "redbull") {
       this.stamina +=5;
+      this.powerup=null;
     }
   }
 }

@@ -9,6 +9,8 @@ function setStamina(player){
         document.getElementById("playerHeads").src = './client/img/Player/Heads/playerFace.png';
         if(player.powerup == "redbull"){
           document.getElementById("powerUpHeads").src = './client/img/keys/platformPack_item003.png';
+        } else {
+          document.getElementById("powerUpHeads").src = '';
         }
         break;
         case playername = "sara":
@@ -16,6 +18,8 @@ function setStamina(player){
         document.getElementById("playerHeads").src =  './client/img/Player/Heads/saraFace.png';
         if(player.powerup == "redbull"){
           document.getElementById("powerUpHeads").src = './client/img/keys/platformPack_item003.png';
+        } else {
+          document.getElementById("powerUpHeads").src = '';
         }
         break;
         case playername = "monster":
@@ -23,6 +27,8 @@ function setStamina(player){
         document.getElementById("playerHeads").src =  './client/img/Monster/platformChar_happy.png';
         if(player.powerup == "redbull"){
          document.getElementById("powerUpHeads").src = './client/img/keys/platformPack_item003.png';
+        } else {
+          document.getElementById("powerUpHeads").src = '';
         }
         break;
         default: 
