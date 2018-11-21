@@ -22,3 +22,4 @@ ftlgame.herokuapp.com
 Helgi Grétar  
 Rafnar  
 Roman  
+Bjarki
