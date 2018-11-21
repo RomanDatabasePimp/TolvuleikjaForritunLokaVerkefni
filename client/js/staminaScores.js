@@ -1,3 +1,4 @@
+// Js files that controls the UI for the player. It display the stamina score and yours player head.
 function setStamina(player){
     let playername = player.character;
     const playerStamina = player.stamina;
