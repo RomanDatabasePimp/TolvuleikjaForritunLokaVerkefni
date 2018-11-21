@@ -10,13 +10,14 @@ let Container;
 let video;// er childid sem er video
 let main;// er parent sem er body
 function allPlayerWaiting(data, flag){
+  backgroundMusic.play();
   player1 = "Waiting for Bob";
   player2 = "Waiting for Sara";
   monster = "Waiting for monster";
   document.getElementById("gameRules").style.display = "none";
     if(data != {}){
         try{
-            document.getElementById('videoContainerinn').style.display = '';
+          document.getElementById('videoContainerinn').style.display = '';
           document.getElementById('fireWorksContainerID').style.display = 'none';
           if(data.hasnotgamestarted[0] == true){player1 = "Bob is ready to roll";}
           if(data.hasnotgamestarted[1] == true){player2 = "Sara will kick your ass"}
