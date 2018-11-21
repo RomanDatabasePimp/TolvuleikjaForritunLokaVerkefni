@@ -22,15 +22,20 @@ function render(ctx) {
     /* if the round hasent started we draw the fade out text */
     g_FadeOutTexts.waitingText.render(g_readyForNextRound);
    
-    
-    /* helgi draws his character animations */
+    if(g_gamestate.__Deadplayers.length > 0) {
+      g_gamestate.__Deadplayers.map((i) => {
+        drawDeadCharacters(i.name, i.posX,i.posY)
+      });
+    }
+     
     g_animations["bob"].render(ctx,g_gamestate);
     g_animations["sara"].render(ctx,g_gamestate);
     g_animations["monster"].render(ctx,g_gamestate);
+
+    g_tilesContainingPlayers.map(char => {drawCharacters(char.tile,char.i,char.j,sockid); });
     
     /* when animations are done rafnar draws the static images of the characters */
   
-    g_tilesContainingPlayers.map(char => {drawCharacters(char.tile,char.i,char.j,sockid); });
     
     //g_tilesContainingPlayers.map(char => { drawCharacters(char.tile,char.i,char.j,sockid);  });
     g_steps.map(step => { g_sprites.highLight.drawAt(g_ctx,step.step.x*64, step.step.y*64); });

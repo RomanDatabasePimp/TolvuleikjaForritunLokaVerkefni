@@ -110,6 +110,7 @@ function drawDeadCharacters(char, i, j){
         g_sprites.saraDead.drawAt(g_ctx, i * 64, j * 64);
       break;
       default:
+  }
 };
 /**
  * Draws the correct character at the corresponding location.
