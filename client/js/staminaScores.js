@@ -6,7 +6,7 @@ function setStamina(player){
     switch(playername) {
         case playername = "bob":
         rightPlayerName = "Bob"
-        document.getElementById("playerHeads").src = './client/img/Player/Heads/playerFace.png';
+        document.getElementById("playerHeads").src = test;
         if(player.powerup == "redbull"){
           document.getElementById("powerUpHeads").src = './client/img/keys/platformPack_item003.png';
         } else {

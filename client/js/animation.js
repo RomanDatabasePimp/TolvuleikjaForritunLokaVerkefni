@@ -108,7 +108,10 @@ playerAnimation.prototype.render = function(g_ctx,map) {
 
     }
 };
-    
+playerAnimation.prototype.clearTemp = function(){
+    this.movement = [];
+    this.tempMove = [];
+};
     playerAnimation.prototype.checkWichDirection = function(newx,newy,oldX,oldY){
         if(this.name == "bob"){
             if(oldX < newx){
