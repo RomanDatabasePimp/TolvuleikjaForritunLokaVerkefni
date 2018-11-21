@@ -5,22 +5,20 @@
 const tile = require('./tile').Tile; // fetch the tile
 const pickup = require('./pickups').PickUp; // our key
 
-/* Our map is composed of a set of tiles, and the tileManeger holds all the tiles */
+/* Our map is composed of a set of tiles,
+   and the tileManeger holds all the tiles */
 let g_tileManager = {
-
   // all the tiles inside the map
   __tiles: [],
   __tileSize: 10, // size of our map in terms of tileSize*tileSize
-  __objPickedUp: 0,
-  __gameWon: { players: false, monster: false},
-  __Deadplayers: [],
+  __objPickedUp: 0, // holds over how many obj have been picked up
+  __gameWon: { players: false, monster: false}, // tells us who won the game
+  __Deadplayers: [], // idea ? maybed hold 
 
   /* Usage : t.objPickedUp()
       For  : t is a g_tileManager object
       After: adds one 1 to objPickedUp  */
-  objPickedUp : function(){
-    this.__objPickedUp++;
-  },
+  objPickedUp : function(){ this.__objPickedUp++; },
 
   /* Usage : t.tyToMoveToNextTile(source,dest)
       For  : t is a g_tileManager object
@@ -31,7 +29,8 @@ let g_tileManager = {
   tyToMoveToNextTile : function(source,dest) {
     //console.log("movement source =",source, " to dest=",dest);
     // if we try to move down
-    if((source.x+1 === dest.x && source.y === dest.y) && !(source.x+1 >= this.__tileSize))  {
+    if((source.x+1 === dest.x && source.y === dest.y) 
+        && !(source.x+1 >= this.__tileSize))  {
       if(!this.__tiles[dest.x][dest.y]._amITerrain) { return true;}
       return false;
     }
@@ -49,7 +48,8 @@ let g_tileManager = {
     }
 
     // if we try to move right
-    else if((source.x === dest.x && source.y+1 === dest.y) && !(source.y+1 >= this.__tileSize)){
+    else if((source.x === dest.x && source.y+1 === dest.y) 
+            && !(source.y+1 >= this.__tileSize)){
       if(!this.__tiles[dest.x][dest.y]._amITerrain) { return true;}
       return false;
     }
@@ -59,6 +59,7 @@ let g_tileManager = {
       return false
     }
   },
+
   /* Usage : t.createNewEmptyMap()
       For  : t is g_tileManager object
      After : creates tileSize*tileSize array of tiles where each tile entries
@@ -75,7 +76,7 @@ let g_tileManager = {
       }
       this.__tiles[i] = tiles;
     }
-    console.log("empty map has been initialized !"); // for debbugin
+    // console.log("empty map has been initialized !"); // for debbugin
     this.generateNewMaze();
   },
   
@@ -111,8 +112,11 @@ let g_tileManager = {
       }
     }
   },
-
 }
+
+/*---------------------------------------------------------------------
+  ---------- Rafnar map generating functions here ---------------------
+  --------------------------------------------------------------------- */
 
 function mapMaker(){
   let map1  = [
@@ -201,6 +205,7 @@ function mapMaker(){
 function callRandom(){
   return Math.floor(Math.random() * 4) + 1;
 }
+
 /* export the tile maneger so we can use it */
 module.exports = {
   g_tileManager,
