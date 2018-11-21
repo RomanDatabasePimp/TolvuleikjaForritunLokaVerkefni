@@ -134,13 +134,13 @@ function updatePlayer(sockid,inp) {
           // you collided with a monster u die
           else {
             deadorkilled = true;
-            player.isAlive = false;
+            player.kill();
           }
         }
         // this client is  a monster
         else {
           deadorkilled = true;
-          playerExists.isAlive = false; // kill the one who collided with player
+          playerExists.kill(); // kill the one who collided with player
         }
       }
 

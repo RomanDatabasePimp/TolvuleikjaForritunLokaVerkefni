@@ -104,14 +104,14 @@ function drawCorrectChar(char, i, j, isHidden) {
   // if our character is hidden, draw it that sprite.
   switch (char) {
     case char = "bob":
-      if (isHidden) {
+     if (isHidden) {
         g_sprites.bobHidden.drawAt(g_ctx, i * 64, j * 64);
       } else {
         g_sprites.player.drawAt(g_ctx, i * 64, j * 64);
       }
       break;
     case char = "sara":
-      if (isHidden) {
+     if (isHidden) {
         g_sprites.saraHidden.drawAt(g_ctx, i * 64, j * 64);
       } else {
         g_sprites.saraPlayer.drawAt(g_ctx, i * 64, j * 64);

@@ -51,7 +51,9 @@ Entity.prototype.updateEntityTilePos = function(nTileX,nTileY,nspatialPos) {
     spatialPos:nspatialPos
   }
 };
-
+Entity.prototype.kill = function(){
+  this.isAlive = false;
+}
 /* export the Entity so others can use it */
 module.exports = {
   Entity,

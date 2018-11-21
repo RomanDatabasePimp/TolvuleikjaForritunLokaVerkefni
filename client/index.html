@@ -112,6 +112,8 @@
     /* to avoid unnecessary computation we store all the clients and the tiles they are in
        in a seperate obj to be further used more efficiently */
     let g_tilesContainingPlayers = {};
+
+    let amIalive = true;
     // for debbugs
     // Background sound 
     var backgroundMusic = new Audio('./client/audios/background.mp3');
@@ -150,15 +152,13 @@
         sockid = socket.id;
         // we check if the data is a game state or a waiting lobby
         if (data.hasOwnProperty("__tiles")) {
-            
+            amIalive = false;
             g_tilesContainingPlayers = fetchPlayerTiles(data.__tiles);
             g_tilesContainingPlayers.map(char => {
               let nplayer = playerExistsInTile(char.tile._entities);
+              //Checks and sets the player as the global variable player if sockId matches.
               
-              if(nplayer.playBy === sockid) {
-                player =  nplayer;
-               
-              } 
+              checkPlayer(nplayer, sockid);
 
               if(g_animations[nplayer.character]) {
                 g_animations[nplayer.character].setMovement(nplayer.movement);
