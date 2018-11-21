@@ -7,6 +7,7 @@ let playerOne;
 let playerTwo;
 let playerThree;
 let Container;
+var backgroundMusic = new Audio('./client/audios/background.mp3');
 // Function that will update the waiting looby, in regards for the players. Only when all of the players are ready the waiting loopy displays none 
 // and the game begins.
 let video;// child and it is the video
