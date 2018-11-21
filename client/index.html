@@ -172,7 +172,8 @@
               
             });
           }
-          console.log(amIalive);
+          if(!amIalive){ socket.emit('clientreadyfornextround', true); }
+          
           // set the new game state so our clients can render it
           g_gamestate = data;
 
@@ -210,15 +211,15 @@
 
       socket.on('roundstart', () => {
         // when the round starts we allow the user to click on the tiles
-
-        window.addEventListener("mousedown", handleMouse);
-        window.addEventListener("mousemove", handleMouse);
-        window.addEventListener("keydown", handleKeydown);
-        window.addEventListener("keyup", handleKeyup);
-
-        setStamina(player);
+        if(amIalive) {
+          window.addEventListener("mousedown", handleMouse);
+          window.addEventListener("mousemove", handleMouse);
+          window.addEventListener("keydown", handleKeydown);
+          window.addEventListener("keyup", handleKeyup);
+          setStamina(player);
+        }
         startProgressBar();
-
+      
         // start the count down that the user has 5 seconds to make a move
         // declare that the client is not ready for the next round 
         // (NOT THIS ROUND BUT THE NEXT THAT IS YET TO BE CALCULATED AND RENDERED)
