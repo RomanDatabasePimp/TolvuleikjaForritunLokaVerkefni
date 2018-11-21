@@ -7,13 +7,16 @@ let playerOne;
 let playerTwo;
 let playerThree;
 let Container;
-var backgroundMusic = new Audio('./client/audios/background.mp3');
 // Function that will update the waiting looby, in regards for the players. Only when all of the players are ready the waiting loopy displays none 
 // and the game begins.
 let video;// child and it is the video
 let main;// parent and it is the body
 function allPlayerWaiting(data, flag){
-  backgroundMusic.play();
+  try{
+    backgroundMusic.play();
+  }catch{
+
+  }
   player1 = "Waiting for Bob";
   player2 = "Waiting for Sara";
   monster = "Waiting for monster";
