@@ -225,8 +225,8 @@ function updateStateAndReturn() {
       const pos = GameLobby._availablePlayers[player].player.getEntityTilePos();
       // if the players died this round
       if(pos.tileX) {
-        //g_tileManager.__tiles[pos.tileX][pos.tileY].removeEntity(pos.spatialPos);
-        //GameLobby._availablePlayers[player].player.updateEntityTilePos(null,null,null);
+        g_tileManager.__tiles[pos.tileX][pos.tileY].removeEntity(pos.spatialPos);
+        GameLobby._availablePlayers[player].player.updateEntityTilePos(null,null,null);
       }
     }
   }

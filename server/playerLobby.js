@@ -46,8 +46,7 @@ function GameLobby() {};
           playBy:null,
           mademove: false,
           powerup:null,
-          movement:[],
-          isAlive: true
+          movement:[]
         }
       )
     },
@@ -64,8 +63,7 @@ function GameLobby() {};
           playBy:null,
           mademove: false,
           powerup:"redbull", // since its 2v1 monster gets his red bull
-          movement:[],
-          isAlive: true
+          movement:[]
         }
       )
     }
