@@ -16,21 +16,21 @@ let KEY_RIGHT = 'D'.charCodeAt(0);
 let KEY_MUSIC = 'M'.charCodeAt(0);
 // GlobalVarable
 let musicPlay = false;
-function startGame(evt){
+function startGame(evt) {
   keys[evt.keyCode] = true;
-  if (evt.keyCode === POWERUP_KEY) { 
+  if (evt.keyCode === POWERUP_KEY) {
     g_usedPowerUp = true;
   }
-  if(eatKey(KEY_MUSIC)){
+  if (eatKey(KEY_MUSIC)) {
     musicPlay = !musicPlay;
-    if(musicPlay){
+    if (musicPlay) {
       backgroundMusic.play();
-    }else{
+    } else {
       backgroundMusic.pause();
     }
   }
   if (evt.keyCode === RESET_KEY) { socket.emit('resetgamerequest', null); }
-  if (evt.keyCode === RDY_KEY ) {
+  if (evt.keyCode === RDY_KEY) {
     evt.preventDefault();
     g_readyForNextRound = true;
     //g_FadeOutTexts.waitingText.giveMeLife();
@@ -46,26 +46,26 @@ function startGame(evt){
 function handleKeydown(evt) {
   keys[evt.keyCode] = true;
   if (eatKey(KEY_UP)) {
-    if(player.entityPos.posY - 1 < 0) return;
-      movePlayerTo(player.entityPos.tileX, player.entityPos.tileY - 1);
-      player.entityPos.tileY -= 1;
+    if (player.entityPos.posY - 1 < 0) { return; }
+    movePlayerTo(player.entityPos.tileX, player.entityPos.tileY - 1);
+    player.entityPos.tileY -= 1;
   }
   if (eatKey(KEY_DOWN)) {
-    if(player.entityPos.posY + 1 > 9) return;
-      movePlayerTo(player.entityPos.tileX, player.entityPos.tileY + 1);
-      player.entityPos.tileY += 1;
+    if (player.entityPos.posY + 1 > 9) { return; }
+    movePlayerTo(player.entityPos.tileX, player.entityPos.tileY + 1);
+    player.entityPos.tileY += 1;
   }
   if (eatKey(KEY_LEFT)) {
-    if(player.entityPos.posX - 1 < 0) return;
-      movePlayerTo(player.entityPos.tileX - 1, player.entityPos.tileY);
-      player.entityPos.tileX -= 1;
+    if (player.entityPos.posX - 1 < 0) { return; }
+    movePlayerTo(player.entityPos.tileX - 1, player.entityPos.tileY);
+    player.entityPos.tileX -= 1;
   }
   if (eatKey(KEY_RIGHT)) {
-    if(player.entityPos.posX + 1 > 9) return;
-      movePlayerTo(player.entityPos.tileX + 1, player.entityPos.tileY);
-      player.entityPos.tileX += 1;
+    if (player.entityPos.posX + 1 > 9) { return; }
+    movePlayerTo(player.entityPos.tileX + 1, player.entityPos.tileY);
+    player.entityPos.tileX += 1;
   }//player.entityPos.tileX
-  
+
 
 }
 
