@@ -224,6 +224,6 @@ function preloadDone() {
   g_sprites.bobDown2 = new Sprite(g_images.bobDown2);
   g_sprites.bobUp1 = new Sprite(g_images.bobUp1);
   g_sprites.bobUp2 = new Sprite(g_images.bobUp2);
-  g_sprites(bobDead) = new Sprite(g_sprites.bobDead);
+  g_sprites.bobDead = new Sprite(g_images.bobDead);
   
 }
