@@ -148,7 +148,7 @@ function requestPreloads() {
     saraDown2: './client/img/Player/sara_07.png',
     saraUp1: './client/img/Player/sara_08.png',
     saraUp2: './client/img/Player/sara_09.png',
-    saraDead: './client/img/Player/TombStoneSARA',
+    saraDead: './client/img/Player/TombStoneSARA.png',
     //Monster
     monster: './client/img/Monster/platformChar_idle.png',
     monsterHidden: './client/img/Monster/monster_hidden.png',
@@ -164,7 +164,7 @@ function requestPreloads() {
     bobRight2: './client/img/Player/player_18.png',
     bobLeft1: './client/img/Player/player_20.png',
     bobLeft2: './client/img/Player/player_21.png',
-    bobDead: './client/img/Player/TombStoneBOB',
+    bobDead: './client/img/Player/TombStoneBOB.png',
     //Sama mynd og player
     bobDown1: './client/img/Player/player_06.png',
     bobDown2: './client/img/Player/player_07.png',
