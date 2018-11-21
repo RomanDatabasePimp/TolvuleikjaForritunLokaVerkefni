@@ -33,7 +33,7 @@ function drawTile(tile, i, j) {
   g_sprites.grassTile.drawAt(g_ctx, i * 64, j * 64);
   if (tile[i][j]._amITerrain) {
     g_sprites.terrain.drawAt(g_ctx, i * 64, j * 64);
-  } 
+  }
   if (tile[i][j]._amIAStructure) {
     g_sprites.tallGrass.drawAt(g_ctx, i * 64, j * 64);
   }
@@ -79,7 +79,7 @@ function fetchPlayerTiles(tiles) {
 function drawCharacters(tile, i, j, id) {
   let tileGrass;
   let entity = playerExistsInTile(tile._entities);
-  if(!g_walkinganimfinish[entity.character]) {  return;  }
+  if (!g_walkinganimfinish[entity.character]) { return; }
   if (tile._amIAStructure) {
     tileGrass = tile;
     if ((tileGrass._TilePosX === player.entityPos.tileX) && (tileGrass._TilePosY === player.entityPos.tileY)) {
@@ -104,14 +104,14 @@ function drawCorrectChar(char, i, j, isHidden) {
   // if our character is hidden, draw it that sprite.
   switch (char) {
     case char = "bob":
-     if (isHidden) {
+      if (isHidden) {
         g_sprites.bobHidden.drawAt(g_ctx, i * 64, j * 64);
       } else {
         g_sprites.player.drawAt(g_ctx, i * 64, j * 64);
       }
       break;
     case char = "sara":
-     if (isHidden) {
+      if (isHidden) {
         g_sprites.saraHidden.drawAt(g_ctx, i * 64, j * 64);
       } else {
         g_sprites.saraPlayer.drawAt(g_ctx, i * 64, j * 64);
@@ -125,10 +125,19 @@ function drawCorrectChar(char, i, j, isHidden) {
       }
       break;
     default:
-
   }
-
 };
+function drawDeadChar(char, i, j) {
+  switch (char.character) {
+    case char = "bob":
+      g_sprites.bobDead.drawAt(g_ctx, i * 64, j * 64);
+      break;
+    case char = "sara":
+      g_sprites.saraDead.drawAt(g_ctx, i * 64, j * 64);
+      break;
+    default:
+  }
+}
 /**
  * finds the entity at our location.
  * @param {Entity} entity 

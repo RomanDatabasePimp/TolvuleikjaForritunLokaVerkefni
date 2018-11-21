@@ -152,19 +152,19 @@
         sockid = socket.id;
         // we check if the data is a game state or a waiting lobby
         if (data.hasOwnProperty("__tiles")) {
-            amIalive = false;
             g_tilesContainingPlayers = fetchPlayerTiles(data.__tiles);
             g_tilesContainingPlayers.map(char => {
               let nplayer = playerExistsInTile(char.tile._entities);
               //Checks and sets the player as the global variable player if sockId matches.
-              
               checkPlayer(nplayer, sockid);
 
               if(g_animations[nplayer.character]) {
                 g_animations[nplayer.character].setMovement(nplayer.movement);
               }
-
-              checkPlayer(nplayer,socket.id);
+              console.log(data);
+              //if(data__Deadplayers.includes(nplayer.character)){
+              //  console.log(nplayer.character, " is dead now");
+              //}
               g_players.push(nplayer);
             });
 
