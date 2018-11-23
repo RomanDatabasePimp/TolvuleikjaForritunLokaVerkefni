@@ -29,16 +29,11 @@ function startGame(evt) {
       backgroundMusic.pause();
     }
   }
-<<<<<<< HEAD
-  if (evt.keyCode === RESET_KEY) { socket.emit('resetgamerequest', null); }
-  if (evt.keyCode === RDY_KEY) {
-=======
   if (evt.keyCode === RESET_KEY) {
     amIalive = true;
     socket.emit('resetgamerequest', null);
   }
   if (evt.keyCode === RDY_KEY ) {
->>>>>>> 0ba397a555e776e7400bfd9fd11160960ea29da5
     evt.preventDefault();
     g_readyForNextRound = true;
     //g_FadeOutTexts.waitingText.giveMeLife();
